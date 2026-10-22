@@ -41,9 +41,15 @@ fourth and fifth are cross-check sources it will consume soon.
 
 ### 3. Bedrock Dedicated Server (BDS) binary — needed next (block physics, RTTI, strings)
 - Mojang's free download. Landing page: `https://www.minecraft.net/en-us/download/server/bedrock`.
-  The actual zips are on Mojang's CDN; a convenient machine-readable index of per-version download
-  URLs (Linux and Windows, release and preview) is `EndstoneMC/bedrock-server-data`'s `versions.json`
-  — use it to resolve a URL for a target version, but download **from Mojang's own URL**, not a mirror.
+  The actual zips are on Mojang's CDN; a convenient machine-readable index is
+  `EndstoneMC/bedrock-server-data`. Its `versions.json` only lists version names; the download URLs
+  and SHA-256s (Linux and Windows) are in `release/<version>/metadata.json` (and
+  `preview/<version>/metadata.json`). Use it to resolve a URL for a target version, but download
+  **from Mojang's own URL**, not a mirror.
+- As of 2026-10-22 Mojang's CDN refuses requests whose User-Agent isn't a browser's. `dataminer
+  fetch` sends an honest User-Agent and doesn't pretend to be a browser, so where the CDN refuses it,
+  download the zip by hand from the landing page and pass `--bds-zip`; it is checked against the
+  index's SHA-256.
 - **Accept the EULA explicitly.** The fetcher must require an `--accept-eula` flag (or equivalent)
   and record that the user accepted it. Do not download BDS without it.
 - Pick the right build: **Linux `bedrock_server` ELF** is the primary RE target — it is stripped of

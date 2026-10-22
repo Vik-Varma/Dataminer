@@ -5,6 +5,7 @@
 //! check in and diff. Nothing here runs the game server; the binary commands read
 //! an object file statically.
 
+mod fetch_cmd;
 mod metadata_cmd;
 mod protocol_cmd;
 
@@ -23,6 +24,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Download and pin the Mojang inputs for a game version into a working dir.
+    Fetch(fetch_cmd::FetchArgs),
     /// Ingest Mojang's public `bedrock-samples` metadata into specs.
     Metadata(metadata_cmd::MetadataArgs),
     /// Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs.
@@ -88,6 +91,7 @@ fn main() -> Result<()> {
 
     let cli = Cli::parse();
     match cli.command {
+        Command::Fetch(args) => fetch_cmd::run(args),
         Command::Metadata(args) => metadata_cmd::run(args),
         Command::Protocol(args) => protocol_cmd::run(args),
         Command::Inspect { file } => inspect(&file),
