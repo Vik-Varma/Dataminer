@@ -25,7 +25,7 @@
 use std::collections::BTreeSet;
 
 use dataminer_core::digest::Sha256Digest;
-use dataminer_core::provenance::{Confidence, Provenance, SourceKind};
+use dataminer_core::provenance::{Method as CoreMethod, Provenance, SourceKind};
 use dataminer_core::spec::SpecDocument;
 use object::{Object, ObjectSection, ObjectSymbol, SectionKind};
 use serde::{Deserialize, Serialize};
@@ -163,7 +163,7 @@ fn finish(
     let classes: Vec<RttiClass> = by_name.into_values().collect();
     let provenance = Provenance {
         source: SourceKind::BdsRtti,
-        confidence: Confidence::Observed,
+        method: CoreMethod::Extracted,
         game_version: game_version.to_string(),
         artifact: artifact.to_string(),
         artifact_sha256: Some(Sha256Digest::of_bytes(data)),

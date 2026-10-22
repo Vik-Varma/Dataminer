@@ -1,7 +1,7 @@
 //! Symbol-table extraction with demangling.
 
 use dataminer_core::digest::Sha256Digest;
-use dataminer_core::provenance::{Confidence, Provenance, SourceKind};
+use dataminer_core::provenance::{Method, Provenance, SourceKind};
 use dataminer_core::spec::SpecDocument;
 use object::{Object, ObjectSymbol, SymbolKind};
 use serde::{Deserialize, Serialize};
@@ -98,11 +98,13 @@ pub fn extract(
         out
     };
 
-    let symbols = if has_symtab {
+    let mut symbols = if has_symtab {
         collect(&mut file.symbols())
     } else {
         collect(&mut file.dynamic_symbols())
     };
+    // Deterministic order for stable diffs: by address, then raw name.
+    symbols.sort_by(|a, b| a.address.cmp(&b.address).then_with(|| a.name.cmp(&b.name)));
 
     let mangling_str = match mangling {
         Mangling::Itanium => "itanium",
@@ -122,7 +124,7 @@ pub fn extract(
 
     let provenance = Provenance {
         source: SourceKind::BdsSymbol,
-        confidence: Confidence::Observed,
+        method: Method::Extracted,
         game_version: game_version.to_string(),
         artifact: artifact.to_string(),
         artifact_sha256: Some(Sha256Digest::of_bytes(data)),

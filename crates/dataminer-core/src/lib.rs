@@ -16,5 +16,5 @@ pub mod provenance;
 pub mod spec;
 
 pub use digest::Sha256Digest;
-pub use provenance::{Confidence, Provenance, SourceKind};
+pub use provenance::{Method, Provenance, SourceKind};
 pub use spec::{SpecDocument, SpecError, SpecMeta};

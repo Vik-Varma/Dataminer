@@ -44,9 +44,16 @@ each person and artifact is on.
 - Every value Dataminer emits goes through `dataminer-core`'s `SpecDocument`, which records the
   source kind, confidence, game version, artifact description, and the SHA-256 of the exact bytes it
   was read from. No fact ships without this. A reviewer must be able to reproduce any number.
-- Use the honest confidence level: `observed` (read verbatim), `derived` (computed by a documented
-  rule, e.g. a block network-id hash), `inferred` (a guess from incomplete evidence). An `inferred`
-  fact must never, on its own, gate a behaviour decision in Ferrock.
+- Use the honest method (matching Ferrock's requirements doc): `extracted` (read verbatim, or
+  computed from such reads by a documented deterministic rule like a block network-id hash),
+  `measured` (observed by running the game, e.g. recording a strict-movement BDS's corrections —
+  preferred for physics), `inferred` (a guess from incomplete evidence), `unknown` (an honest gap).
+  An `inferred` value must never, on its own, gate a behaviour decision in Ferrock, and you never
+  fill a gap with a guess to raise coverage — mark it `unknown`.
+- Output is deterministic (sorted records, byte-identical on re-run) and laid out as Ferrock
+  consumes it: `out/<game-version>/<dataset>.json` plus a `manifest.json` (game version, protocol,
+  source hashes, Dataminer commit, per-dataset schema version). See
+  [docs/attack-plan.md](docs/attack-plan.md).
 - When you could not establish something, say so in the provenance `notes`. An honest gap is a good
   outcome; a confident wrong fact is the worst one.
 

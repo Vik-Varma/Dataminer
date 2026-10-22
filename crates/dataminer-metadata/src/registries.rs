@@ -78,7 +78,7 @@ pub fn parse_items(
             message: "no items found; the file format may have changed".to_string(),
         });
     }
-    let items = raw
+    let mut items: Vec<Item> = raw
         .data_items
         .into_iter()
         .map(|i| Item {
@@ -89,6 +89,7 @@ pub fn parse_items(
             serialization_name: i.serialization_name,
         })
         .collect();
+    items.sort_by(|a, b| a.name.cmp(&b.name));
     let provenance = crate::provenance_for(game_version, repo_ref, FILE, bytes);
     Ok(SpecDocument::new(
         ITEMS_KIND,
@@ -183,7 +184,7 @@ pub fn parse_simple(
             message: "no entries found; the file format may have changed".to_string(),
         });
     }
-    let entries = raw
+    let mut entries: Vec<RegistryEntry> = raw
         .data_items
         .into_iter()
         .map(|e| RegistryEntry {
@@ -191,6 +192,7 @@ pub fn parse_simple(
             id: e.id,
         })
         .collect();
+    entries.sort_by(|a, b| a.name.cmp(&b.name));
     let provenance = crate::provenance_for(game_version, repo_ref, file, bytes);
     Ok(SpecDocument::new(
         registry.kind(),

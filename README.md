@@ -14,11 +14,15 @@ planned; see [docs/attack-plan.md](docs/attack-plan.md).
 
 ## Why
 
-Ferrock needs an exact, trustworthy map of the game: block and item ids, the command tree, packet
-layouts, enum values, class names. Guessing or copying another project's data would taint a
-clean-room effort and get Ferrock players banned when a value is wrong. Dataminer produces those
-facts from sources we are allowed to use, and attaches to every fact enough provenance that a
-reviewer can reproduce it.
+Ferrock needs an exact, trustworthy map of the game: block and item ids, state collision boxes,
+player movement constants, the command tree, packet layouts, enum values, class names. Guessing or
+copying another project's data would taint a clean-room effort and get Ferrock players banned when a
+value is wrong. Dataminer produces those facts from sources we are allowed to use, and attaches to
+every fact enough provenance that a reviewer can reproduce it: a source, and a method —
+`extracted` (read verbatim or computed deterministically), `measured` (observed by running the
+game), `inferred` (a flagged guess), or `unknown` (an honest gap, never filled to pad coverage).
+Ferrock's consumption contract is in its repo at `docs/dataminer-requirements.md`; this tool tracks
+it.
 
 ## What counts as a clean source
 
@@ -42,8 +46,9 @@ You need Rust 1.99; `rust-toolchain.toml` selects it automatically.
 cargo build --workspace
 cargo test  --workspace
 
-# Ingest a local bedrock-samples checkout into specs (reads it; copies nothing):
-cargo run -p dataminer-cli -- metadata --samples /path/to/bedrock-samples --out specs/1.26.50.4
+# Ingest a local bedrock-samples checkout into specs (reads it; copies nothing).
+# Writes out/<game-version>/<dataset>.json + a manifest.json, deterministically:
+cargo run -p dataminer-cli -- metadata --samples /path/to/bedrock-samples --protocol 2193 --out out
 
 # Inspect a Bedrock Dedicated Server binary:
 cargo run -p dataminer-cli -- inspect /path/to/bedrock_server

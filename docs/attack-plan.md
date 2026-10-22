@@ -5,6 +5,14 @@ exact, trustworthy, versioned map of Minecraft: Bedrock Edition. This plan seque
 value and cleanliness: cheap, unambiguous, permissively sourced facts first; expensive binary
 structure last.
 
+Ferrock's own consumption contract is written up in its repo at `docs/dataminer-requirements.md`.
+This plan tracks it. Ferrock targets **game 1.26.51, wire protocol 2193**. Its sharpest need is
+**player movement constants** (gravity, drag, speeds, jump, step height, and the swim/glide/fly/
+crawl/ladder/liquid coefficients) — the competitor's movement values are provisional or unmeasured,
+so exact values there are a real advantage. Movement is `measured`, not `extracted`: the method is to
+drive a headless client (Acacia) on a strict-movement BDS and record its corrections (it corrects
+anything more than 0.0001 off), with golden tests on known values (stone hardness 1.5, gravity 0.08).
+
 ## Principles
 
 1. **Cleanest source wins.** Prefer Mojang's own published data, then our own captures and Script API
@@ -18,23 +26,50 @@ structure last.
 
 ## Layers, by priority
 
-| # | Layer | Source | Confidence | Status |
+Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, survival), **P2**
+(Phase 3, PvP).
+
+| Tier | Layer | Source | Method | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Blocks + state properties | `bedrock-samples` vanilladata | observed | **done** |
-| 1 | Items | `bedrock-samples` vanilladata | observed | **done** |
-| 1 | Commands + enums | `bedrock-samples` command module | observed | **done** |
-| 1 | Entities / biomes / effects / enchantments | `bedrock-samples` vanilladata | observed | **done** |
-| 2 | Packet layouts (field order, types) | `bedrock-protocol-docs` JSON schemas | observed | next |
-| 2 | Molang queries / math functions | `bedrock-samples` molang module | observed | next |
-| 3 | BDS symbols (demangled) | BDS binary symbol table | observed | **done** |
-| 3 | RTTI class names | BDS `_ZTI*` symbols + `_ZTS*` rodata strings | observed | **done** |
-| 3 | Binary strings | BDS rodata/data sections | observed | **done** |
-| 4 | Block network ids | derived: FNV-1a over state NBT | derived | planned |
-| 4 | Registries sent at join | capture of our own session | observed | planned |
-| 4 | Script API enumerations | behaviour pack on our own BDS | observed | planned |
-| 5 | Struct sizes / offsets, vtable layout, class hierarchy | Ghidra/IDA headless → JSON facts | derived | planned (engine) |
-| 5 | Serializer field order from code | engine analysis of serialize methods | derived | planned (engine) |
+| P0 | Blocks: names, state properties, raw ids | `bedrock-samples` vanilladata | extracted | **done** |
+| P0 | Blocks: collision/outline boxes, friction, light, render layer, solidity | BDS binary / Script API | extracted | planned |
+| P0 | Block network runtime id / hash | derived: FNV-1a over sorted state NBT | extracted | planned |
+| P0 | Player movement constants (gravity, drag, speeds, jump, step, swim/glide/fly/crawl/ladder/liquid) | **measured**: headless Acacia on strict-movement BDS | measured | planned |
+| P0 | Items: ids, stack size, durability, tags, block↔item map | `bedrock-samples` + BDS | extracted | **partial** (ids/names done) |
+| P0 | Packet schemas + version diff | `bedrock-protocol-docs` JSON schemas | extracted | next |
+| P1 | Commands + enums | `bedrock-samples` command module | extracted | **done** |
+| P1 | Entities (hitboxes, attributes, rideability) | `bedrock-samples` + BDS | extracted | **partial** (ids done) |
+| P1 | Biomes / effects / enchantments (names) | `bedrock-samples` vanilladata | extracted | **done** |
+| P1 | Hardness + break-time formula; recipes; biome tints; sound/particle maps | BDS + packs | extracted | planned |
+| P2 | Combat timing, knockback, item-use durations, reach | BDS / measured | measured | planned |
+| — | BDS symbols (demangled) | BDS binary symbol table | extracted | **done** |
+| — | RTTI class names | BDS `_ZTI*` symbols + `_ZTS*` rodata strings | extracted | **done** |
+| — | Binary strings | BDS rodata/data sections | extracted | **done** |
+| — | Struct sizes/offsets, vtable layout, hierarchy, serializer field order | Ghidra/IDA headless → JSON facts | extracted | planned (engine) |
 | — | Spec diffing across versions | Dataminer `diff` | — | **done** |
+
+## Output contract (what Ferrock pins)
+
+- `out/<game-version>/<dataset>.json` plus `manifest.json` (game version, wire protocol, source file
+  hashes, Dataminer commit, per-dataset schema version). **Done** for the metadata datasets.
+- Deterministic: sorted records, byte-identical on re-run. **Done** for metadata and symbols.
+- A JSON Schema per dataset, and a small serde types crate under a permissive (MIT/Apache) license so
+  non-GPL consumers can use it too. *Planned.*
+- Provenance on every record (source + method `extracted`/`measured`/`inferred`/`unknown`); gaps are
+  marked `unknown`, never guessed. **Done** at the document level; per-record provenance arrives with
+  the binary/physics datasets.
+- A non-interactive CLI that exits non-zero on failure and prints a coverage summary (e.g. "1,193 of
+  1,201 blocks have collision boxes; 8 unknown, listed"). *Planned.*
+- A `diff` command across versions. **Done.**
+- Tagged releases; Ferrock pins a tag and checks the manifest hashes. *Planned.*
+
+## Trust (how we avoid shipping a wrong number)
+
+- Cross-check each dataset against an independent source and report disagreements: PrismarineJS
+  minecraft-data, gophertunnel/Dragonfly (MIT), Acacia's `blocks.bin` and `acacia-physics` (a port of
+  Oomph's bedsim). Never weaken a cross-check to make it pass.
+- Prefer measurement over inference for physics (strict-movement BDS corrections).
+- Golden tests for well-known values (stone hardness 1.5, gravity 0.08 blocks/tick²).
 
 ## Roadmap
 

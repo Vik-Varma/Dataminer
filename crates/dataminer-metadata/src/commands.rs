@@ -154,7 +154,7 @@ pub fn parse(
         });
     }
 
-    let enums = raw
+    let mut enums: Vec<CommandEnum> = raw
         .command_enums
         .into_iter()
         .map(|e| CommandEnum {
@@ -162,8 +162,9 @@ pub fn parse(
             values: e.values.into_iter().map(|v| v.value).collect(),
         })
         .collect();
+    enums.sort_by(|a, b| a.name.cmp(&b.name));
 
-    let commands = raw
+    let mut commands: Vec<Command> = raw
         .commands
         .into_iter()
         .map(|c| Command {
@@ -190,6 +191,7 @@ pub fn parse(
                 .collect(),
         })
         .collect();
+    commands.sort_by(|a, b| a.name.cmp(&b.name));
 
     let provenance = crate::provenance_for(game_version, repo_ref, FILE, bytes);
     Ok(SpecDocument::new(

@@ -114,7 +114,10 @@ pub fn parse(
         })
         .collect();
 
-    let blocks = raw
+    let mut properties: Vec<BlockProperty> = properties;
+    properties.sort_by(|a, b| a.name.cmp(&b.name));
+
+    let mut blocks: Vec<Block> = raw
         .data_items
         .into_iter()
         .map(|b| Block {
@@ -124,6 +127,9 @@ pub fn parse(
             properties: b.properties.into_iter().map(|r| r.name).collect(),
         })
         .collect();
+    // Sort by name for stable, reviewable diffs across versions. Each record
+    // keeps its raw_id, so ordering carries no information that is lost here.
+    blocks.sort_by(|a, b| a.name.cmp(&b.name));
 
     let payload = BlocksPayload { properties, blocks };
     let provenance = crate::provenance_for(game_version, repo_ref, FILE, bytes);

@@ -7,7 +7,7 @@
 //! leave interpretation to the reader.
 
 use dataminer_core::digest::Sha256Digest;
-use dataminer_core::provenance::{Confidence, Provenance, SourceKind};
+use dataminer_core::provenance::{Method, Provenance, SourceKind};
 use dataminer_core::spec::SpecDocument;
 use object::{Object, ObjectSection, SectionKind};
 use serde::{Deserialize, Serialize};
@@ -93,7 +93,7 @@ pub fn extract(
 
     let provenance = Provenance {
         source: SourceKind::BdsString,
-        confidence: Confidence::Observed,
+        method: Method::Extracted,
         game_version: game_version.to_string(),
         artifact: artifact.to_string(),
         artifact_sha256: Some(Sha256Digest::of_bytes(data)),
