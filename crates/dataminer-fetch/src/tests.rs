@@ -32,6 +32,14 @@ fn fixture(name: &str) -> Fixture {
         std::fs::write(docs.join("README.md"), tag).unwrap();
         commit_and_tag(&docs, tag);
     }
+    // 1.26.52 exists only on Mojang's bot branch, untagged.
+    git_in(&docs, &["checkout", "--quiet", "-b", "automated/1.26.52"]);
+    std::fs::write(docs.join("README.md"), "1.26.52").unwrap();
+    git_in(
+        &docs,
+        &["commit", "--quiet", "--all", "--message", "1.26.52"],
+    );
+    git_in(&docs, &["checkout", "--quiet", "main"]);
 
     let samples = root.join("samples");
     init(&samples);
@@ -80,12 +88,22 @@ fn fixture(name: &str) -> Fixture {
         std::fs::write(d.join("metadata.json"), entry).unwrap();
     }
 
+    std::fs::write(
+        root.join("links.json"),
+        format!(
+            r#"{{"result":{{"links":[{{"downloadType":"serverBedrockLinux","downloadUrl":"{}"}}]}}}}"#,
+            file_url(&zip)
+        ),
+    )
+    .unwrap();
+
     Fixture {
         root,
         remotes: |root| Remotes {
             samples: file_url(&root.join("samples")),
             docs: file_url(&root.join("docs")),
             bds_index: file_url(&root.join("index")),
+            bds_links: file_url(&root.join("links.json")),
             bds_host: "file://".into(),
             curl_protocols: "=file".into(),
         },
@@ -132,6 +150,11 @@ fn fetches_pins_and_is_idempotent() {
 
     let server = report.sources.get(Kind::BedrockServer).unwrap();
     assert_eq!(server.game_version, "1.26.51.1");
+    assert!(
+        server.notes[0].contains("confirmed by Mojang"),
+        "{:?}",
+        server.notes
+    );
     assert!(dir.join("bedrock-server/bedrock_server").is_file());
     assert!(!dir.join("bedrock-server-1.26.51.1.zip.partial").exists());
     #[cfg(unix)]
@@ -201,6 +224,35 @@ fn bds_must_match_the_index_and_come_from_mojang() {
     opts.samples_ref = Some("v1.26.40.05".into());
     let err = format!("{:#}", fetch(&opts).err().unwrap());
     assert!(err.contains("refusing to download a mirror"), "{err}");
+}
+
+#[test]
+fn bds_url_must_agree_with_mojangs_links_api() {
+    let fx = fixture("links");
+    std::fs::write(
+        fx.root.join("links.json"),
+        r#"{"result":{"links":[{"downloadType":"serverBedrockLinux",
+            "downloadUrl":"https://www.minecraft.net/x/bedrock-server-1.26.51.2.zip"}]}}"#,
+    )
+    .unwrap();
+    let err = format!("{:#}", fetch(&fx.options("1.26.51")).err().unwrap());
+    assert!(err.contains("Mojang's download-links API says"), "{err}");
+}
+
+#[test]
+fn uses_mojangs_branch_when_a_release_is_untagged() {
+    let fx = fixture("branch");
+    let mut opts = fx.options("1.26.52");
+    opts.skip_bds = true;
+    let report = fetch(&opts).unwrap();
+    let docs = report.sources.get(Kind::BedrockProtocolDocs).unwrap();
+    assert_eq!(docs.git_ref.as_deref(), Some("automated/1.26.52"));
+    assert_eq!(docs.game_version, "1.26.52");
+    assert_eq!(docs.protocol, Some(2193));
+    assert!(docs.notes[0].contains("no release tag"), "{:?}", docs.notes);
+    let samples = report.sources.get(Kind::BedrockSamples).unwrap();
+    assert_eq!(samples.git_ref.as_deref(), Some("v1.26.50.4"));
+    assert_eq!(samples.r#match, Match::SameProtocol);
 }
 
 #[test]

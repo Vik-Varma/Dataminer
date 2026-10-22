@@ -37,6 +37,9 @@ fourth and fifth are cross-check sources it will consume soon.
   `v1.26.51`, which is protocol 2193). Each tag's packet JSON carries `x-protocol-version`.
 - Dataminer needs the `json/` directory. Checkout the tag that matches the target protocol.
 - **License:** same EULA posture as bedrock-samples. Working dir only, never committed.
+- Not every release is tagged: 1.26.52 exists only on Mojang's bot branch `automated/1.26.52`
+  (protocol 2193; its packet JSON matches `v1.26.51` except for the version stamp). `dataminer
+  fetch` uses that branch, pinned by commit, when a release has no tag.
 - Consumed by: `dataminer protocol --docs <dir> --game-version 1.26.51 --out <out>`.
 
 ### 3. Bedrock Dedicated Server (BDS) binary — needed next (block physics, RTTI, strings)
@@ -46,8 +49,13 @@ fourth and fifth are cross-check sources it will consume soon.
   and SHA-256s (Linux and Windows) are in `release/<version>/metadata.json` (and
   `preview/<version>/metadata.json`). Use it to resolve a URL for a target version, but download
   **from Mojang's own URL**, not a mirror.
-- As of 2026-10-22 Mojang's CDN refuses requests whose User-Agent isn't a browser's. `dataminer
-  fetch` sends an honest User-Agent and doesn't pretend to be a browser, so where the CDN refuses it,
+- Mojang's own download-links API,
+  `https://net-secondary.web.minecraft-services.net/api/v1.0/download/links`, names the current
+  release and preview builds only. `dataminer fetch` checks the index's URL against it when the
+  target is the current release.
+- As of 2026-10-22 Mojang's CDN resets requests that don't name their downloader, and refused
+  every non-browser User-Agent tried from a cloud machine. `dataminer fetch` sends the bare, honest
+  `dataminer` and doesn't pretend to be a browser, so where the CDN refuses it,
   download the zip by hand from the landing page and pass `--bds-zip`; it is checked against the
   index's SHA-256.
 - **Accept the EULA explicitly.** The fetcher must require an `--accept-eula` flag (or equivalent)

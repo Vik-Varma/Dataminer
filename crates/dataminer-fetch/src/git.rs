@@ -15,7 +15,13 @@ pub fn ls_remote_tags(url: &str) -> Result<Vec<String>> {
         .collect())
 }
 
-/// A shallow, blobless clone of `tag` into `dest`, checking out only the
+/// Whether the remote has a branch named `branch`.
+pub fn has_branch(url: &str, branch: &str) -> Result<bool> {
+    let out = run(git(None).args(["ls-remote", "--heads", url, &format!("refs/heads/{branch}")]))?;
+    Ok(!out.trim().is_empty())
+}
+
+/// A shallow, blobless clone of `tag` (or a branch) into `dest`, checking out only the
 /// top-level files and `subdir`.
 pub fn clone_sparse(url: &str, tag: &str, subdir: &str, dest: &Path) -> Result<()> {
     run(git(None)

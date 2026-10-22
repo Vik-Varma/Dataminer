@@ -49,11 +49,29 @@ pub fn download(url: &str, dest: Option<&Path>, protocols: &str) -> Result<Vec<u
     Ok(out.into_bytes())
 }
 
-const USER_AGENT: &str = concat!(
-    "dataminer/",
-    env!("CARGO_PKG_VERSION"),
-    " (+https://github.com/Vik-Varma/Dataminer)"
-);
+/// An honest, bare name. Mojang's CDN resets requests that don't name their
+/// downloader, and some networks (cloud machines among them) are refused anyway.
+const USER_AGENT: &str = "dataminer";
+
+/// The current Linux release URL from Mojang's download-links API:
+/// `{"result": {"links": [{"downloadType": "serverBedrockLinux", "downloadUrl": …}, …]}}`.
+pub fn current_linux_url(bytes: &[u8]) -> Option<String> {
+    let v: Value = serde_json::from_slice(bytes).ok()?;
+    v.pointer("/result/links")?
+        .as_array()?
+        .iter()
+        .find(|l| l.get("downloadType").and_then(Value::as_str) == Some("serverBedrockLinux"))?
+        .get("downloadUrl")?
+        .as_str()
+        .map(str::to_string)
+}
+
+/// The build version in a BDS URL: `…/bedrock-server-1.26.52.3.zip` → `1.26.52.3`.
+pub fn version_of(url: &str) -> Option<String> {
+    let file = url.rsplit('/').next()?;
+    let v = file.strip_prefix("bedrock-server-")?.strip_suffix(".zip")?;
+    Some(v.to_string())
+}
 
 /// Unpack `zip` into `dest`, refusing entries that would land outside it.
 pub fn extract(zip: &Path, dest: &Path) -> Result<()> {
@@ -107,6 +125,17 @@ mod tests {
             "ad91d3b824e51ea50b5bb601c295cbd8f543a29b14315c2ad89ff27311e2d860"
         );
         assert!(parse_index(br#"{"binary":{"linux":{"url":"x","sha256":"zz"}}}"#).is_err());
+    }
+
+    #[test]
+    fn reads_mojangs_current_release() {
+        let json = br#"{"result":{"links":[
+            {"downloadType":"serverBedrockWindows","downloadUrl":"https://www.minecraft.net/bedrockdedicatedserver/bin-win/bedrock-server-1.26.52.3.zip"},
+            {"downloadType":"serverBedrockLinux","downloadUrl":"https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip"}]}}"#;
+        let url = current_linux_url(json).unwrap();
+        assert!(url.contains("/bin-linux/"));
+        assert_eq!(version_of(&url).as_deref(), Some("1.26.52.3"));
+        assert_eq!(current_linux_url(br#"{"result":{"links":[]}}"#), None);
     }
 
     #[test]

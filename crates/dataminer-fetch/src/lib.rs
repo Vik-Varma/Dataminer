@@ -29,6 +29,8 @@ pub struct Remotes {
     pub docs: String,
     /// Base URL of the EndstoneMC `bedrock-server-data` index.
     pub bds_index: String,
+    /// Mojang's download-links API, which names the current BDS release.
+    pub bds_links: String,
     /// BDS is only downloaded from URLs that start with this (Mojang's host).
     pub bds_host: String,
     /// curl's `--proto` list for downloads.
@@ -41,6 +43,8 @@ impl Default for Remotes {
             samples: "https://github.com/Mojang/bedrock-samples".into(),
             docs: "https://github.com/Mojang/bedrock-protocol-docs".into(),
             bds_index: "https://raw.githubusercontent.com/EndstoneMC/bedrock-server-data/HEAD"
+                .into(),
+            bds_links: "https://net-secondary.web.minecraft-services.net/api/v1.0/download/links"
                 .into(),
             bds_host: "https://www.minecraft.net/".into(),
             curl_protocols: "=https".into(),
@@ -209,18 +213,34 @@ fn check(dir: &Path, rec: &Source) -> Result<()> {
 
 fn fetch_docs(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
     let url = &opts.remotes.docs;
+    let mut notes = Vec::new();
     let (tag, how) = match &opts.docs_ref {
         Some(r) => (r.clone(), Match::Explicit),
         None => match version::pick(&git::ls_remote_tags(url)?, target) {
             Pick::Exact(t) => (t, Match::Exact),
-            Pick::SameTrain(t) => no_tag("bedrock-protocol-docs", target, &[t], "--docs-ref")?,
-            Pick::None(near) => no_tag("bedrock-protocol-docs", target, &near, "--docs-ref")?,
+            pick => {
+                // Mojang's bot publishes each release on an `automated/<version>`
+                // branch, but not every release gets a tag (1.26.52 didn't).
+                let branch = format!("automated/{target}");
+                if !git::has_branch(url, &branch)? {
+                    let near = match pick {
+                        Pick::Exact(t) | Pick::SameTrain(t) => vec![t],
+                        Pick::None(near) => near,
+                    };
+                    return no_tag("bedrock-protocol-docs", target, &near, "--docs-ref");
+                }
+                notes.push(format!(
+                    "no release tag for {target}; used Mojang's {branch} branch"
+                ));
+                (branch, Match::Exact)
+            }
         },
     };
     let dest = clone(dir, Kind::BedrockProtocolDocs, url, &tag, "json")?;
     let protocol = git::protocol_in_dir(&dest.join("json"))?;
     let mut src = record(dir, Kind::BedrockProtocolDocs, url, &tag, how)?;
     src.protocol = Some(protocol);
+    src.notes = notes;
     Ok(src)
 }
 
@@ -295,6 +315,38 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
         r.bds_host
     );
     let file = entry.url.rsplit('/').next().unwrap_or_default().to_string();
+    let game_version = bds::version_of(&entry.url).unwrap_or_else(|| opts.game_version.clone());
+
+    // Mojang's own links API names only the current release. When that is the
+    // target, the index must agree with it.
+    let mut notes = Vec::new();
+    let current = bds::download(&r.bds_links, None, &r.curl_protocols)
+        .ok()
+        .and_then(|b| bds::current_linux_url(&b));
+    match current {
+        Some(url) if url == entry.url => {
+            notes.push("download URL confirmed by Mojang's download-links API".to_string());
+        }
+        Some(url)
+            if bds::version_of(&url)
+                .and_then(|v| Version::parse(&v))
+                .map(|v| v.game())
+                == Version::parse(&game_version).map(|v| v.game()) =>
+        {
+            anyhow::bail!(
+                "the index says {}, but Mojang's download-links API says {url} for the same \
+                 version; not guessing which is right",
+                entry.url
+            )
+        }
+        Some(url) => notes.push(format!(
+            "not the current release (Mojang's download-links API lists {url}); URL from the \
+             index only"
+        )),
+        None => notes.push(
+            "Mojang's download-links API could not be read; URL from the index only".to_string(),
+        ),
+    }
 
     let dest = dir.join(Kind::BedrockServer.dir());
     let download = dir.join(format!("{file}.partial"));
@@ -304,7 +356,8 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
             bds::download(&entry.url, Some(&download), &r.curl_protocols).with_context(|| {
                 format!(
                     "downloading {}. If a proxy refused the host, that is a policy denial: \
-                     don't route around it. You can download the zip yourself from \
+                     don't route around it. Mojang's CDN also refuses some clients, cloud \
+                     machines among them. You can download the zip yourself from \
                      https://www.minecraft.net/en-us/download/server/bedrock and pass \
                      --bds-zip <file>; it is checked against the index's SHA-256",
                     entry.url
@@ -337,12 +390,6 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
     }
 
     let (tree_sha256, files) = tree::digest(&dest)?;
-    let game_version = file
-        .strip_prefix("bedrock-server-")
-        .and_then(|f| f.strip_suffix(".zip"))
-        .unwrap_or(&opts.game_version)
-        .to_string();
-    let mut notes = Vec::new();
     if let Some(p) = &opts.bds_zip {
         notes.push(format!(
             "zip supplied by the user ({}), not downloaded; its SHA-256 matches the index",
@@ -424,7 +471,8 @@ fn record(dir: &Path, kind: Kind, url: &str, tag: &str, how: Match) -> Result<So
         file_sha256: None,
         index_url: None,
         index_sha256: None,
-        game_version: Version::parse(tag).map_or_else(|| tag.to_string(), |v| v.to_string()),
+        game_version: Version::parse(tag.rsplit('/').next().unwrap_or(tag))
+            .map_or_else(|| tag.to_string(), |v| v.to_string()),
         protocol: None,
         r#match: how,
         tree_sha256,
