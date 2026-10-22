@@ -184,7 +184,7 @@ fn write_manifest(
     let manifest = json!({
         "game_version": game_version,
         "wire_protocol": protocol,
-        "dataminer_commit": option_env!("DATAMINER_COMMIT").unwrap_or("unknown"),
+        "dataminer_commit": env!("DATAMINER_COMMIT"),
         "tool": concat!("dataminer ", env!("CARGO_PKG_VERSION")),
         "datasets": datasets,
     });
