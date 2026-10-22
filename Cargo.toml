@@ -1,0 +1,56 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/dataminer-core",
+    "crates/dataminer-metadata",
+    "crates/dataminer-binary",
+    "crates/dataminer-diff",
+    "crates/dataminer-cli",
+]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.99"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/Vik-Varma/Dataminer"
+publish = false
+
+[workspace.dependencies]
+dataminer-core = { path = "crates/dataminer-core" }
+dataminer-metadata = { path = "crates/dataminer-metadata" }
+dataminer-binary = { path = "crates/dataminer-binary" }
+dataminer-diff = { path = "crates/dataminer-diff" }
+
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+# Binary analysis. All pure-Rust, permissively licensed (MIT/Apache-2.0), so a
+# GPL-3.0 workspace can use them. No `unsafe` from us; see the workspace lints.
+object = "0.40"
+gimli = "0.34"
+cpp_demangle = "0.5"
+msvc-demangler = "0.11"
+# `pdb2` is the maintained fork of `pdb` (the original's last release was 2022);
+# used for Windows PDB parsing once a symbolicated BDS PE is in scope.
+pdb2 = "0.11"
+
+[workspace.lints.rust]
+# Dataminer reads binaries and JSON and writes specs. It never needs unsafe.
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+dbg_macro = "deny"
+ignore_without_reason = "deny"
+todo = "deny"
+unimplemented = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

@@ -1,0 +1,12 @@
+/target
+
+# Never commit mined inputs or outputs. See AGENTS.md and docs/clean-room-and-legal.md.
+# Supply bedrock-samples / BDS locally; they are not redistributed here.
+/bedrock-samples/
+/bedrock_server*
+*.pdb
+*.debug
+/specs/
+/captures/
+*.nbt
+.tokens/

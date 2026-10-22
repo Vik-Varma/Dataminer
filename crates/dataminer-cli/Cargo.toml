@@ -1,0 +1,26 @@
+[package]
+name = "dataminer-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "dataminer"
+path = "src/main.rs"
+
+[dependencies]
+dataminer-core.workspace = true
+dataminer-metadata.workspace = true
+dataminer-binary.workspace = true
+dataminer-diff.workspace = true
+anyhow.workspace = true
+clap.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true
