@@ -36,7 +36,7 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 | P0 | Block network runtime id / hash | derived: FNV-1a over sorted state NBT | extracted | planned |
 | P0 | Player movement constants (gravity, drag, speeds, jump, step, swim/glide/fly/crawl/ladder/liquid) | **measured**: headless Acacia on strict-movement BDS | measured | planned |
 | P0 | Items: ids, stack size, durability, tags, block↔item map | `bedrock-samples` + BDS | extracted | **partial** (ids/names done) |
-| P0 | Packet schemas + version diff | `bedrock-protocol-docs` JSON schemas | extracted | next |
+| P0 | Packet schemas (id, fields in wire order) + enums + version diff | `bedrock-protocol-docs` JSON schemas | extracted | **done** |
 | P1 | Commands + enums | `bedrock-samples` command module | extracted | **done** |
 | P1 | Entities (hitboxes, attributes, rideability) | `bedrock-samples` + BDS | extracted | **partial** (ids done) |
 | P1 | Biomes / effects / enchantments (names) | `bedrock-samples` vanilladata | extracted | **done** |
@@ -54,7 +54,8 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
   hashes, Dataminer commit, per-dataset schema version). **Done** for the metadata datasets.
 - Deterministic: sorted records, byte-identical on re-run. **Done** for metadata and symbols.
 - A JSON Schema per dataset, and a small serde types crate under a permissive (MIT/Apache) license so
-  non-GPL consumers can use it too. *Planned.*
+  non-GPL consumers can use it too. *Planned.* (The extractor crates already expose serde types,
+  under GPL-3.0.)
 - Provenance on every record (source + method `extracted`/`measured`/`inferred`/`unknown`); gaps are
   marked `unknown`, never guessed. **Done** at the document level; per-record provenance arrives with
   the binary/physics datasets.

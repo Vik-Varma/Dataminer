@@ -200,6 +200,7 @@ dependencies = [
  "dataminer-core",
  "dataminer-diff",
  "dataminer-metadata",
+ "dataminer-protocol",
  "serde_json",
  "tracing",
  "tracing-subscriber",
@@ -225,6 +226,16 @@ dependencies = [
 
 [[package]]
 name = "dataminer-metadata"
+version = "0.0.1"
+dependencies = [
+ "dataminer-core",
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
+name = "dataminer-protocol"
 version = "0.0.1"
 dependencies = [
  "dataminer-core",

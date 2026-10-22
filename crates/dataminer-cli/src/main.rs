@@ -6,6 +6,7 @@
 //! an object file statically.
 
 mod metadata_cmd;
+mod protocol_cmd;
 
 use std::path::PathBuf;
 
@@ -24,6 +25,8 @@ struct Cli {
 enum Command {
     /// Ingest Mojang's public `bedrock-samples` metadata into specs.
     Metadata(metadata_cmd::MetadataArgs),
+    /// Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs.
+    Protocol(protocol_cmd::ProtocolArgs),
     /// Summarize a binary (format, architecture, whether it is stripped).
     Inspect {
         /// The binary file to inspect.
@@ -86,6 +89,7 @@ fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Command::Metadata(args) => metadata_cmd::run(args),
+        Command::Protocol(args) => protocol_cmd::run(args),
         Command::Inspect { file } => inspect(&file),
         Command::Binary { what } => run_binary(what),
         Command::Diff { old, new, out } => run_diff(&old, &new, out.as_deref()),

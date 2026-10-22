@@ -14,6 +14,7 @@ path = "src/main.rs"
 [dependencies]
 dataminer-core.workspace = true
 dataminer-metadata.workspace = true
+dataminer-protocol.workspace = true
 dataminer-binary.workspace = true
 dataminer-diff.workspace = true
 anyhow.workspace = true

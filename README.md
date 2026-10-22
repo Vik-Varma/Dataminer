@@ -50,6 +50,10 @@ cargo test  --workspace
 # Writes out/<game-version>/<dataset>.json + a manifest.json, deterministically:
 cargo run -p dataminer-cli -- metadata --samples /path/to/bedrock-samples --protocol 2193 --out out
 
+# Ingest Mojang's bedrock-protocol-docs (checked out at the target version tag)
+# into packet-layout specs: each packet's id and fields in wire order, plus enums:
+cargo run -p dataminer-cli -- protocol --docs /path/to/bedrock-protocol-docs --game-version 1.26.51 --out out
+
 # Inspect a Bedrock Dedicated Server binary:
 cargo run -p dataminer-cli -- inspect /path/to/bedrock_server
 
@@ -72,6 +76,7 @@ type-name strings that survive in read-only data.
 | --- | --- |
 | `crates/dataminer-core` | The spec/provenance vocabulary every extractor shares |
 | `crates/dataminer-metadata` | Ingest Mojang's public `bedrock-samples` metadata into specs |
+| `crates/dataminer-protocol` | Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs (fields in wire order) |
 | `crates/dataminer-binary` | Static ELF/PE analysis: symbols, RTTI, strings (demangling via `cpp_demangle`/`msvc-demangler`) |
 | `crates/dataminer-diff` | Structural diffs between specs across game versions |
 | `crates/dataminer-cli` | The `dataminer` command-line tool |

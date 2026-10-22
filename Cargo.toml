@@ -3,6 +3,7 @@ resolver = "3"
 members = [
     "crates/dataminer-core",
     "crates/dataminer-metadata",
+    "crates/dataminer-protocol",
     "crates/dataminer-binary",
     "crates/dataminer-diff",
     "crates/dataminer-cli",
@@ -19,6 +20,7 @@ publish = false
 [workspace.dependencies]
 dataminer-core = { path = "crates/dataminer-core" }
 dataminer-metadata = { path = "crates/dataminer-metadata" }
+dataminer-protocol = { path = "crates/dataminer-protocol" }
 dataminer-binary = { path = "crates/dataminer-binary" }
 dataminer-diff = { path = "crates/dataminer-diff" }
 
