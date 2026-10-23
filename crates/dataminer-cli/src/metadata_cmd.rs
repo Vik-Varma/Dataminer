@@ -107,6 +107,24 @@ pub fn run(args: MetadataArgs) -> Result<()> {
             records: doc.payload.commands.len(),
         });
     }
+    // Molang queries and math functions.
+    {
+        let (bytes, hash) = read(&meta_dir, "molang_modules/mojang-molang-queries.json")?;
+        let doc = dataminer_metadata::molang::parse(&bytes, &game_version, &repo_ref)?;
+        write_doc(&out_dir, "molang.json", &doc.to_pretty_json()?)?;
+        tracing::info!(
+            "molang: {} queries, {} math functions",
+            doc.payload.queries.len(),
+            doc.payload.math_functions.len()
+        );
+        written.push(Written {
+            dataset: "molang",
+            schema_version: dataminer_metadata::molang::SCHEMA_VERSION,
+            source: "molang_modules/mojang-molang-queries.json",
+            source_sha256: hash,
+            records: doc.payload.queries.len() + doc.payload.math_functions.len(),
+        });
+    }
     // Simple registries.
     for (registry, file, dataset) in [
         (SimpleRegistry::Entities, "entities.json", "entities"),

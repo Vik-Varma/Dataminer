@@ -60,7 +60,9 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
   marked `unknown`, never guessed. **Done** at the document level; per-record provenance arrives with
   the binary/physics datasets.
 - A non-interactive CLI that exits non-zero on failure and prints a coverage summary (e.g. "1,193 of
-  1,201 blocks have collision boxes; 8 unknown, listed"). *Planned.*
+  1,201 blocks have collision boxes; 8 unknown, listed"). **Done** via `dataminer report [--strict]`,
+  which counts records, lists `unresolved` entries and `method: unknown` records, and fails under
+  `--strict`. Field-level coverage grows automatically as datasets gain optional/`unknown` fields.
 - A `diff` command across versions. **Done.**
 - Tagged releases; Ferrock pins a tag and checks the manifest hashes. *Planned.*
 
@@ -77,10 +79,11 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 - **M1 — Mojang data (done).** Ingest vanilladata, commands; emit normalized specs with provenance;
   diff across versions. *Exit:* `dataminer metadata` produces all layer-1 specs from a real checkout;
   `diff` reports clean deltas. (Met.)
-- **M2 — Protocol + binary reads.** Add the `bedrock-protocol-docs` packet-schema ingester and the
-  Molang module. Symbols/RTTI/strings from BDS (done); add `.init_array`/`.CRT$XC*` enumeration and
-  string cross-references. *Exit:* packet field order for the core join packets, and class names from
-  a real stripped Linux BDS, both diffable.
+- **M2 — Protocol + binary reads (mostly done).** The `bedrock-protocol-docs` packet-schema ingester
+  and the Molang module are done; symbols/RTTI/strings from BDS are done. Still to add:
+  `.init_array`/`.CRT$XC*` enumeration and string cross-references. *Exit:* packet field order for the
+  core join packets (done, v1.26.51), and class names from a real stripped Linux BDS (pending the
+  fetcher's BDS), both diffable.
 - **M3 — Live facts.** A behaviour pack that dumps Script API enumerations to stdout, and a capture
   ingester for the registries a server sends at join (StartGame, ItemRegistry, …). Derive block
   network ids and verify against capture. *Exit:* block runtime ids cross-checked three ways
