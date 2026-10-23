@@ -33,7 +33,7 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 | --- | --- | --- | --- | --- |
 | P0 | Blocks: names, state properties, raw ids | `bedrock-samples` vanilladata | extracted | **done** |
 | P0 | Blocks: collision/outline boxes, friction, light, render layer, solidity | BDS binary / Script API | extracted | planned |
-| P0 | Block network runtime id / hash | derived: FNV-1a over sorted state NBT | extracted | planned |
+| P0 | Block states (every permutation) + network runtime hash | FNV-1a over sorted state NBT, from mojang-blocks.json | extracted | **done** (live-capture cross-check pending) |
 | P0 | Player movement constants (gravity, drag, speeds, jump, step, swim/glide/fly/crawl/ladder/liquid) | **measured**: headless Acacia on strict-movement BDS | measured | planned |
 | P0 | Items: ids, stack size, durability, tags, block↔item map | `bedrock-samples` + BDS | extracted | **partial** (ids/names done) |
 | P0 | Packet schemas (id, fields in wire order) + enums + version diff | `bedrock-protocol-docs` JSON schemas | extracted | **done** |
@@ -85,9 +85,9 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
   core join packets (done, v1.26.51), and class names from a real stripped Linux BDS (pending the
   fetcher's BDS), both diffable.
 - **M3 — Live facts.** A behaviour pack that dumps Script API enumerations to stdout, and a capture
-  ingester for the registries a server sends at join (StartGame, ItemRegistry, …). Derive block
-  network ids and verify against capture. *Exit:* block runtime ids cross-checked three ways
-  (metadata ↔ derived hash ↔ capture).
+  ingester for the registries a server sends at join (StartGame, ItemRegistry, …). Block network
+  hashes are computed (done); verify them and the cartesian state set against a capture. *Exit:*
+  block runtime ids cross-checked three ways (metadata ↔ derived hash ↔ capture).
 - **M4 — Structure via an engine.** A pinned Ghidra-headless/PyGhidra job that emits JSON facts
   (struct sizes, vtable slot counts, hierarchy, serializer call sequences), cached per BDS version,
   with cross-version porting anchored on RTTI and strings. *Exit:* a reviewed set of struct/vtable

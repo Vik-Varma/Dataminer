@@ -75,8 +75,26 @@ pub fn run(args: MetadataArgs) -> Result<()> {
             dataset: "blocks",
             schema_version: dataminer_metadata::blocks::SCHEMA_VERSION,
             source: "vanilladata_modules/mojang-blocks.json",
-            source_sha256: hash,
+            source_sha256: hash.clone(),
             records: doc.payload.blocks.len(),
+        });
+
+        // Block states + network hashes, derived from the same blocks source.
+        let bs = dataminer_metadata::blockstates::enumerate(&doc);
+        write_doc(&out_dir, "blockstates.json", &bs.to_pretty_json()?)?;
+        tracing::info!(
+            "blockstates: {} blocks, {} states ({} unresolved, {} collisions)",
+            bs.payload.block_count,
+            bs.payload.state_count,
+            bs.payload.unresolved.len(),
+            bs.payload.collisions.len()
+        );
+        written.push(Written {
+            dataset: "blockstates",
+            schema_version: dataminer_metadata::blockstates::SCHEMA_VERSION,
+            source: "vanilladata_modules/mojang-blocks.json",
+            source_sha256: hash,
+            records: bs.payload.state_count,
         });
     }
     // Items.

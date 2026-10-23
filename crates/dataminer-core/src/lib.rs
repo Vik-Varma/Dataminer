@@ -11,10 +11,12 @@
 //! and a reviewer can reproduce it. We never emit a number we cannot point at a
 //! source for.
 
+pub mod block_hash;
 pub mod digest;
 pub mod provenance;
 pub mod spec;
 
+pub use block_hash::{StateValue, network_block_hash};
 pub use digest::Sha256Digest;
 pub use provenance::{Method, Provenance, SourceKind};
 pub use spec::{SpecDocument, SpecError, SpecMeta};
