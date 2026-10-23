@@ -13,6 +13,7 @@
 
 pub mod block_hash;
 pub mod digest;
+pub mod nbt;
 pub mod provenance;
 pub mod spec;
 

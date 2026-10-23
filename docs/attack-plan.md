@@ -64,6 +64,9 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
   which counts records, lists `unresolved` entries and `method: unknown` records, and fails under
   `--strict`. Field-level coverage grows automatically as datasets gain optional/`unknown` fields.
 - A `diff` command across versions. **Done.**
+- Cross-check against independent sources. **Done** for block states: `dataminer crosscheck
+  blockstates` verifies hashes against an authoritative `block_states.nbt` (network-LE NBT reader in
+  `dataminer-core::nbt`) and reports per-block differences.
 - Tagged releases; Ferrock pins a tag and checks the manifest hashes. *Planned.*
 
 ## Trust (how we avoid shipping a wrong number)

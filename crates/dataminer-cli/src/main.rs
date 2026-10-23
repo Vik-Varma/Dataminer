@@ -5,6 +5,7 @@
 //! check in and diff. Nothing here runs the game server; the binary commands read
 //! an object file statically.
 
+mod crosscheck_cmd;
 mod metadata_cmd;
 mod protocol_cmd;
 mod report_cmd;
@@ -41,6 +42,11 @@ enum Command {
     },
     /// Summarize a spec's coverage; with --strict, exit non-zero on any gaps.
     Report(report_cmd::ReportArgs),
+    /// Cross-check a dataset against an independent source and report differences.
+    Crosscheck {
+        #[command(subcommand)]
+        what: CrosscheckCommand,
+    },
     /// Diff two spec documents and report what changed between versions.
     Diff {
         /// The older spec JSON.
@@ -51,6 +57,12 @@ enum Command {
         #[arg(long)]
         out: Option<PathBuf>,
     },
+}
+
+#[derive(Subcommand)]
+enum CrosscheckCommand {
+    /// Check blockstates hashes against an authoritative block_states.nbt.
+    Blockstates(crosscheck_cmd::BlockStatesArgs),
 }
 
 #[derive(Subcommand)]
@@ -96,6 +108,9 @@ fn main() -> Result<ExitCode> {
         Command::Metadata(args) => metadata_cmd::run(args).map(|()| ok),
         Command::Protocol(args) => protocol_cmd::run(args).map(|()| ok),
         Command::Report(args) => report_cmd::run(args),
+        Command::Crosscheck { what } => match what {
+            CrosscheckCommand::Blockstates(a) => crosscheck_cmd::run_blockstates(a).map(|()| ok),
+        },
         Command::Inspect { file } => inspect(&file).map(|()| ok),
         Command::Binary { what } => run_binary(what).map(|()| ok),
         Command::Diff { old, new, out } => run_diff(&old, &new, out.as_deref()).map(|()| ok),

@@ -54,7 +54,17 @@ version drift between it and 1.26.50.4.
 
 ## Reproduce
 
-The check used Dragonfly `block_states.nbt` from `df-mc/dragonfly` (MIT) and
-`dataminer metadata … --out out` to produce `blockstates.json`. The decoder/comparator is a throwaway
-script (network-LE NBT → per-state hash → set compare); productizing it as a `dataminer crosscheck`
-command (a Rust network-LE NBT reader + set/hash diff) is tracked as a follow-up.
+Reproduce with the built-in command (a Rust network-LE NBT reader in
+`dataminer-core::nbt` plus a hash/set diff):
+
+```sh
+dataminer metadata --samples <bedrock-samples> --out out
+dataminer crosscheck blockstates \
+    --spec out/1.26.50.4/blockstates.json \
+    --against <df-mc/dragonfly>/server/world/block_states.nbt \
+    --out crosscheck.json
+```
+
+It prints the summary above (`ours=22189 theirs=22091 matched=22055`) and writes the per-block
+difference report. The numbers here were first obtained with a throwaway script and then reproduced
+exactly by this command.
