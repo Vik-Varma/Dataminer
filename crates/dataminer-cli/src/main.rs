@@ -6,6 +6,7 @@
 //! an object file statically.
 
 mod crosscheck_cmd;
+mod fetch_cmd;
 mod metadata_cmd;
 mod protocol_cmd;
 mod report_cmd;
@@ -26,6 +27,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Download and pin the Mojang inputs for a game version into a working dir.
+    Fetch(fetch_cmd::FetchArgs),
     /// Ingest Mojang's public `bedrock-samples` metadata into specs.
     Metadata(metadata_cmd::MetadataArgs),
     /// Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs.
@@ -105,6 +108,7 @@ fn main() -> Result<ExitCode> {
     let cli = Cli::parse();
     let ok = ExitCode::SUCCESS;
     match cli.command {
+        Command::Fetch(args) => fetch_cmd::run(args).map(|()| ok),
         Command::Metadata(args) => metadata_cmd::run(args).map(|()| ok),
         Command::Protocol(args) => protocol_cmd::run(args).map(|()| ok),
         Command::Report(args) => report_cmd::run(args),

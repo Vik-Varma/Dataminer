@@ -6,6 +6,7 @@ members = [
     "crates/dataminer-protocol",
     "crates/dataminer-binary",
     "crates/dataminer-diff",
+    "crates/dataminer-fetch",
     "crates/dataminer-cli",
 ]
 
@@ -23,6 +24,7 @@ dataminer-metadata = { path = "crates/dataminer-metadata" }
 dataminer-protocol = { path = "crates/dataminer-protocol" }
 dataminer-binary = { path = "crates/dataminer-binary" }
 dataminer-diff = { path = "crates/dataminer-diff" }
+dataminer-fetch = { path = "crates/dataminer-fetch" }
 
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
@@ -32,6 +34,9 @@ sha2 = "0.10"
 thiserror = "2"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+# Unpacking the Bedrock Dedicated Server download (deflate only, pure Rust).
+zip = { version = "9", default-features = false, features = ["deflate-flate2-zlib-rs"] }
 
 # Binary analysis. All pure-Rust, permissively licensed (MIT/Apache-2.0), so a
 # GPL-3.0 workspace can use them. No `unsafe` from us; see the workspace lints.

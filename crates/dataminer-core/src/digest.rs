@@ -1,6 +1,7 @@
 //! SHA-256 digests, used to pin exactly which bytes produced a spec.
 
 use std::fmt;
+use std::io::{self, Read};
 
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -21,6 +22,22 @@ impl Sha256Digest {
         let mut buf = [0u8; 32];
         buf.copy_from_slice(&out);
         Self(buf)
+    }
+
+    /// Hash everything a reader yields, without holding it all in memory.
+    pub fn of_reader(mut reader: impl Read) -> io::Result<Self> {
+        let mut hasher = Sha256::new();
+        let mut buf = vec![0u8; 64 * 1024];
+        loop {
+            let n = reader.read(&mut buf)?;
+            if n == 0 {
+                break;
+            }
+            hasher.update(&buf[..n]);
+        }
+        let mut out = [0u8; 32];
+        out.copy_from_slice(&hasher.finalize());
+        Ok(Self(out))
     }
 
     /// The raw 32 bytes.
@@ -89,6 +106,13 @@ mod tests {
             "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         );
         assert_eq!(d.to_string(), format!("sha256:{}", d.to_hex()));
+    }
+
+    #[test]
+    fn reader_matches_bytes() {
+        let data = vec![7u8; 200_000];
+        let d = Sha256Digest::of_reader(&data[..]).unwrap();
+        assert_eq!(d, Sha256Digest::of_bytes(&data));
     }
 
     #[test]

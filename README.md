@@ -46,6 +46,12 @@ You need Rust 1.99; `rust-toolchain.toml` selects it automatically.
 cargo build --workspace
 cargo test  --workspace
 
+# Download and pin the Mojang inputs for a version into the git-ignored work/ dir
+# (needs git and curl; you must accept the Minecraft EULA). Records what it got,
+# with hashes, in work/<version>/sources.json; re-running is a no-op.
+cargo run -p dataminer-cli -- fetch --game-version 1.26.51 --accept-eula --out work
+cargo run -p dataminer-cli -- fetch --game-version 1.26.51 --out work --verify
+
 # Ingest a local bedrock-samples checkout into specs (reads it; copies nothing).
 # Writes out/<game-version>/<dataset>.json + a manifest.json, deterministically:
 cargo run -p dataminer-cli -- metadata --samples /path/to/bedrock-samples --protocol 2193 --out out
@@ -87,6 +93,7 @@ type-name strings that survive in read-only data.
 | `crates/dataminer-protocol` | Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs (fields in wire order) |
 | `crates/dataminer-binary` | Static ELF/PE analysis: symbols, RTTI, strings (demangling via `cpp_demangle`/`msvc-demangler`) |
 | `crates/dataminer-diff` | Structural diffs between specs across game versions |
+| `crates/dataminer-fetch` | Download and pin the inputs (`bedrock-samples`, `bedrock-protocol-docs`, BDS) for a version |
 | `crates/dataminer-cli` | The `dataminer` command-line tool |
 | `docs/` | Strategy, and the datamining and reverse-engineering technique surveys |
 
@@ -96,7 +103,7 @@ type-name strings that survive in read-only data.
 - [docs/datamining-techniques.md](docs/datamining-techniques.md) — industry survey of Bedrock datamining
 - [docs/reverse-engineering.md](docs/reverse-engineering.md) — industry survey of RE tools and methods
 - [docs/clean-room-and-legal.md](docs/clean-room-and-legal.md) — the clean-room method and legal guardrails
-- [docs/fetcher-requirements.md](docs/fetcher-requirements.md) — what a companion "fetcher" tool must download, and how, to feed Dataminer
+- [docs/fetcher-requirements.md](docs/fetcher-requirements.md) — what `dataminer fetch` downloads, and the rules it follows
 
 ## License
 

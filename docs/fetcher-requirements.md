@@ -37,6 +37,9 @@ fourth and fifth are cross-check sources it will consume soon.
   `v1.26.51`, which is protocol 2193). Each tag's packet JSON carries `x-protocol-version`.
 - Dataminer needs the `json/` directory. Checkout the tag that matches the target protocol.
 - **License:** same EULA posture as bedrock-samples. Working dir only, never committed.
+- Not every release is tagged: 1.26.52 exists only on Mojang's bot branch `automated/1.26.52`
+  (protocol 2193; its packet JSON matches `v1.26.51` except for the version stamp). `dataminer
+  fetch` uses that branch, pinned by commit, when a release has no tag.
 - Consumed by: `dataminer protocol --docs <dir> --game-version 1.26.51 --out <out>`.
 
 ### 3. Bedrock Dedicated Server (BDS) binary — **verified working** (RTTI, symbols, strings)
@@ -53,6 +56,15 @@ fourth and fifth are cross-check sources it will consume soon.
   and follow redirects: `curl -sSL --http1.1 -A "Mozilla/5.0 (X11; Linux x86_64)" -o bds.zip <url>`.
   Without the UA you get an empty reply / HTTP-2 stream error, not a policy denial. Then **verify the
   sha1 against the index** before using the file, and fail on mismatch.
+- **What `dataminer fetch` does.** It resolves the URL from `EndstoneMC/bedrock-server-data`, whose
+  `release/<version>/metadata.json` gives the Linux and Windows URLs with a **SHA-256** (its
+  `versions.json` only lists version names). It downloads with the recipe above (browser
+  `User-Agent`, HTTP/1.1), but treats a redirect as an error, and refuses the zip unless its SHA-256
+  matches the index. It also reads Mojang's own download-links API,
+  `https://net-secondary.web.minecraft-services.net/api/v1.0/download/links`, which names only the
+  current release and preview builds. It does this on every BDS fetch (`--bds-zip` included) and
+  fails if it can't: when the target is the current release, the index's URL must match it.
+  `--bds-zip <file>` takes a zip downloaded by hand instead, checked the same way.
 - **Accept the EULA explicitly.** The fetcher must require an `--accept-eula` flag (or equivalent)
   and record that the user accepted it. Do not download BDS without it.
 - Pick the right build: **Linux `bedrock_server` ELF** is the primary RE target — confirmed on
