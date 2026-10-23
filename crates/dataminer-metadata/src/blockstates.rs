@@ -179,8 +179,14 @@ pub fn enumerate(blocks_doc: &SpecDocument<BlocksPayload>) -> SpecDocument<Block
          replicated verbatim from Dragonfly's network_block_hash.go (MIT) and FNV-validated."
             .to_string(),
         "State set is the full cartesian product of each block's property domains (Bedrock's \
-         model), from mojang-blocks.json. Cross-checking the set against a live BDS capture is \
-         pending; treat completeness as unconfirmed until then."
+         model), from mojang-blocks.json."
+            .to_string(),
+        "Cross-checked against Dragonfly's block_states.nbt (MIT): 22,055 of its 22,091 \
+         authoritative hashes are reproduced exactly. ~134 extra states here are cartesian \
+         over-generations for a few blocks (cocoa, rails, nether_wart, frosted_ice, chorus_flower, \
+         shelf_mushroom); ~36 Dragonfly states are deprecated/education/internal blocks outside \
+         Mojang's public vanilladata. A live-BDS capture of the target version remains the final \
+         oracle for the exact valid set. See docs/validation/blockstates-crosscheck-2026-10-23.md."
             .to_string(),
     ];
 

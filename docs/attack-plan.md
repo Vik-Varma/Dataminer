@@ -33,7 +33,7 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 | --- | --- | --- | --- | --- |
 | P0 | Blocks: names, state properties, raw ids | `bedrock-samples` vanilladata | extracted | **done** |
 | P0 | Blocks: collision/outline boxes, friction, light, render layer, solidity | BDS binary / Script API | extracted | planned |
-| P0 | Block states (every permutation) + network runtime hash | FNV-1a over sorted state NBT, from mojang-blocks.json | extracted | **done** (live-capture cross-check pending) |
+| P0 | Block states (every permutation) + network runtime hash | FNV-1a over sorted state NBT, from mojang-blocks.json | extracted | **done**, cross-checked vs Dragonfly (22,055/22,091 hashes exact); live capture is the final oracle |
 | P0 | Player movement constants (gravity, drag, speeds, jump, step, swim/glide/fly/crawl/ladder/liquid) | **measured**: headless Acacia on strict-movement BDS | measured | planned |
 | P0 | Items: ids, stack size, durability, tags, block↔item map | `bedrock-samples` + BDS | extracted | **partial** (ids/names done) |
 | P0 | Packet schemas (id, fields in wire order) + enums + version diff | `bedrock-protocol-docs` JSON schemas | extracted | **done** |
@@ -70,7 +70,8 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 
 - Cross-check each dataset against an independent source and report disagreements: PrismarineJS
   minecraft-data, gophertunnel/Dragonfly (MIT), Acacia's `blocks.bin` and `acacia-physics` (a port of
-  Oomph's bedsim). Never weaken a cross-check to make it pass.
+  Oomph's bedsim). Never weaken a cross-check to make it pass. Results live in `docs/validation/`
+  (e.g. the block-state hash check against Dragonfly: 22,055/22,091 exact).
 - Prefer measurement over inference for physics (strict-movement BDS corrections).
 - Golden tests for well-known values (stone hardness 1.5, gravity 0.08 blocks/tick²).
 
