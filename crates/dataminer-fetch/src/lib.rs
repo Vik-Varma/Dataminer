@@ -86,12 +86,16 @@ pub fn fetch(opts: &Options) -> Result<Report> {
         "every source is Mojang's and under the Minecraft EULA \
          (https://www.minecraft.net/eula); pass --accept-eula to accept it and fetch"
     );
-    let target = Version::parse(&opts.game_version).with_context(|| {
-        format!(
-            "{:?} is not a release version like 1.26.51",
-            opts.game_version
-        )
-    })?;
+    // A canonical three-part version, so the directory, index path and git
+    // refs all name the same thing.
+    let target = Version::parse(&opts.game_version)
+        .filter(|v| v.game() == *v && v.to_string() == opts.game_version)
+        .with_context(|| {
+            format!(
+                "{:?} is not a release version like 1.26.51",
+                opts.game_version
+            )
+        })?;
     let dir = opts.out.join(&opts.game_version);
     std::fs::create_dir_all(&dir).with_context(|| format!("creating {}", dir.display()))?;
 
@@ -136,9 +140,11 @@ pub fn fetch(opts: &Options) -> Result<Report> {
             Kind::BedrockProtocolDocs => fetch_docs(&dir, &target, opts)?,
             Kind::BedrockSamples => fetch_samples(&dir, &target, sources.protocol, opts)?,
             Kind::BedrockServer if opts.skip_bds => continue,
-            Kind::BedrockServer => fetch_bds(&dir, opts)?,
+            Kind::BedrockServer => fetch_bds(&dir, &target, opts)?,
         };
-        if kind == Kind::BedrockProtocolDocs {
+        // An explicit docs ref may be another version, so its protocol is not
+        // the target's.
+        if kind == Kind::BedrockProtocolDocs && src.r#match != Match::Explicit {
             sources.protocol = src.protocol;
         }
         sources.sources.push(src);
@@ -157,13 +163,21 @@ pub fn fetch(opts: &Options) -> Result<Report> {
 }
 
 /// Re-check every source recorded in `dir/sources.json` without downloading.
+/// Docs and samples must be recorded; BDS may have been skipped.
 pub fn verify(dir: &Path) -> Result<Sources> {
     let sources = Sources::read(dir)?
         .with_context(|| format!("no {} in {}", sources::FILE_NAME, dir.display()))?;
-    let problems: Vec<String> = sources
-        .sources
-        .iter()
-        .filter_map(|s| check(dir, s).err().map(|e| format!("{e:#}")))
+    let missing = [Kind::BedrockProtocolDocs, Kind::BedrockSamples]
+        .into_iter()
+        .filter(|k| sources.get(*k).is_none())
+        .map(|k| format!("{} is not recorded; the fetch is incomplete", k.dir()));
+    let problems: Vec<String> = missing
+        .chain(
+            sources
+                .sources
+                .iter()
+                .filter_map(|s| check(dir, s).err().map(|e| format!("{e:#}"))),
+        )
         .collect();
     anyhow::ensure!(problems.is_empty(), "{}", problems.join("\n"));
     Ok(sources)
@@ -184,6 +198,14 @@ fn reuse(dir: &Path, rec: &Source, wanted_ref: Option<&str>) -> Result<()> {
 
 /// Fail unless the cached source still has the recorded contents and commit.
 fn check(dir: &Path, rec: &Source) -> Result<()> {
+    anyhow::ensure!(
+        rec.path == rec.kind.dir(),
+        "{} records {} at {:?}, not {}",
+        sources::FILE_NAME,
+        rec.kind.dir(),
+        rec.path,
+        rec.kind.dir()
+    );
     let path = dir.join(&rec.path);
     anyhow::ensure!(
         path.is_dir(),
@@ -236,11 +258,11 @@ fn fetch_docs(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
             }
         },
     };
-    let dest = clone(dir, Kind::BedrockProtocolDocs, url, &tag, "json")?;
-    let protocol = git::protocol_in_dir(&dest.join("json"))?;
-    let mut src = record(dir, Kind::BedrockProtocolDocs, url, &tag, how)?;
-    src.protocol = Some(protocol);
+    let staging = clone(dir, Kind::BedrockProtocolDocs, url, &tag, "json")?;
+    let mut src = record(&staging, Kind::BedrockProtocolDocs, url, &tag, how)?;
+    src.protocol = Some(git::protocol_in_dir(&staging.join("json"))?);
     src.notes = notes;
+    install(dir, Kind::BedrockProtocolDocs, &staging)?;
     Ok(src)
 }
 
@@ -285,26 +307,24 @@ fn fetch_samples(
             Pick::None(near) => no_tag("bedrock-samples", target, &near, "--samples-ref")?,
         },
     };
-    let dest = clone(dir, Kind::BedrockSamples, url, &tag, "metadata")?;
-    let mut src = record(dir, Kind::BedrockSamples, url, &tag, how)?;
-    if let Some(v) = samples_version(&dest) {
+    let staging = clone(dir, Kind::BedrockSamples, url, &tag, "metadata")?;
+    let mut src = record(&staging, Kind::BedrockSamples, url, &tag, how)?;
+    if let Some(v) = samples_version(&staging) {
         src.game_version = v;
     }
     src.protocol = tag_protocol;
     src.notes = notes;
+    install(dir, Kind::BedrockSamples, &staging)?;
     Ok(src)
 }
 
-fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
+fn fetch_bds(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
     let r = &opts.remotes;
-    let index_url = format!(
-        "{}/release/{}/metadata.json",
-        r.bds_index, opts.game_version
-    );
+    let index_url = format!("{}/release/{target}/metadata.json", r.bds_index);
     let index = bds::download(&index_url, None, &r.curl_protocols).with_context(|| {
         format!(
-            "no BDS index entry for {} (see {}/versions.json for the versions it lists)",
-            opts.game_version, r.bds_index
+            "no BDS index entry for {target} (see {}/versions.json for the versions it lists)",
+            r.bds_index
         )
     })?;
     let entry = bds::parse_index(&index)?;
@@ -314,16 +334,29 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
         entry.url,
         r.bds_host
     );
-    let file = entry.url.rsplit('/').next().unwrap_or_default().to_string();
-    let game_version = bds::version_of(&entry.url).unwrap_or_else(|| opts.game_version.clone());
+    let game_version = bds::version_of(&entry.url).with_context(|| {
+        format!(
+            "the index's URL {} is not a BDS download (…/bedrock-server-<version>.zip)",
+            entry.url
+        )
+    })?;
+    anyhow::ensure!(
+        Version::parse(&game_version).map(|v| v.game()).as_ref() == Some(target),
+        "the index entry for {target} is BDS {game_version}, not {target}"
+    );
+    let file = format!("bedrock-server-{game_version}.zip");
 
     // Mojang's own links API names only the current release. When that is the
     // target, the index must agree with it.
     let mut notes = Vec::new();
-    let current = bds::download(&r.bds_links, None, &r.curl_protocols)
-        .ok()
-        .and_then(|b| bds::current_linux_url(&b));
-    match current {
+    let links = bds::download(&r.bds_links, None, &r.curl_protocols).with_context(|| {
+        format!(
+            "reading Mojang's download-links API at {}. If a proxy refused the host, that is \
+             a policy denial: don't route around it",
+            r.bds_links
+        )
+    })?;
+    match bds::current_linux_url(&links) {
         Some(url) if url == entry.url => {
             notes.push("download URL confirmed by Mojang's download-links API".to_string());
         }
@@ -331,7 +364,8 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
             if bds::version_of(&url)
                 .and_then(|v| Version::parse(&v))
                 .map(|v| v.game())
-                == Version::parse(&game_version).map(|v| v.game()) =>
+                .as_ref()
+                == Some(target) =>
         {
             anyhow::bail!(
                 "the index says {}, but Mojang's download-links API says {url} for the same \
@@ -344,12 +378,13 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
              index only"
         )),
         None => notes.push(
-            "Mojang's download-links API could not be read; URL from the index only".to_string(),
+            "Mojang's download-links API lists no Linux build; URL from the index only".to_string(),
         ),
     }
 
     let dest = dir.join(Kind::BedrockServer.dir());
-    let download = dir.join(format!("{file}.partial"));
+    // A fixed local name: nothing from the index becomes a path.
+    let download = dir.join("bedrock-server.zip.partial");
     let zip = match &opts.bds_zip {
         Some(p) => p.clone(),
         None => {
@@ -379,17 +414,26 @@ fn fetch_bds(dir: &Path, opts: &Options) -> Result<Source> {
         entry.sha256
     );
     let staging = fresh_staging(dir, Kind::BedrockServer)?;
-    bds::extract(&zip, &staging)?;
-    anyhow::ensure!(
-        staging.join("bedrock_server").is_file(),
-        "{file} has no bedrock_server at its root; is it the Linux build?"
-    );
-    std::fs::rename(&staging, &dest)?;
+    let unpacked = bds::extract(&zip, &staging).and_then(|()| {
+        anyhow::ensure!(
+            staging.join("bedrock_server").is_file(),
+            "{file} has no bedrock_server at its root; is it the Linux build?"
+        );
+        tree::digest(&staging)
+    });
     if opts.bds_zip.is_none() {
         std::fs::remove_file(&download)?;
     }
+    let (tree_sha256, files) = match unpacked {
+        Ok(digest) => digest,
+        Err(e) => {
+            // Best effort, keeping the real error: the next run replaces it anyway.
+            let _ = std::fs::remove_dir_all(&staging);
+            return Err(e);
+        }
+    };
+    std::fs::rename(&staging, &dest)?;
 
-    let (tree_sha256, files) = tree::digest(&dest)?;
     if let Some(p) = &opts.bds_zip {
         notes.push(format!(
             "zip supplied by the user ({}), not downloaded; its SHA-256 matches the index",
@@ -425,10 +469,10 @@ fn no_tag<T>(repo: &str, target: &Version, near: &[String], flag: &str) -> Resul
     anyhow::bail!("{repo} has no tag for {target} (nearest: {near}); pass {flag} <tag> to use one")
 }
 
-/// Clone into a staging dir, then move it into place, so an interrupted fetch
-/// never leaves a half-made source that looks complete.
+/// Clone into a staging dir and return it. The caller reads and hashes it
+/// there, then [`install`]s it, so a failure or interruption at any point
+/// leaves only a staging dir, which the next run replaces.
 fn clone(dir: &Path, kind: Kind, url: &str, tag: &str, subdir: &str) -> Result<PathBuf> {
-    let dest = dir.join(kind.dir());
     let staging = fresh_staging(dir, kind)?;
     git::clone_sparse(url, tag, subdir, &staging)?;
     anyhow::ensure!(
@@ -436,8 +480,14 @@ fn clone(dir: &Path, kind: Kind, url: &str, tag: &str, subdir: &str) -> Result<P
         "{} {tag} has no {subdir}/",
         kind.dir()
     );
-    std::fs::rename(&staging, &dest)?;
-    Ok(dest)
+    Ok(staging)
+}
+
+/// Move a finished staging dir into place as `kind`'s directory.
+fn install(dir: &Path, kind: Kind, staging: &Path) -> Result<()> {
+    let dest = dir.join(kind.dir());
+    std::fs::rename(staging, &dest)
+        .with_context(|| format!("moving {} to {}", staging.display(), dest.display()))
 }
 
 /// An empty staging dir for `kind`, after checking nothing unrecorded is in
@@ -458,15 +508,15 @@ fn fresh_staging(dir: &Path, kind: Kind) -> Result<PathBuf> {
     Ok(staging)
 }
 
-fn record(dir: &Path, kind: Kind, url: &str, tag: &str, how: Match) -> Result<Source> {
-    let path = dir.join(kind.dir());
-    let (tree_sha256, files) = tree::digest(&path)?;
+/// The record for a git source checked out at `path`.
+fn record(path: &Path, kind: Kind, url: &str, tag: &str, how: Match) -> Result<Source> {
+    let (tree_sha256, files) = tree::digest(path)?;
     Ok(Source {
         kind,
         path: kind.dir().into(),
         url: url.into(),
         git_ref: Some(tag.into()),
-        commit: Some(git::head(&path)?),
+        commit: Some(git::head(path)?),
         file: None,
         file_sha256: None,
         index_url: None,

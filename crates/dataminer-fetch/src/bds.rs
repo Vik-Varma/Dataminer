@@ -36,17 +36,26 @@ pub fn parse_index(bytes: &[u8]) -> Result<IndexEntry> {
 
 /// Download `url` with `curl`, to `dest` or (when `None`) into memory.
 ///
-/// No redirects are followed, so the bytes come from the host that was named.
+/// A redirect is an error, so the bytes come from the host that was named.
+/// The user's `~/.curlrc` is ignored (`-q`), and a stalled transfer fails.
 /// `protocols` is curl's `--proto` list, `=https` outside tests.
 pub fn download(url: &str, dest: Option<&Path>, protocols: &str) -> Result<Vec<u8>> {
     let mut cmd = Command::new("curl");
-    cmd.args(["--fail", "--silent", "--show-error", "--max-redirs", "0"])
+    cmd.args(["-q", "--fail", "--silent", "--show-error", "--globoff"])
+        .args(["--location", "--max-redirs", "0"])
+        .args([
+            "--connect-timeout",
+            "30",
+            "--speed-limit",
+            "1024",
+            "--speed-time",
+            "60",
+        ])
         .args(["--proto", protocols, "--user-agent", USER_AGENT]);
     if let Some(dest) = dest {
         cmd.arg("--output").arg(dest);
     }
-    let out = crate::git::run(cmd.arg(url))?;
-    Ok(out.into_bytes())
+    crate::git::run(cmd.arg("--").arg(url))
 }
 
 /// An honest, bare name. Mojang's CDN resets requests that don't name their

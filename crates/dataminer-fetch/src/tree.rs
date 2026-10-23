@@ -9,9 +9,10 @@ use dataminer_core::Sha256Digest;
 /// Digest every file under `root` except a top-level `.git`.
 ///
 /// Files are visited in sorted path order (`/`-separated) and each contributes
-/// its relative path and the SHA-256 of its contents, so the result is the same
-/// on every OS and every run. Symlinks contribute their target, not what it
-/// points to. Returns the digest and the number of files.
+/// its relative path and the SHA-256 of its contents, so the same files give
+/// the same result on every OS and every run (git checkouts are made with
+/// line-ending conversion off for that reason). Symlinks contribute their
+/// target, not what it points to. Returns the digest and the number of files.
 pub fn digest(root: &Path) -> Result<(Sha256Digest, u64)> {
     let mut entries = Vec::new();
     walk(root, "", &mut entries)?;

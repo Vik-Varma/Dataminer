@@ -40,6 +40,11 @@ fn fixture(name: &str) -> Fixture {
         &["commit", "--quiet", "--all", "--message", "1.26.52"],
     );
     git_in(&docs, &["checkout", "--quiet", "main"]);
+    // A tag whose packets state no protocol, to make a docs fetch fail late.
+    git_in(&docs, &["checkout", "--quiet", "-b", "broken"]);
+    std::fs::write(docs.join("json/AnimatePacket.json"), "{}").unwrap();
+    commit_and_tag(&docs, "no-protocol");
+    git_in(&docs, &["checkout", "--quiet", "main"]);
 
     let samples = root.join("samples");
     init(&samples);
@@ -71,11 +76,13 @@ fn fixture(name: &str) -> Fixture {
         ],
     );
     let good = Sha256Digest::of_bytes(&std::fs::read(&zip).unwrap()).to_hex();
+    let zip_50 = mojang.join("bedrock-server-1.26.50.4.zip");
+    write_zip(&zip_50, &[("bedrock_server", b"\x7fELF fake".as_slice())]);
     let wrong = Sha256Digest::of_bytes(b"other").to_hex();
     let index = root.join("index");
     for (version, url, sha) in [
         ("1.26.51", file_url(&zip), good.as_str()),
-        ("1.26.50", file_url(&zip), wrong.as_str()),
+        ("1.26.50", file_url(&zip_50), wrong.as_str()),
         (
             "1.26.45",
             "https://mirror.invalid/b.zip".to_string(),
@@ -111,6 +118,29 @@ fn fixture(name: &str) -> Fixture {
 }
 
 impl Fixture {
+    /// Point the index entry for `version` (and Mojang's links API) at a new
+    /// zip named `file` holding `entries`, and return the zip's path.
+    fn serve_bds(&self, version: &str, file: &str, entries: &[(&str, &[u8])]) -> PathBuf {
+        let dir = self.root.join("mojang").join(version);
+        std::fs::create_dir_all(&dir).unwrap();
+        let zip = dir.join(file);
+        write_zip(&zip, entries);
+        let sha = Sha256Digest::of_bytes(&std::fs::read(&zip).unwrap()).to_hex();
+        let url = file_url(&zip);
+        let d = self.root.join("index/release").join(version);
+        std::fs::create_dir_all(&d).unwrap();
+        let entry = format!(r#"{{"binary":{{"linux":{{"url":"{url}","sha256":"{sha}"}}}}}}"#);
+        std::fs::write(d.join("metadata.json"), entry).unwrap();
+        std::fs::write(
+            self.root.join("links.json"),
+            format!(
+                r#"{{"result":{{"links":[{{"downloadType":"serverBedrockLinux","downloadUrl":"{url}"}}]}}}}"#
+            ),
+        )
+        .unwrap();
+        zip
+    }
+
     fn options(&self, version: &str) -> Options {
         Options {
             game_version: version.into(),
@@ -156,7 +186,7 @@ fn fetches_pins_and_is_idempotent() {
         server.notes
     );
     assert!(dir.join("bedrock-server/bedrock_server").is_file());
-    assert!(!dir.join("bedrock-server-1.26.51.1.zip.partial").exists());
+    assert!(!dir.join("bedrock-server.zip.partial").exists());
     #[cfg(unix)]
     {
         use std::os::unix::fs::PermissionsExt;
@@ -216,7 +246,7 @@ fn bds_must_match_the_index_and_come_from_mojang() {
     assert!(!fx.root.join("work/1.26.50/bedrock-server").exists());
     assert!(
         !fx.root
-            .join("work/1.26.50/bedrock-server-1.26.51.1.zip.partial")
+            .join("work/1.26.50/bedrock-server.zip.partial")
             .exists()
     );
 
@@ -269,6 +299,135 @@ fn requires_the_eula_and_a_known_tag() {
         err.contains("bedrock-protocol-docs has no tag for 1.26.60 (nearest: v1.26.51)"),
         "{err}"
     );
+}
+
+#[test]
+fn rejects_non_canonical_versions() {
+    let fx = fixture("canonical");
+    for v in ["1.26.051", "1.26.50.4"] {
+        let err = format!("{:#}", fetch(&fx.options(v)).err().unwrap());
+        assert!(err.contains("is not a release version"), "{v}: {err}");
+    }
+}
+
+#[test]
+fn a_late_failure_does_not_wedge_the_next_run() {
+    let fx = fixture("wedge");
+    let mut opts = fx.options("1.26.51");
+    opts.skip_bds = true;
+    opts.docs_ref = Some("no-protocol".into());
+    let err = format!("{:#}", fetch(&opts).err().unwrap());
+    assert!(err.contains("no x-protocol-version"), "{err}");
+
+    opts.docs_ref = None;
+    fetch(&opts).unwrap();
+}
+
+#[test]
+fn samples_take_no_protocol_from_an_explicit_docs_ref() {
+    let fx = fixture("explicit-docs");
+    let mut opts = fx.options("1.26.50");
+    opts.skip_bds = true;
+    opts.docs_ref = Some("v1.26.40".into());
+    let report = fetch(&opts).unwrap();
+    assert_eq!(report.sources.protocol, None);
+    let samples = report.sources.get(Kind::BedrockSamples).unwrap();
+    assert_eq!(samples.r#match, Match::Exact);
+    assert_eq!(samples.protocol, None);
+}
+
+#[test]
+fn verify_needs_docs_and_samples() {
+    let fx = fixture("verify-partial");
+    let mut opts = fx.options("1.26.45");
+    opts.skip_bds = true;
+    // Samples are refused (another protocol), so only docs get recorded.
+    assert!(fetch(&opts).is_err());
+    let err = format!("{:#}", verify(&fx.root.join("work/1.26.45")).unwrap_err());
+    assert!(err.contains("bedrock-samples is not recorded"), "{err}");
+}
+
+#[test]
+fn bds_must_be_the_target_version() {
+    let fx = fixture("bds-version");
+    fx.serve_bds(
+        "1.26.40",
+        "bedrock-server-1.26.51.1.zip",
+        &[("bedrock_server", b"x".as_slice())],
+    );
+    let err = format!("{:#}", fetch(&fx.options("1.26.40")).err().unwrap());
+    assert!(err.contains("is BDS 1.26.51.1, not 1.26.40"), "{err}");
+
+    fx.serve_bds(
+        "1.26.40",
+        "bedrock-server",
+        &[("bedrock_server", b"x".as_slice())],
+    );
+    let err = format!("{:#}", fetch(&fx.options("1.26.40")).err().unwrap());
+    assert!(err.contains("is not a BDS download"), "{err}");
+}
+
+#[test]
+fn a_blocked_links_api_stops_the_fetch() {
+    let fx = fixture("links-blocked");
+    std::fs::remove_file(fx.root.join("links.json")).unwrap();
+    let err = format!("{:#}", fetch(&fx.options("1.26.51")).err().unwrap());
+    assert!(err.contains("Mojang's download-links API"), "{err}");
+    assert!(!fx.root.join("work/1.26.51/bedrock-server").exists());
+}
+
+#[test]
+fn a_failed_unpack_leaves_no_debris() {
+    let fx = fixture("debris");
+    fx.serve_bds(
+        "1.26.51",
+        "bedrock-server-1.26.51.1.zip",
+        &[("README.txt", b"windows build".as_slice())],
+    );
+    let err = format!("{:#}", fetch(&fx.options("1.26.51")).err().unwrap());
+    assert!(err.contains("no bedrock_server"), "{err}");
+    let left: Vec<_> = std::fs::read_dir(fx.root.join("work/1.26.51"))
+        .unwrap()
+        .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
+        .filter(|n| n.ends_with(".partial"))
+        .collect();
+    assert!(left.is_empty(), "{left:?}");
+}
+
+#[test]
+fn uses_and_keeps_a_user_supplied_zip() {
+    let fx = fixture("bds-zip");
+    let mut opts = fx.options("1.26.51");
+    opts.bds_zip = Some(fx.root.join("mojang/bedrock-server-1.26.51.1.zip"));
+    let report = fetch(&opts).unwrap();
+    let server = report.sources.get(Kind::BedrockServer).unwrap();
+    assert!(
+        server
+            .notes
+            .iter()
+            .any(|n| n.contains("supplied by the user")),
+        "{:?}",
+        server.notes
+    );
+    assert!(opts.bds_zip.as_ref().unwrap().is_file());
+
+    let fx = fixture("bds-zip-bad");
+    let bad = fx.root.join("mine.zip");
+    write_zip(&bad, &[("bedrock_server", b"other".as_slice())]);
+    let mut opts = fx.options("1.26.51");
+    opts.bds_zip = Some(bad.clone());
+    let err = format!("{:#}", fetch(&opts).err().unwrap());
+    assert!(err.contains("but the index says"), "{err}");
+    assert!(bad.is_file());
+}
+
+#[test]
+fn downloads_keep_the_raw_bytes() {
+    let dir = test_dir("raw-bytes");
+    let path = dir.join("index.json");
+    std::fs::write(&path, b"{\"v\":\"\xff\"}").unwrap();
+    let got = bds::download(&file_url(&path), None, "=file").unwrap();
+    assert_eq!(got, std::fs::read(&path).unwrap());
 }
 
 fn init(dir: &Path) {

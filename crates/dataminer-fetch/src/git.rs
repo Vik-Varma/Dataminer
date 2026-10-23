@@ -8,7 +8,7 @@ use serde_json::Value;
 
 /// The release and preview tags of a remote, without fetching anything else.
 pub fn ls_remote_tags(url: &str) -> Result<Vec<String>> {
-    let out = run(git(None).args(["ls-remote", "--tags", "--refs", url]))?;
+    let out = run_text(git(None).args(["ls-remote", "--tags", "--refs", url]))?;
     Ok(out
         .lines()
         .filter_map(|l| l.split_once("refs/tags/").map(|(_, t)| t.to_string()))
@@ -17,7 +17,8 @@ pub fn ls_remote_tags(url: &str) -> Result<Vec<String>> {
 
 /// Whether the remote has a branch named `branch`.
 pub fn has_branch(url: &str, branch: &str) -> Result<bool> {
-    let out = run(git(None).args(["ls-remote", "--heads", url, &format!("refs/heads/{branch}")]))?;
+    let out =
+        run_text(git(None).args(["ls-remote", "--heads", url, &format!("refs/heads/{branch}")]))?;
     Ok(!out.trim().is_empty())
 }
 
@@ -41,7 +42,7 @@ pub fn clone_sparse(url: &str, tag: &str, subdir: &str, dest: &Path) -> Result<(
 
 /// The commit checked out in `dir`.
 pub fn head(dir: &Path) -> Result<String> {
-    Ok(run(git(Some(dir)).args(["rev-parse", "HEAD"]))?
+    Ok(run_text(git(Some(dir)).args(["rev-parse", "HEAD"]))?
         .trim()
         .to_string())
 }
@@ -76,7 +77,7 @@ pub fn protocol_at_tag(docs: &Path, tag: &str) -> Result<u32> {
             "origin",
         ])
         .arg(format!("+refs/tags/{tag}:refs/tags/{tag}")))?;
-    let listing = run(git(Some(docs)).args(["ls-tree", "--name-only", tag, "json/"]))?;
+    let listing = run_text(git(Some(docs)).args(["ls-tree", "--name-only", tag, "json/"]))?;
     let mut names: Vec<&str> = listing.lines().filter(|n| n.ends_with(".json")).collect();
     names.sort_unstable();
     for name in names {
@@ -101,10 +102,14 @@ fn protocol_of(bytes: &[u8]) -> Option<u32> {
     u32::try_from(p).ok()
 }
 
+/// A `git` command that ignores the user's line-ending settings, so a
+/// checkout has the same bytes on every OS (Git for Windows defaults to
+/// `core.autocrlf=true`, which would rewrite every file).
 fn git(dir: Option<&Path>) -> Command {
     let mut cmd = Command::new("git");
     cmd.env("GIT_TERMINAL_PROMPT", "0")
-        .args(["-c", "advice.detachedHead=false"]);
+        .args(["-c", "advice.detachedHead=false"])
+        .args(["-c", "core.autocrlf=false", "-c", "core.eol=lf"]);
     if let Some(dir) = dir {
         cmd.arg("-C").arg(dir);
     }
@@ -112,7 +117,7 @@ fn git(dir: Option<&Path>) -> Command {
 }
 
 /// Run a command and return its stdout, or fail with its stderr.
-pub(crate) fn run(cmd: &mut Command) -> Result<String> {
+pub(crate) fn run(cmd: &mut Command) -> Result<Vec<u8>> {
     let shown = format!("{cmd:?}");
     let out = cmd
         .output()
@@ -123,5 +128,19 @@ pub(crate) fn run(cmd: &mut Command) -> Result<String> {
         out.status,
         String::from_utf8_lossy(&out.stderr).trim()
     );
-    Ok(String::from_utf8_lossy(&out.stdout).into_owned())
+    Ok(out.stdout)
+}
+
+fn run_text(cmd: &mut Command) -> Result<String> {
+    Ok(String::from_utf8_lossy(&run(cmd)?).into_owned())
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn ignores_the_users_line_ending_config() {
+        let cmd = format!("{:?}", super::git(None));
+        assert!(cmd.contains("core.autocrlf=false"), "{cmd}");
+        assert!(cmd.contains("core.eol=lf"), "{cmd}");
+    }
 }
