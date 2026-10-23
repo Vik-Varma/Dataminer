@@ -33,7 +33,7 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 | --- | --- | --- | --- | --- |
 | P0 | Blocks: names, state properties, raw ids | `bedrock-samples` vanilladata | extracted | **done** |
 | P0 | Blocks: collision/outline boxes, friction, light, render layer, solidity | BDS binary / Script API | extracted | planned |
-| P0 | Block network runtime id / hash | derived: FNV-1a over sorted state NBT | extracted | planned |
+| P0 | Block states (every permutation) + network runtime hash | FNV-1a over sorted state NBT, from mojang-blocks.json | extracted | **done**, cross-checked vs Dragonfly (22,055/22,091 hashes exact); live capture is the final oracle |
 | P0 | Player movement constants (gravity, drag, speeds, jump, step, swim/glide/fly/crawl/ladder/liquid) | **measured**: headless Acacia on strict-movement BDS | measured | planned |
 | P0 | Items: ids, stack size, durability, tags, block↔item map | `bedrock-samples` + BDS | extracted | **partial** (ids/names done) |
 | P0 | Packet schemas (id, fields in wire order) + enums + version diff | `bedrock-protocol-docs` JSON schemas | extracted | **done** |
@@ -60,15 +60,21 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
   marked `unknown`, never guessed. **Done** at the document level; per-record provenance arrives with
   the binary/physics datasets.
 - A non-interactive CLI that exits non-zero on failure and prints a coverage summary (e.g. "1,193 of
-  1,201 blocks have collision boxes; 8 unknown, listed"). *Planned.*
+  1,201 blocks have collision boxes; 8 unknown, listed"). **Done** via `dataminer report [--strict]`,
+  which counts records, lists `unresolved` entries and `method: unknown` records, and fails under
+  `--strict`. Field-level coverage grows automatically as datasets gain optional/`unknown` fields.
 - A `diff` command across versions. **Done.**
+- Cross-check against independent sources. **Done** for block states: `dataminer crosscheck
+  blockstates` verifies hashes against an authoritative `block_states.nbt` (network-LE NBT reader in
+  `dataminer-core::nbt`) and reports per-block differences.
 - Tagged releases; Ferrock pins a tag and checks the manifest hashes. *Planned.*
 
 ## Trust (how we avoid shipping a wrong number)
 
 - Cross-check each dataset against an independent source and report disagreements: PrismarineJS
   minecraft-data, gophertunnel/Dragonfly (MIT), Acacia's `blocks.bin` and `acacia-physics` (a port of
-  Oomph's bedsim). Never weaken a cross-check to make it pass.
+  Oomph's bedsim). Never weaken a cross-check to make it pass. Results live in `docs/validation/`
+  (e.g. the block-state hash check against Dragonfly: 22,055/22,091 exact).
 - Prefer measurement over inference for physics (strict-movement BDS corrections).
 - Golden tests for well-known values (stone hardness 1.5, gravity 0.08 blocks/tick²).
 
@@ -77,14 +83,15 @@ Ferrock priority tiers: **P0** (Phase 1, walking a world), **P1** (Phase 2, surv
 - **M1 — Mojang data (done).** Ingest vanilladata, commands; emit normalized specs with provenance;
   diff across versions. *Exit:* `dataminer metadata` produces all layer-1 specs from a real checkout;
   `diff` reports clean deltas. (Met.)
-- **M2 — Protocol + binary reads.** Add the `bedrock-protocol-docs` packet-schema ingester and the
-  Molang module. Symbols/RTTI/strings from BDS (done); add `.init_array`/`.CRT$XC*` enumeration and
-  string cross-references. *Exit:* packet field order for the core join packets, and class names from
-  a real stripped Linux BDS, both diffable.
+- **M2 — Protocol + binary reads (mostly done).** The `bedrock-protocol-docs` packet-schema ingester
+  and the Molang module are done; symbols/RTTI/strings from BDS are done. Still to add:
+  `.init_array`/`.CRT$XC*` enumeration and string cross-references. *Exit:* packet field order for the
+  core join packets (done, v1.26.51), and class names from a real stripped Linux BDS (pending the
+  fetcher's BDS), both diffable.
 - **M3 — Live facts.** A behaviour pack that dumps Script API enumerations to stdout, and a capture
-  ingester for the registries a server sends at join (StartGame, ItemRegistry, …). Derive block
-  network ids and verify against capture. *Exit:* block runtime ids cross-checked three ways
-  (metadata ↔ derived hash ↔ capture).
+  ingester for the registries a server sends at join (StartGame, ItemRegistry, …). Block network
+  hashes are computed (done); verify them and the cartesian state set against a capture. *Exit:*
+  block runtime ids cross-checked three ways (metadata ↔ derived hash ↔ capture).
 - **M4 — Structure via an engine.** A pinned Ghidra-headless/PyGhidra job that emits JSON facts
   (struct sizes, vtable slot counts, hierarchy, serializer call sequences), cached per BDS version,
   with cross-version porting anchored on RTTI and strings. *Exit:* a reviewed set of struct/vtable

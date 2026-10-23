@@ -5,11 +5,14 @@
 //! check in and diff. Nothing here runs the game server; the binary commands read
 //! an object file statically.
 
+mod crosscheck_cmd;
 mod fetch_cmd;
 mod metadata_cmd;
 mod protocol_cmd;
+mod report_cmd;
 
 use std::path::PathBuf;
+use std::process::ExitCode;
 
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
@@ -40,6 +43,13 @@ enum Command {
         #[command(subcommand)]
         what: BinaryCommand,
     },
+    /// Summarize a spec's coverage; with --strict, exit non-zero on any gaps.
+    Report(report_cmd::ReportArgs),
+    /// Cross-check a dataset against an independent source and report differences.
+    Crosscheck {
+        #[command(subcommand)]
+        what: CrosscheckCommand,
+    },
     /// Diff two spec documents and report what changed between versions.
     Diff {
         /// The older spec JSON.
@@ -50,6 +60,12 @@ enum Command {
         #[arg(long)]
         out: Option<PathBuf>,
     },
+}
+
+#[derive(Subcommand)]
+enum CrosscheckCommand {
+    /// Check blockstates hashes against an authoritative block_states.nbt.
+    Blockstates(crosscheck_cmd::BlockStatesArgs),
 }
 
 #[derive(Subcommand)]
@@ -80,7 +96,7 @@ struct BinaryExtractArgs {
     out: Option<PathBuf>,
 }
 
-fn main() -> Result<()> {
+fn main() -> Result<ExitCode> {
     tracing_subscriber::fmt()
         .with_env_filter(
             tracing_subscriber::EnvFilter::try_from_default_env()
@@ -90,13 +106,18 @@ fn main() -> Result<()> {
         .init();
 
     let cli = Cli::parse();
+    let ok = ExitCode::SUCCESS;
     match cli.command {
-        Command::Fetch(args) => fetch_cmd::run(args),
-        Command::Metadata(args) => metadata_cmd::run(args),
-        Command::Protocol(args) => protocol_cmd::run(args),
-        Command::Inspect { file } => inspect(&file),
-        Command::Binary { what } => run_binary(what),
-        Command::Diff { old, new, out } => run_diff(&old, &new, out.as_deref()),
+        Command::Fetch(args) => fetch_cmd::run(args).map(|()| ok),
+        Command::Metadata(args) => metadata_cmd::run(args).map(|()| ok),
+        Command::Protocol(args) => protocol_cmd::run(args).map(|()| ok),
+        Command::Report(args) => report_cmd::run(args),
+        Command::Crosscheck { what } => match what {
+            CrosscheckCommand::Blockstates(a) => crosscheck_cmd::run_blockstates(a).map(|()| ok),
+        },
+        Command::Inspect { file } => inspect(&file).map(|()| ok),
+        Command::Binary { what } => run_binary(what).map(|()| ok),
+        Command::Diff { old, new, out } => run_diff(&old, &new, out.as_deref()).map(|()| ok),
     }
 }
 

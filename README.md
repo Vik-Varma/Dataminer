@@ -68,8 +68,16 @@ cargo run -p dataminer-cli -- binary rtti    /path/to/bedrock_server --game-vers
 cargo run -p dataminer-cli -- binary symbols /path/to/bedrock_server --game-version 1.26.52 --out symbols.json
 cargo run -p dataminer-cli -- binary strings /path/to/bedrock_server --game-version 1.26.52 --out strings.json
 
+# Summarize a spec's coverage; --strict exits non-zero on gaps (a CI hook):
+cargo run -p dataminer-cli -- report out/1.26.51/packets.json --strict
+
+# Cross-check block-state hashes against an authoritative block_states.nbt
+# (network little-endian NBT, e.g. Dragonfly's, MIT) and report differences:
+cargo run -p dataminer-cli -- crosscheck blockstates \
+    --spec out/1.26.50.4/blockstates.json --against block_states.nbt --out crosscheck.json
+
 # Diff two spec documents to see what a game update changed:
-cargo run -p dataminer-cli -- diff specs/old/blocks.json specs/new/blocks.json
+cargo run -p dataminer-cli -- diff out/old/blocks.json out/new/blocks.json
 ```
 
 On a current Linux BDS (stripped of function names but with RTTI intact), `binary rtti` recovers

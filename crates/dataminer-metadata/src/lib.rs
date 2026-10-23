@@ -13,7 +13,9 @@
 //! verbatim; we never invent values.
 
 pub mod blocks;
+pub mod blockstates;
 pub mod commands;
+pub mod molang;
 pub mod registries;
 
 use dataminer_core::digest::Sha256Digest;
