@@ -35,14 +35,20 @@ pub fn parse_index(bytes: &[u8]) -> Result<IndexEntry> {
 }
 
 /// Download `url` with `curl`, to `dest` or (when `None`) into memory.
+pub fn download(url: &str, dest: Option<&Path>, protocols: &str) -> Result<Vec<u8>> {
+    crate::git::run(curl(dest, protocols).arg("--").arg(url))
+}
+
+/// The `curl` command for [`download`], before the URL.
 ///
 /// A redirect is an error, so the bytes come from the host that was named.
-/// The user's `~/.curlrc` is ignored (`-q`), and a stalled transfer fails.
-/// `protocols` is curl's `--proto` list, `=https` outside tests.
-pub fn download(url: &str, dest: Option<&Path>, protocols: &str) -> Result<Vec<u8>> {
+/// The user's `~/.curlrc` is ignored (`-q`, which must come first), and a
+/// stalled transfer fails. `protocols` is curl's `--proto` list, `=https`
+/// outside tests.
+fn curl(dest: Option<&Path>, protocols: &str) -> Command {
     let mut cmd = Command::new("curl");
     cmd.args(["-q", "--fail", "--silent", "--show-error", "--globoff"])
-        .args(["--location", "--max-redirs", "0"])
+        .args(["--location", "--max-redirs", "0", "--http1.1"])
         .args([
             "--connect-timeout",
             "30",
@@ -55,12 +61,14 @@ pub fn download(url: &str, dest: Option<&Path>, protocols: &str) -> Result<Vec<u
     if let Some(dest) = dest {
         cmd.arg("--output").arg(dest);
     }
-    crate::git::run(cmd.arg("--").arg(url))
+    cmd
 }
 
-/// An honest, bare name. Mojang's CDN resets requests that don't name their
-/// downloader, and some networks (cloud machines among them) are refused anyway.
-const USER_AGENT: &str = "dataminer";
+/// Mojang's CDN resets requests from non-browser clients (an empty reply on
+/// HTTP/1.1, a stream error on HTTP/2), so downloads send a browser
+/// User-Agent over HTTP/1.1. The project owner chose this; see
+/// `docs/fetcher-requirements.md`.
+const USER_AGENT: &str = "Mozilla/5.0 (X11; Linux x86_64)";
 
 /// The current Linux release URL from Mojang's download-links API:
 /// `{"result": {"links": [{"downloadType": "serverBedrockLinux", "downloadUrl": …}, …]}}`.
@@ -146,6 +154,14 @@ mod tests {
         assert_eq!(version_of(&url).as_deref(), Some("1.26.52.3"));
         let empty = serde_json::json!({"result": {"links": []}});
         assert_eq!(current_linux_url(&empty), None);
+    }
+
+    #[test]
+    fn downloads_like_a_browser_over_http1() {
+        let cmd = format!("{:?}", curl(Some(Path::new("out.zip")), "=https"));
+        assert!(cmd.contains("\"--http1.1\""), "{cmd}");
+        assert!(cmd.contains("\"Mozilla/5.0 (X11; Linux x86_64)\""), "{cmd}");
+        assert!(cmd.starts_with("\"curl\" \"-q\""), "{cmd}");
     }
 
     #[test]

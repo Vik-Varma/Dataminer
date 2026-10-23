@@ -454,8 +454,7 @@ fn unpack_bds(
         bds::download(&entry.url, Some(zip), &r.curl_protocols).with_context(|| {
             format!(
                 "downloading {}. If a proxy refused the host, that is a policy denial: \
-                 don't route around it. Mojang's CDN also refuses some clients, cloud \
-                 machines among them. You can download the zip yourself from \
+                 don't route around it. You can download the zip yourself from \
                  https://www.minecraft.net/en-us/download/server/bedrock and pass \
                  --bds-zip <file>; it is checked against the index's SHA-256",
                 entry.url
