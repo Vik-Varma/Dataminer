@@ -356,6 +356,13 @@ fn fetch_bds(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
             r.bds_links
         )
     })?;
+    let links: serde_json::Value = serde_json::from_slice(&links).with_context(|| {
+        format!(
+            "Mojang's download-links API at {} answered with something that isn't the JSON it \
+             publishes (a proxy's block page?); not skipping the check",
+            r.bds_links
+        )
+    })?;
     match bds::current_linux_url(&links) {
         Some(url) if url == entry.url => {
             notes.push("download URL confirmed by Mojang's download-links API".to_string());
@@ -382,50 +389,22 @@ fn fetch_bds(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
         ),
     }
 
+    // Before downloading anything, make sure nothing unrecorded is in the way.
     let dest = dir.join(Kind::BedrockServer.dir());
+    let staging = fresh_staging(dir, Kind::BedrockServer)?;
     // A fixed local name: nothing from the index becomes a path.
     let download = dir.join("bedrock-server.zip.partial");
-    let zip = match &opts.bds_zip {
-        Some(p) => p.clone(),
-        None => {
-            bds::download(&entry.url, Some(&download), &r.curl_protocols).with_context(|| {
-                format!(
-                    "downloading {}. If a proxy refused the host, that is a policy denial: \
-                     don't route around it. Mojang's CDN also refuses some clients, cloud \
-                     machines among them. You can download the zip yourself from \
-                     https://www.minecraft.net/en-us/download/server/bedrock and pass \
-                     --bds-zip <file>; it is checked against the index's SHA-256",
-                    entry.url
-                )
-            })?;
-            download.clone()
-        }
-    };
-    let file_sha256 = Sha256Digest::of_reader(std::io::BufReader::new(
-        std::fs::File::open(&zip).with_context(|| format!("opening {}", zip.display()))?,
-    ))?;
-    if file_sha256 != entry.sha256 && opts.bds_zip.is_none() {
-        std::fs::remove_file(&download)?;
-    }
-    anyhow::ensure!(
-        file_sha256 == entry.sha256,
-        "{} has SHA-256 {file_sha256}, but the index says {}; not using it",
-        zip.display(),
-        entry.sha256
-    );
-    let staging = fresh_staging(dir, Kind::BedrockServer)?;
-    let unpacked = bds::extract(&zip, &staging).and_then(|()| {
-        anyhow::ensure!(
-            staging.join("bedrock_server").is_file(),
-            "{file} has no bedrock_server at its root; is it the Linux build?"
-        );
-        tree::digest(&staging)
-    });
+    let zip = opts.bds_zip.clone().unwrap_or_else(|| download.clone());
+    let unpacked = unpack_bds(&entry, &zip, opts.bds_zip.is_none(), &staging, r, &file);
     if opts.bds_zip.is_none() {
-        std::fs::remove_file(&download)?;
+        let removed = std::fs::remove_file(&download);
+        // After a failure the zip may not exist; keep the real error.
+        if unpacked.is_ok() {
+            removed.with_context(|| format!("removing {}", download.display()))?;
+        }
     }
-    let (tree_sha256, files) = match unpacked {
-        Ok(digest) => digest,
+    let (file_sha256, (tree_sha256, files)) = match unpacked {
+        Ok(digests) => digests,
         Err(e) => {
             // Best effort, keeping the real error: the next run replaces it anyway.
             let _ = std::fs::remove_dir_all(&staging);
@@ -458,6 +437,46 @@ fn fetch_bds(dir: &Path, target: &Version, opts: &Options) -> Result<Source> {
         fetched_at: sources::now_rfc3339(),
         notes,
     })
+}
+
+/// Download the BDS zip to `zip` (unless the user supplied it), check it
+/// against the index's SHA-256, and unpack it into `staging`. Returns the
+/// zip's digest and the unpacked tree's digest and file count.
+fn unpack_bds(
+    entry: &bds::IndexEntry,
+    zip: &Path,
+    download: bool,
+    staging: &Path,
+    r: &Remotes,
+    file: &str,
+) -> Result<(Sha256Digest, (Sha256Digest, u64))> {
+    if download {
+        bds::download(&entry.url, Some(zip), &r.curl_protocols).with_context(|| {
+            format!(
+                "downloading {}. If a proxy refused the host, that is a policy denial: \
+                 don't route around it. Mojang's CDN also refuses some clients, cloud \
+                 machines among them. You can download the zip yourself from \
+                 https://www.minecraft.net/en-us/download/server/bedrock and pass \
+                 --bds-zip <file>; it is checked against the index's SHA-256",
+                entry.url
+            )
+        })?;
+    }
+    let file_sha256 = Sha256Digest::of_reader(std::io::BufReader::new(
+        std::fs::File::open(zip).with_context(|| format!("opening {}", zip.display()))?,
+    ))?;
+    anyhow::ensure!(
+        file_sha256 == entry.sha256,
+        "{} has SHA-256 {file_sha256}, but the index says {}; not using it",
+        zip.display(),
+        entry.sha256
+    );
+    bds::extract(zip, staging)?;
+    anyhow::ensure!(
+        staging.join("bedrock_server").is_file(),
+        "{file} has no bedrock_server at its root; is it the Linux build?"
+    );
+    Ok((file_sha256, tree::digest(staging)?))
 }
 
 fn no_tag<T>(repo: &str, target: &Version, near: &[String], flag: &str) -> Result<T> {

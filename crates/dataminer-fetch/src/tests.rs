@@ -377,6 +377,27 @@ fn a_blocked_links_api_stops_the_fetch() {
 }
 
 #[test]
+fn an_unrecorded_server_dir_fails_before_downloading() {
+    let fx = fixture("server-in-the-way");
+    let mut opts = fx.options("1.26.51");
+    opts.skip_bds = true;
+    let dir = fetch(&opts).unwrap().dir;
+    std::fs::create_dir(dir.join("bedrock-server")).unwrap();
+
+    let err = format!("{:#}", fetch(&fx.options("1.26.51")).err().unwrap());
+    assert!(err.contains("exists but is not recorded"), "{err}");
+    assert!(!dir.join("bedrock-server.zip.partial").exists());
+}
+
+#[test]
+fn a_links_api_answer_that_is_not_json_stops_the_fetch() {
+    let fx = fixture("links-garbage");
+    std::fs::write(fx.root.join("links.json"), "<html>blocked</html>").unwrap();
+    let err = format!("{:#}", fetch(&fx.options("1.26.51")).err().unwrap());
+    assert!(err.contains("isn't the JSON it publishes"), "{err}");
+}
+
+#[test]
 fn a_failed_unpack_leaves_no_debris() {
     let fx = fixture("debris");
     fx.serve_bds(

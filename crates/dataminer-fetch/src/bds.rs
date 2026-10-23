@@ -64,9 +64,9 @@ const USER_AGENT: &str = "dataminer";
 
 /// The current Linux release URL from Mojang's download-links API:
 /// `{"result": {"links": [{"downloadType": "serverBedrockLinux", "downloadUrl": …}, …]}}`.
-pub fn current_linux_url(bytes: &[u8]) -> Option<String> {
-    let v: Value = serde_json::from_slice(bytes).ok()?;
-    v.pointer("/result/links")?
+pub fn current_linux_url(links: &Value) -> Option<String> {
+    links
+        .pointer("/result/links")?
         .as_array()?
         .iter()
         .find(|l| l.get("downloadType").and_then(Value::as_str) == Some("serverBedrockLinux"))?
@@ -141,10 +141,11 @@ mod tests {
         let json = br#"{"result":{"links":[
             {"downloadType":"serverBedrockWindows","downloadUrl":"https://www.minecraft.net/bedrockdedicatedserver/bin-win/bedrock-server-1.26.52.3.zip"},
             {"downloadType":"serverBedrockLinux","downloadUrl":"https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip"}]}}"#;
-        let url = current_linux_url(json).unwrap();
+        let url = current_linux_url(&serde_json::from_slice(json).unwrap()).unwrap();
         assert!(url.contains("/bin-linux/"));
         assert_eq!(version_of(&url).as_deref(), Some("1.26.52.3"));
-        assert_eq!(current_linux_url(br#"{"result":{"links":[]}}"#), None);
+        let empty = serde_json::json!({"result": {"links": []}});
+        assert_eq!(current_linux_url(&empty), None);
     }
 
     #[test]

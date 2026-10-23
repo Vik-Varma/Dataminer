@@ -51,8 +51,9 @@ fourth and fifth are cross-check sources it will consume soon.
   **from Mojang's own URL**, not a mirror.
 - Mojang's own download-links API,
   `https://net-secondary.web.minecraft-services.net/api/v1.0/download/links`, names the current
-  release and preview builds only. `dataminer fetch` checks the index's URL against it when the
-  target is the current release.
+  release and preview builds only. `dataminer fetch` reads it on every BDS fetch (`--bds-zip`
+  included) and fails if it can't: when the target is the current release, the index's URL must
+  match it.
 - As of 2026-10-22 Mojang's CDN resets requests that don't name their downloader, and refused
   every non-browser User-Agent tried from a cloud machine. `dataminer fetch` sends the bare, honest
   `dataminer` and doesn't pretend to be a browser, so where the CDN refuses it,

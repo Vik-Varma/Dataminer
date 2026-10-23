@@ -23,7 +23,8 @@ pub struct FetchArgs {
     #[arg(long)]
     skip_bds: bool,
     /// Use a BDS zip you downloaded yourself instead of downloading it. It must
-    /// match the SHA-256 the index lists for the version.
+    /// match the SHA-256 the index lists for the version. The index and
+    /// Mojang's download-links API must still be reachable.
     #[arg(long, conflicts_with = "skip_bds")]
     bds_zip: Option<PathBuf>,
     /// Check out this `bedrock-samples` tag instead of resolving one.
