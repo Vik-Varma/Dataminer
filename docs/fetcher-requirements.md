@@ -39,20 +39,29 @@ fourth and fifth are cross-check sources it will consume soon.
 - **License:** same EULA posture as bedrock-samples. Working dir only, never committed.
 - Consumed by: `dataminer protocol --docs <dir> --game-version 1.26.51 --out <out>`.
 
-### 3. Bedrock Dedicated Server (BDS) binary — needed next (block physics, RTTI, strings)
-- Mojang's free download. Landing page: `https://www.minecraft.net/en-us/download/server/bedrock`.
-  The actual zips are on Mojang's CDN; a convenient machine-readable index of per-version download
-  URLs (Linux and Windows, release and preview) is `EndstoneMC/bedrock-server-data`'s `versions.json`
-  — use it to resolve a URL for a target version, but download **from Mojang's own URL**, not a mirror.
+### 3. Bedrock Dedicated Server (BDS) binary — **verified working** (RTTI, symbols, strings)
+- Mojang's free download, on Mojang's CDN under `https://www.minecraft.net/bedrockdedicatedserver/`.
+- **Resolve the URL from an index.** `Bedrock-OSS/BDS-Versions` is the best one: `versions.json` gives
+  `cdn_root` and the `stable`/`preview` versions per platform, and `linux/<version>.json` gives the
+  exact `download_url`, a **`sha1`** and `size_in_bytes`. (`EndstoneMC/bedrock-server-data` is a
+  similar fallback.) Download **from Mojang's own `download_url`**, not a mirror. Example for the
+  Ferrock target: `linux/1.26.51.1.json` →
+  `https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.51.1.zip`,
+  sha1 `0610779dc0b8461736fc3aff74d72e53fe8c37e2`, 94,926,669 bytes.
+- **Download recipe that works behind this environment's egress proxy** (verified 2026-10-23):
+  Mojang's CDN rejects the default client here, so send a browser `User-Agent` and force HTTP/1.1,
+  and follow redirects: `curl -sSL --http1.1 -A "Mozilla/5.0 (X11; Linux x86_64)" -o bds.zip <url>`.
+  Without the UA you get an empty reply / HTTP-2 stream error, not a policy denial. Then **verify the
+  sha1 against the index** before using the file, and fail on mismatch.
 - **Accept the EULA explicitly.** The fetcher must require an `--accept-eula` flag (or equivalent)
   and record that the user accepted it. Do not download BDS without it.
-- Pick the right build: **Linux `bedrock_server` ELF** is the primary RE target — it is stripped of
-  function names but keeps RTTI (`_ZTI`/`_ZTS`), which Dataminer's `binary rtti` relies on. The
-  Windows PE has no PDB (removed ~1.21.20) and is built `/GR-` (no RTTI), so prefer Linux.
-- Extract the zip into the working dir. **Never commit the binary or anything derived from it.**
-- Note on this cloud environment: the minecraft.net download host may be blocked by the egress proxy
-  here; the fetcher is meant to run on the user's own machine where that isn't an issue. If a host is
-  blocked, report it (read the agent-proxy status), don't route around it.
+- Pick the right build: **Linux `bedrock_server` ELF** is the primary RE target — confirmed on
+  1.26.51.1 to be a stripped 256 MB x86-64 PIE ELF with **no static symbol table (391 dynamic
+  symbols) but RTTI intact**: Dataminer's `binary rtti` recovered **51,590 class names** from its
+  `_ZTS*` rodata type strings. The Windows PE has no PDB (removed ~1.21.20) and is built `/GR-`
+  (no RTTI), so prefer Linux.
+- Extract the zip into the working dir. **Never commit the binary or anything derived from it**
+  (the RTTI/strings specs are ~27 MB / ~80 MB — they go to Ferrock as a pinned release, not into git).
 - Consumed by: `dataminer inspect <bin>`, `dataminer binary rtti|symbols|strings <bin> --game-version <v>`.
 
 ### 4. Cross-check sources — soon (trust/verification), all permissive licenses
