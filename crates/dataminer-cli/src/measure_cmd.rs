@@ -8,9 +8,9 @@ use dataminer_core::digest::Sha256Digest;
 use dataminer_core::provenance::{Method, Provenance, SourceKind};
 use serde_json::{Value, json};
 
-/// Arguments for `dataminer measure bamboo`.
+/// Arguments shared by the `dataminer measure` subcommands.
 #[derive(clap::Args)]
-pub struct BambooArgs {
+pub struct MeasureArgs {
     /// The run log (JSON lines) the headless client wrote.
     #[arg(long)]
     runs: PathBuf,
@@ -27,25 +27,27 @@ pub struct BambooArgs {
     /// The wire protocol of the measured server, recorded in a new manifest.
     #[arg(long)]
     protocol: Option<u32>,
-    /// Base output directory. Writes `<out>/<game-version>/bamboo.json` and adds
-    /// it to that directory's `manifest.json`.
+    /// Base output directory. Writes `<out>/<game-version>/<dataset>.json` and
+    /// adds it to that directory's `manifest.json`.
     #[arg(long)]
     out: PathBuf,
 }
 
-/// Run `dataminer measure bamboo`.
-pub fn run_bamboo(args: BambooArgs) -> Result<()> {
+/// Read the run log and hash the measured server binary.
+fn inputs(args: &MeasureArgs) -> Result<(String, Sha256Digest, Sha256Digest)> {
     let log =
         std::fs::read(&args.runs).with_context(|| format!("reading {}", args.runs.display()))?;
     let log_hash = Sha256Digest::of_bytes(&log);
-    let runs =
-        dataminer_measure::parse_runs(std::str::from_utf8(&log).context("run log is not UTF-8")?)?;
+    let log = String::from_utf8(log).context("run log is not UTF-8")?;
     let bds_hash = Sha256Digest::of_reader(
         std::fs::File::open(&args.bds)
             .with_context(|| format!("opening {}", args.bds.display()))?,
     )?;
+    Ok((log, log_hash, bds_hash))
+}
 
-    let provenance = Provenance {
+fn provenance(args: &MeasureArgs, bds_hash: Sha256Digest, notes: Vec<String>) -> Provenance {
+    Provenance {
         source: SourceKind::PacketCapture,
         method: Method::Measured,
         game_version: args.game_version.clone(),
@@ -58,7 +60,18 @@ pub fn run_bamboo(args: BambooArgs) -> Result<()> {
         ),
         artifact_sha256: Some(bds_hash),
         tool: dataminer_measure::TOOL.into(),
-        notes: vec![
+        notes,
+    }
+}
+
+/// Run `dataminer measure bamboo`.
+pub fn run_bamboo(args: MeasureArgs) -> Result<()> {
+    let (log, log_hash, bds_hash) = inputs(&args)?;
+    let runs = dataminer_measure::parse_runs(&log)?;
+    let provenance = provenance(
+        &args,
+        bds_hash,
+        vec![
             format!("run log {log_hash}, {} runs", runs.len()),
             "collision boxes and the offset values are measured; the offset model's form \
              (inputs, generator, per-axis range and steps) was found by static and dynamic \
@@ -67,27 +80,10 @@ pub fn run_bamboo(args: BambooArgs) -> Result<()> {
                 .into(),
             "outline use is inferred (static analysis only); rendering use is unknown".into(),
         ],
-    };
+    );
     let doc = dataminer_measure::bamboo::derive(&runs, provenance)?;
 
-    let out_dir = args.out.join(&args.game_version);
-    std::fs::create_dir_all(&out_dir).with_context(|| format!("creating {}", out_dir.display()))?;
-    let json = doc.to_pretty_json()?;
-    let path = out_dir.join("bamboo.json");
-    std::fs::write(&path, &json).with_context(|| format!("writing {}", path.display()))?;
-    add_to_manifest(
-        &out_dir,
-        &args.game_version,
-        args.protocol,
-        json!({
-            "dataset": dataminer_measure::bamboo::KIND,
-            "file": "bamboo.json",
-            "schema_version": dataminer_measure::bamboo::SCHEMA_VERSION,
-            "records": doc.payload.states.len(),
-            "source": format!("measured on BDS {}", args.bds_version),
-            "source_sha256": doc.meta.provenance.artifact_sha256.as_ref().map(ToString::to_string),
-        }),
-    )?;
+    let path = write(&args, &doc, doc.payload.states.len())?;
     let v = &doc.payload.validation;
     eprintln!(
         "wrote {} ({} states, {} stops, max error {} blocks)",
@@ -97,6 +93,67 @@ pub fn run_bamboo(args: BambooArgs) -> Result<()> {
         v.max_abs_error_blocks
     );
     Ok(())
+}
+
+/// Run `dataminer measure traces`.
+pub fn run_traces(args: MeasureArgs) -> Result<()> {
+    let (log, log_hash, bds_hash) = inputs(&args)?;
+    let provenance = provenance(
+        &args,
+        bds_hash,
+        vec![
+            format!("trace log {log_hash}"),
+            "tick i is the server's state after it processed input i; each trace was replayed \
+             from the same start with the same inputs until every tick had been corrected"
+                .into(),
+            "the client sent PlayerAuthInput at 20 Hz with input mode mouse, play mode normal, \
+             interaction model crosshair, the move vector also as the analogue and raw move \
+             vectors, camera orientation from yaw and pitch, and a zero delta"
+                .into(),
+        ],
+    );
+    let doc = dataminer_measure::traces::derive(&log, provenance)?;
+    let path = write(&args, &doc, doc.payload.traces.len())?;
+    let unknown = doc
+        .payload
+        .traces
+        .iter()
+        .filter(|t| t.method == Method::Unknown)
+        .count();
+    eprintln!(
+        "wrote {} ({} traces, {unknown} with unrevealed ticks)",
+        path.display(),
+        doc.payload.traces.len()
+    );
+    Ok(())
+}
+
+/// Write a spec to `<out>/<game-version>/<kind>.json` and list it in the manifest.
+fn write<T: serde::Serialize>(
+    args: &MeasureArgs,
+    doc: &dataminer_core::SpecDocument<T>,
+    records: usize,
+) -> Result<PathBuf> {
+    let out_dir = args.out.join(&args.game_version);
+    std::fs::create_dir_all(&out_dir).with_context(|| format!("creating {}", out_dir.display()))?;
+    let file = format!("{}.json", doc.meta.kind);
+    let path = out_dir.join(&file);
+    std::fs::write(&path, doc.to_pretty_json()?)
+        .with_context(|| format!("writing {}", path.display()))?;
+    add_to_manifest(
+        &out_dir,
+        &args.game_version,
+        args.protocol,
+        json!({
+            "dataset": doc.meta.kind,
+            "file": file,
+            "schema_version": doc.meta.schema_version,
+            "records": records,
+            "source": format!("measured on BDS {}", args.bds_version),
+            "source_sha256": doc.meta.provenance.artifact_sha256.as_ref().map(ToString::to_string),
+        }),
+    )?;
+    Ok(path)
 }
 
 /// Add or replace one dataset entry in `<out_dir>/manifest.json`, keeping the rest.

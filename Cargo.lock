@@ -209,6 +209,7 @@ dependencies = [
  "dataminer-measure",
  "dataminer-metadata",
  "dataminer-protocol",
+ "serde",
  "serde_json",
  "tracing",
  "tracing-subscriber",

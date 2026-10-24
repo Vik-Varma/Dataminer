@@ -77,7 +77,9 @@ enum CrosscheckCommand {
 #[derive(Subcommand)]
 enum MeasureCommand {
     /// Bamboo collision boxes per state and the per-position offset.
-    Bamboo(measure_cmd::BambooArgs),
+    Bamboo(measure_cmd::MeasureArgs),
+    /// Per-tick movement traces (position, velocity, sprint and swim flags).
+    Traces(measure_cmd::MeasureArgs),
 }
 
 #[derive(Subcommand)]
@@ -125,6 +127,7 @@ fn main() -> Result<ExitCode> {
         Command::Protocol(args) => protocol_cmd::run(args).map(|()| ok),
         Command::Measure { what } => match what {
             MeasureCommand::Bamboo(a) => measure_cmd::run_bamboo(a).map(|()| ok),
+            MeasureCommand::Traces(a) => measure_cmd::run_traces(a).map(|()| ok),
         },
         Command::Report(args) => report_cmd::run(args),
         Command::Crosscheck { what } => match what {
