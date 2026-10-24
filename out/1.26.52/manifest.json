@@ -14,11 +14,11 @@
       "dataset": "movement-traces",
       "file": "movement-traces.json",
       "schema_version": 1,
-      "records": 47,
+      "records": 64,
       "source": "measured on BDS 1.26.52.3",
       "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207"
     }
   ],
-  "dataminer_commit": "7ad06cf",
+  "dataminer_commit": "8fac1da",
   "tool": "dataminer 0.0.1"
 }

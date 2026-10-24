@@ -29,7 +29,7 @@ one run reveals only every sixth tick.
 Food, saturation and exhaustion were set through the Script API before each case. Effects were
 applied with `/effect` before the case, so they were already active at its start.
 
-## What the 47 traces cover
+## What the 64 traces cover
 
 All of them are `measured`, and every one verified with zero corrections.
 
@@ -42,6 +42,8 @@ All of them are `measured`, and every one verified with zero corrections.
 | Water, 3 deep | idle on the bottom; walking on the bottom; sprint-swimming at pitch 0, +30 and −30; jump held from the bottom, then sneaking; jump held for 20 ticks then released; walking then sprint-swimming |
 | Water, 1 deep | walking, sprinting, a jump |
 | Lava, 3 deep (Fire Resistance) | idle on the bottom, walking on the bottom, jump held |
+| Climbing | a ladder and vines on a stone column (forward held; forward and jump held; climb then release; climb then sneak); a scaffolding column (jump held; jump then sneak; jump then release). The column's top is capped by a roof at y 209, so the climbs stop at feet y 207.2 |
+| Slowing and special blocks | walking and sprinting inside cobweb; walking and jumping on honey; walking and sprinting on soul sand; walking on blue ice; jumping on slime |
 | Angled movement, for the clean side's small corrections | sprinting and sprint-jumping (jump held) at yaw 10 on stone; sprint-swimming from a pool's bottom with strafe left, strafe right, and at yaw 10 |
 
 ## Headline numbers
@@ -86,9 +88,27 @@ leaving the block.
 - Walking on the bottom: 0.0392 per tick.
 - Jump held: rising steadily at 0.04 per tick.
 
+**Climbing.**
+- On a ladder or vines, climbing with forward held is a flat 0.2 per tick. Holding jump as well
+  doesn't make it faster.
+- Released mid-climb, the climber slows over about 5 ticks, then descends at 0.2 per tick.
+- Sneaking on a ladder holds the player in place.
+- The ladder's collision plate is 3/16 thick: the climber stops 0.3 + 0.1875 from the wall.
+- Scaffolding: jump held rises 0.15 per tick, and sneak descends 0.15 per tick. Released, the
+  player falls onto the scaffolding block below and stands on it.
+
+**Slowing and special blocks.**
+- Cobweb: walking moves a constant 0.0245 per tick, from the first tick; sprinting 0.03185.
+- Honey: walking settles at 0.05928 per tick, and a jump peaks 0.51402 above the block.
+- Soul sand: its top is 0.875 above its base. Walking settles at 0.11743 per tick, sprinting at
+  0.15265.
+- Slime: a jump peaks at the normal 1.25224, and the player then bounces.
+
 ## Not covered
 
-- Swimming in flowing water.
-- Ladders, scaffolding, bubble columns, and slowing blocks (cobweb, honey, soul sand, powder snow).
+- Swimming in flowing water, and bubble columns.
+- **Powder snow and plain ice.** Their runs never replayed identically: the server corrected the same
+  ticks on every replay. They are not in the spec. Some state that persists between replays is
+  suspected, such as the freezing in powder snow.
 - Starting a swim in 1-deep water by any route other than sprinting. Sprinting there did not set
   the swimming flag.
