@@ -21,11 +21,15 @@ one run reveals only every sixth tick.
    swimming from the bottom. Runs that started in mid-air or mid-water did not replay identically.
    The likely reason is when the teleport lands relative to the inputs. 8 such runs failed
    verification and are not in the spec; each was redone from rest.
+4. **Every trace must start where it was meant to.** Verification can't catch a player who never
+   reached the start: one run killed the player before it began, and a dead player agrees
+   perfectly. `dataminer measure traces` rejects a trace whose first tick is more than 1 block
+   from its start. Three such runs were redone.
 
 Food, saturation and exhaustion were set through the Script API before each case. Effects were
 applied with `/effect` before the case, so they were already active at its start.
 
-## What the 42 traces cover
+## What the 47 traces cover
 
 All of them are `measured`, and every one verified with zero corrections.
 
@@ -38,6 +42,7 @@ All of them are `measured`, and every one verified with zero corrections.
 | Water, 3 deep | idle on the bottom; walking on the bottom; sprint-swimming at pitch 0, +30 and −30; jump held from the bottom, then sneaking; jump held for 20 ticks then released; walking then sprint-swimming |
 | Water, 1 deep | walking, sprinting, a jump |
 | Lava, 3 deep (Fire Resistance) | idle on the bottom, walking on the bottom, jump held |
+| Angled movement, for the clean side's small corrections | sprinting and sprint-jumping (jump held) at yaw 10 on stone; sprint-swimming from a pool's bottom with strafe left, strafe right, and at yaw 10 |
 
 ## Headline numbers
 

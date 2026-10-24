@@ -10,8 +10,8 @@
       "artifact_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
       "tool": "dataminer-measure 0.0.1",
       "notes": [
-        "trace log sha256:1d060b287a4db9a2732273e4a1e8240b37d17abbaf135a23f4708a90ffde68d6",
-        "verification log sha256:a3726dc0ed5177574267093080012d78bfe28ebb70242612124987cb977d2cfa",
+        "trace log sha256:0e0fcd9c6a56bbcecb7d5442ee8503ba266612a911d21a20fca26e78668a8043",
+        "verification log sha256:f9f3287bac8dab0d05433761bd9b7b8a4185964865250c9a9e93d1a909f25019",
         "tick i is the server's state after it processed input i; each trace was replayed from the same start with the same inputs until every tick had been corrected",
         "the client sent PlayerAuthInput at 20 Hz with input mode mouse, play mode normal, interaction model crosshair, the move vector also as the analogue and raw move vectors, camera orientation from yaw and pitch, and a zero delta"
       ]
@@ -30864,6 +30864,6525 @@
               0.0,
               0.0,
               0.17387785
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          }
+        ]
+      },
+      {
+        "name": "sprint-jump held at yaw 10, from rest",
+        "setup": [
+          "effect @a clear",
+          "gamemode s @a",
+          "scriptevent probe:food 20",
+          "scriptevent probe:sat 5",
+          "effect @a resistance 900 255 true"
+        ],
+        "start": [
+          0.5,
+          200.0,
+          -22.5
+        ],
+        "inputs": [
+          {
+            "from": 0,
+            "to": 140,
+            "move_vector": [
+              0.0,
+              1.0
+            ],
+            "yaw": 10.0,
+            "pitch": 0.0,
+            "bits": [
+              3,
+              6,
+              10,
+              16,
+              20,
+              61
+            ],
+            "first_tick_bits": [
+              31,
+              60
+            ]
+          }
+        ],
+        "method": "measured",
+        "verification": {
+          "replays": 2,
+          "corrected_ticks": []
+        },
+        "ticks": [
+          {
+            "feet": [
+              0.443156,
+              200.42001,
+              -22.177572
+            ],
+            "velocity": [
+              -0.031036839,
+              0.33319998,
+              0.17604545
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.4076946,
+              200.75322,
+              -21.976435
+            ],
+            "velocity": [
+              -0.032269873,
+              0.248136,
+              0.1830359
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.3710002,
+              201.00136,
+              -21.768307
+            ],
+            "velocity": [
+              -0.033391934,
+              0.16477329,
+              0.18939722
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.3331837,
+              201.16614,
+              -21.553816
+            ],
+            "velocity": [
+              -0.034413006,
+              0.083077826,
+              0.195186
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.29434615,
+              201.24922,
+              -21.333536
+            ],
+            "velocity": [
+              -0.03534218,
+              0.003016271,
+              0.2004538
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.25457942,
+              201.25224,
+              -21.10799
+            ],
+            "velocity": [
+              -0.03618773,
+              -0.07544406,
+              0.2052475
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.21396714,
+              201.1768,
+              -20.87765
+            ],
+            "velocity": [
+              -0.036957182,
+              -0.15233518,
+              0.20960978
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.1725854,
+              201.02448,
+              -20.642946
+            ],
+            "velocity": [
+              -0.037657384,
+              -0.22768848,
+              0.21357945
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.13050348,
+              200.79678,
+              -20.404274
+            ],
+            "velocity": [
+              -0.038294565,
+              -0.3015347,
+              0.21719185
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.08778435,
+              200.49525,
+              -20.16199
+            ],
+            "velocity": [
+              -0.0388744,
+              -0.37390402,
+              0.22047913
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.04448539,
+              200.12135,
+              -19.916418
+            ],
+            "velocity": [
+              -0.03940205,
+              -0.44482595,
+              0.22347055
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.00065878034,
+              200.00002,
+              -19.667854
+            ],
+            "velocity": [
+              -0.03988221,
+              -0.0784,
+              0.22619274
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.09606746,
+              200.42001,
+              -19.119234
+            ],
+            "velocity": [
+              -0.052812528,
+              0.33319998,
+              0.29954672
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.15330455,
+              200.75322,
+              -18.794594
+            ],
+            "velocity": [
+              -0.052085746,
+              0.248136,
+              0.29542205
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.20981485,
+              201.00136,
+              -18.47408
+            ],
+            "velocity": [
+              -0.051424373,
+              0.16477329,
+              0.29166862
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.26566374,
+              201.16614,
+              -18.157318
+            ],
+            "velocity": [
+              -0.050822526,
+              0.083077826,
+              0.288253
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.32091084,
+              201.24922,
+              -17.843971
+            ],
+            "velocity": [
+              -0.05027485,
+              0.003016271,
+              0.28514478
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.37561023,
+              201.25224,
+              -17.533733
+            ],
+            "velocity": [
+              -0.04977646,
+              -0.07544406,
+              0.2823163
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.42981124,
+              201.1768,
+              -17.226324
+            ],
+            "velocity": [
+              -0.049322926,
+              -0.15233518,
+              0.2797424
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.4835587,
+              201.02448,
+              -16.92149
+            ],
+            "velocity": [
+              -0.04891021,
+              -0.22768848,
+              0.27740014
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.5368935,
+              200.79678,
+              -16.618998
+            ],
+            "velocity": [
+              -0.04853464,
+              -0.3015347,
+              0.27526867
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.5898527,
+              200.49525,
+              -16.318636
+            ],
+            "velocity": [
+              -0.04819287,
+              -0.37390402,
+              0.27332905
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.6424701,
+              200.12135,
+              -16.020214
+            ],
+            "velocity": [
+              -0.047881857,
+              -0.44482595,
+              0.27156398
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.69477654,
+              200.00002,
+              -15.7235565
+            ],
+            "velocity": [
+              -0.04759884,
+              -0.0784,
+              0.26995775
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.79921937,
+              200.42001,
+              -15.131172
+            ],
+            "velocity": [
+              -0.057025805,
+              0.33319998,
+              0.3234424
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.86066973,
+              200.75322,
+              -14.782637
+            ],
+            "velocity": [
+              -0.05591983,
+              0.248136,
+              0.31716713
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.92101413,
+              201.00136,
+              -14.440376
+            ],
+            "velocity": [
+              -0.05491339,
+              0.16477329,
+              0.31145665
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.9803521,
+              201.16614,
+              -14.1038265
+            ],
+            "velocity": [
+              -0.05399753,
+              0.083077826,
+              0.3062601
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.0387743,
+              201.24922,
+              -13.772472
+            ],
+            "velocity": [
+              -0.053164102,
+              0.003016271,
+              0.30153126
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.0963628,
+              201.25224,
+              -13.445848
+            ],
+            "velocity": [
+              -0.05240568,
+              -0.07544406,
+              0.29722798
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.1531931,
+              201.1768,
+              -13.123528
+            ],
+            "velocity": [
+              -0.051715516,
+              -0.15233518,
+              0.293312
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.2093332,
+              201.02448,
+              -12.805122
+            ],
+            "velocity": [
+              -0.05108747,
+              -0.22768848,
+              0.2897485
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.2648453,
+              200.79678,
+              -12.490282
+            ],
+            "velocity": [
+              -0.050515946,
+              -0.3015347,
+              0.28650567
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.3197857,
+              200.49525,
+              -12.178682
+            ],
+            "velocity": [
+              -0.049995854,
+              -0.37390402,
+              0.2835547
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.3742062,
+              200.12135,
+              -11.870035
+            ],
+            "velocity": [
+              -0.049522575,
+              -0.44482595,
+              0.28086933
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.4281533,
+              200.00002,
+              -11.564074
+            ],
+            "velocity": [
+              -0.049091887,
+              -0.0784,
+              0.27842563
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.5340892,
+              200.42001,
+              -10.963221
+            ],
+            "velocity": [
+              -0.057841014,
+              0.33319998,
+              0.32806584
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.5963547,
+              200.75322,
+              -10.610062
+            ],
+            "velocity": [
+              -0.05666167,
+              0.248136,
+              0.32137448
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.6574409,
+              201.00136,
+              -10.263594
+            ],
+            "velocity": [
+              -0.055588465,
+              0.16477329,
+              0.31528533
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.717454,
+              201.16614,
+              -9.923216
+            ],
+            "velocity": [
+              -0.054611847,
+              0.083077826,
+              0.30974418
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.7764903,
+              201.24922,
+              -9.588379
+            ],
+            "velocity": [
+              -0.05372313,
+              0.003016271,
+              0.30470175
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.834638,
+              201.25224,
+              -9.258585
+            ],
+            "velocity": [
+              -0.052914392,
+              -0.07544406,
+              0.30011314
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.891977,
+              201.1768,
+              -8.933378
+            ],
+            "velocity": [
+              -0.052178442,
+              -0.15233518,
+              0.2959375
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.9485799,
+              201.02448,
+              -8.612349
+            ],
+            "velocity": [
+              -0.051508732,
+              -0.22768848,
+              0.29213768
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.0045133,
+              200.79678,
+              -8.295117
+            ],
+            "velocity": [
+              -0.050899293,
+              -0.3015347,
+              0.28867984
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.0598369,
+              200.49525,
+              -7.9813447
+            ],
+            "velocity": [
+              -0.0503447,
+              -0.37390402,
+              0.2855332
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.1146064,
+              200.12135,
+              -7.6707187
+            ],
+            "velocity": [
+              -0.049840022,
+              -0.44482595,
+              0.28266975
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.168871,
+              200.00002,
+              -7.362956
+            ],
+            "velocity": [
+              -0.049380764,
+              -0.0784,
+              0.28006402
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.2750955,
+              200.42001,
+              -6.7604647
+            ],
+            "velocity": [
+              -0.05799874,
+              0.33319998,
+              0.32896042
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.3375187,
+              200.75322,
+              -6.406411
+            ],
+            "velocity": [
+              -0.0568052,
+              0.248136,
+              0.32218853
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.3987484,
+              201.00136,
+              -6.0591297
+            ],
+            "velocity": [
+              -0.05571908,
+              0.16477329,
+              0.31602612
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.4588923,
+              201.16614,
+              -5.718011
+            ],
+            "velocity": [
+              -0.05473071,
+              0.083077826,
+              0.3104183
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.5180473,
+              201.24922,
+              -5.3824997
+            ],
+            "velocity": [
+              -0.05383129,
+              0.003016271,
+              0.3053152
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.5763035,
+              201.25224,
+              -5.0520916
+            ],
+            "velocity": [
+              -0.053012818,
+              -0.07544406,
+              0.30067137
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.633741,
+              201.1768,
+              -4.7263274
+            ],
+            "velocity": [
+              -0.052268013,
+              -0.15233518,
+              0.2964455
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.6904335,
+              201.02448,
+              -4.404789
+            ],
+            "velocity": [
+              -0.05159024,
+              -0.22768848,
+              0.29259995
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.746448,
+              200.79678,
+              -4.087096
+            ],
+            "velocity": [
+              -0.050973468,
+              -0.3015347,
+              0.2891005
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.801846,
+              200.49525,
+              -3.772903
+            ],
+            "velocity": [
+              -0.050412204,
+              -0.37390402,
+              0.285916
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.8566828,
+              200.12135,
+              -3.461894
+            ],
+            "velocity": [
+              -0.049901452,
+              -0.44482595,
+              0.2830181
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.9110088,
+              200.00002,
+              -3.1537828
+            ],
+            "velocity": [
+              -0.049436666,
+              -0.0784,
+              0.28038102
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.0172896,
+              200.42001,
+              -2.5509744
+            ],
+            "velocity": [
+              -0.058029264,
+              0.33319998,
+              0.3291335
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.0797434,
+              200.75322,
+              -2.1967483
+            ],
+            "velocity": [
+              -0.05683298,
+              0.248136,
+              0.32234603
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.1410012,
+              201.00136,
+              -1.8493092
+            ],
+            "velocity": [
+              -0.055744357,
+              0.16477329,
+              0.31616944
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.20117,
+              201.16614,
+              -1.5080469
+            ],
+            "velocity": [
+              -0.054753713,
+              0.083077826,
+              0.31054875
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.2603483,
+              201.24922,
+              -1.1724052
+            ],
+            "velocity": [
+              -0.053852227,
+              0.003016271,
+              0.3054339
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.3186255,
+              201.25224,
+              -0.8418785
+            ],
+            "velocity": [
+              -0.053031873,
+              -0.07544406,
+              0.3007794
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.376082,
+              201.1768,
+              -0.5160062
+            ],
+            "velocity": [
+              -0.05228535,
+              -0.15233518,
+              0.2965438
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.4327917,
+              201.02448,
+              -0.19436947
+            ],
+            "velocity": [
+              -0.051606018,
+              -0.22768848,
+              0.2926894
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.4888225,
+              200.79678,
+              0.12341285
+            ],
+            "velocity": [
+              -0.05098782,
+              -0.3015347,
+              0.28918192
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.5442348,
+              200.49525,
+              0.4376877
+            ],
+            "velocity": [
+              -0.05042526,
+              -0.37390402,
+              0.2859901
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.5990844,
+              200.12135,
+              0.74877065
+            ],
+            "velocity": [
+              -0.049913336,
+              -0.44482595,
+              0.28308553
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.6534224,
+              200.00002,
+              1.0569491
+            ],
+            "velocity": [
+              -0.04944748,
+              -0.0784,
+              0.2804424
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.759714,
+              200.42001,
+              1.659819
+            ],
+            "velocity": [
+              -0.05803517,
+              0.33319998,
+              0.329167
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.8221736,
+              200.75322,
+              2.014079
+            ],
+            "velocity": [
+              -0.05683835,
+              0.248136,
+              0.32237652
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.8834367,
+              201.00136,
+              2.3615484
+            ],
+            "velocity": [
+              -0.055749245,
+              0.16477329,
+              0.3161972
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.9436107,
+              201.16614,
+              2.7028384
+            ],
+            "velocity": [
+              -0.05475816,
+              0.083077826,
+              0.310574
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.0027933,
+              201.24922,
+              3.038505
+            ],
+            "velocity": [
+              -0.053856276,
+              0.003016271,
+              0.30545688
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.0610743,
+              201.25224,
+              3.3690548
+            ],
+            "velocity": [
+              -0.05303556,
+              -0.07544406,
+              0.3008003
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.118534,
+              201.1768,
+              3.6949482
+            ],
+            "velocity": [
+              -0.052288707,
+              -0.15233518,
+              0.29656282
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.1752477,
+              201.02448,
+              4.016604
+            ],
+            "velocity": [
+              -0.05160907,
+              -0.22768848,
+              0.29270673
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.2312813,
+              200.79678,
+              4.3344035
+            ],
+            "velocity": [
+              -0.0509906,
+              -0.3015347,
+              0.28919768
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.2866964,
+              200.49525,
+              4.648694
+            ],
+            "velocity": [
+              -0.05042779,
+              -0.37390402,
+              0.28600442
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.341549,
+              200.12135,
+              4.959791
+            ],
+            "velocity": [
+              -0.049915634,
+              -0.44482595,
+              0.28309858
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.3958893,
+              200.00002,
+              5.2679825
+            ],
+            "velocity": [
+              -0.049449574,
+              -0.0784,
+              0.28045425
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.502183,
+              200.42001,
+              5.8708644
+            ],
+            "velocity": [
+              -0.05803631,
+              0.33319998,
+              0.3291735
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.564644,
+              200.75322,
+              6.2251306
+            ],
+            "velocity": [
+              -0.056839388,
+              0.248136,
+              0.32238245
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.625908,
+              201.00136,
+              6.572606
+            ],
+            "velocity": [
+              -0.055750187,
+              0.16477329,
+              0.31620258
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.686083,
+              201.16614,
+              6.913902
+            ],
+            "velocity": [
+              -0.054759014,
+              0.083077826,
+              0.31057888
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.745266,
+              201.24922,
+              7.2495737
+            ],
+            "velocity": [
+              -0.053857047,
+              0.003016271,
+              0.30546132
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.803548,
+              201.25224,
+              7.5801277
+            ],
+            "velocity": [
+              -0.053036258,
+              -0.07544406,
+              0.30080435
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.8610086,
+              201.1768,
+              7.906025
+            ],
+            "velocity": [
+              -0.052289344,
+              -0.15233518,
+              0.29656652
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.9177227,
+              201.02448,
+              8.227684
+            ],
+            "velocity": [
+              -0.05160965,
+              -0.22768848,
+              0.29271007
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.973757,
+              200.79678,
+              8.545488
+            ],
+            "velocity": [
+              -0.05099113,
+              -0.3015347,
+              0.2892007
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.029172,
+              200.49525,
+              8.859781
+            ],
+            "velocity": [
+              -0.05042827,
+              -0.37390402,
+              0.28600717
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.0840254,
+              200.12135,
+              9.170881
+            ],
+            "velocity": [
+              -0.049916074,
+              -0.44482595,
+              0.28310108
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.1383657,
+              200.00002,
+              9.479076
+            ],
+            "velocity": [
+              -0.049449977,
+              -0.0784,
+              0.28045654
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.2446604,
+              200.42001,
+              10.081961
+            ],
+            "velocity": [
+              -0.05803653,
+              0.33319998,
+              0.32917473
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.3071213,
+              200.75322,
+              10.436228
+            ],
+            "velocity": [
+              -0.05683959,
+              0.248136,
+              0.32238355
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.3683853,
+              201.00136,
+              10.783705
+            ],
+            "velocity": [
+              -0.05575037,
+              0.16477329,
+              0.3162036
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.4285603,
+              201.16614,
+              11.125
+            ],
+            "velocity": [
+              -0.054759186,
+              0.083077826,
+              0.3105798
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.4877434,
+              201.24922,
+              11.460672
+            ],
+            "velocity": [
+              -0.053857204,
+              0.003016271,
+              0.30546218
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.5460253,
+              201.25224,
+              11.791227
+            ],
+            "velocity": [
+              -0.0530364,
+              -0.07544406,
+              0.30080512
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.603486,
+              201.1768,
+              12.117126
+            ],
+            "velocity": [
+              -0.05228947,
+              -0.15233518,
+              0.2965672
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.6602,
+              201.02448,
+              12.438786
+            ],
+            "velocity": [
+              -0.051609766,
+              -0.22768848,
+              0.2927107
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.716234,
+              200.79678,
+              12.75659
+            ],
+            "velocity": [
+              -0.050991233,
+              -0.3015347,
+              0.2892013
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.7716503,
+              200.49525,
+              13.070883
+            ],
+            "velocity": [
+              -0.05042837,
+              -0.37390402,
+              0.28600773
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.826503,
+              200.12135,
+              13.381985
+            ],
+            "velocity": [
+              -0.049916163,
+              -0.44482595,
+              0.2831016
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.880844,
+              200.00002,
+              13.690178
+            ],
+            "velocity": [
+              -0.04945006,
+              -0.0784,
+              0.280457
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -5.987138,
+              200.42001,
+              14.293062
+            ],
+            "velocity": [
+              -0.058036573,
+              0.33319998,
+              0.329175
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.0495987,
+              200.75322,
+              14.647331
+            ],
+            "velocity": [
+              -0.05683963,
+              0.248136,
+              0.3223838
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.1108627,
+              201.00136,
+              14.994808
+            ],
+            "velocity": [
+              -0.05575041,
+              0.16477329,
+              0.3162038
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.1710377,
+              201.16614,
+              15.336105
+            ],
+            "velocity": [
+              -0.05475922,
+              0.083077826,
+              0.31058002
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.2302217,
+              201.24922,
+              15.671778
+            ],
+            "velocity": [
+              -0.053857237,
+              0.003016271,
+              0.30546236
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.2885036,
+              201.25224,
+              16.002333
+            ],
+            "velocity": [
+              -0.053036433,
+              -0.07544406,
+              0.3008053
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.3459644,
+              201.1768,
+              16.328232
+            ],
+            "velocity": [
+              -0.052289497,
+              -0.15233518,
+              0.29656738
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.4026785,
+              201.02448,
+              16.649893
+            ],
+            "velocity": [
+              -0.051609788,
+              -0.22768848,
+              0.29271087
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.4587126,
+              200.79678,
+              16.967697
+            ],
+            "velocity": [
+              -0.050991252,
+              -0.3015347,
+              0.28920144
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.5141287,
+              200.49525,
+              17.281992
+            ],
+            "velocity": [
+              -0.050428387,
+              -0.37390402,
+              0.28600785
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.568981,
+              200.12135,
+              17.593092
+            ],
+            "velocity": [
+              -0.049916178,
+              -0.44482595,
+              0.28310168
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.6233225,
+              200.00002,
+              17.901287
+            ],
+            "velocity": [
+              -0.04945007,
+              -0.0784,
+              0.28045708
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.729616,
+              200.42001,
+              18.504171
+            ],
+            "velocity": [
+              -0.05803658,
+              0.33319998,
+              0.32917503
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.7920775,
+              200.75322,
+              18.858438
+            ],
+            "velocity": [
+              -0.056839637,
+              0.248136,
+              0.32238382
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.8533416,
+              201.00136,
+              19.205915
+            ],
+            "velocity": [
+              -0.05575042,
+              0.16477329,
+              0.31620383
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.9135165,
+              201.16614,
+              19.547213
+            ],
+            "velocity": [
+              -0.054759227,
+              0.083077826,
+              0.31058004
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -6.9727,
+              201.24922,
+              19.882885
+            ],
+            "velocity": [
+              -0.053857245,
+              0.003016271,
+              0.3054624
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.030982,
+              201.25224,
+              20.21344
+            ],
+            "velocity": [
+              -0.05303644,
+              -0.07544406,
+              0.30080533
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.088443,
+              201.1768,
+              20.53934
+            ],
+            "velocity": [
+              -0.052289505,
+              -0.15233518,
+              0.2965674
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.145157,
+              201.02448,
+              20.861
+            ],
+            "velocity": [
+              -0.051609796,
+              -0.22768848,
+              0.2927109
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.2011914,
+              200.79678,
+              21.178804
+            ],
+            "velocity": [
+              -0.05099126,
+              -0.3015347,
+              0.28920147
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.256607,
+              200.49525,
+              21.4931
+            ],
+            "velocity": [
+              -0.050428394,
+              -0.37390402,
+              0.28600788
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.31146,
+              200.12135,
+              21.8042
+            ],
+            "velocity": [
+              -0.049916185,
+              -0.44482595,
+              0.2831017
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.365801,
+              200.00002,
+              22.112394
+            ],
+            "velocity": [
+              -0.049450077,
+              -0.0784,
+              0.2804571
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.472095,
+              200.42001,
+              22.715279
+            ],
+            "velocity": [
+              -0.058036588,
+              0.33319998,
+              0.32917506
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.5345564,
+              200.75322,
+              23.069546
+            ],
+            "velocity": [
+              -0.056839645,
+              0.248136,
+              0.32238385
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.5958204,
+              201.00136,
+              23.417023
+            ],
+            "velocity": [
+              -0.055750426,
+              0.16477329,
+              0.31620386
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.6559954,
+              201.16614,
+              23.75832
+            ],
+            "velocity": [
+              -0.054759234,
+              0.083077826,
+              0.31058007
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.715179,
+              201.24922,
+              24.093992
+            ],
+            "velocity": [
+              -0.053857252,
+              0.003016271,
+              0.30546242
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.773461,
+              201.25224,
+              24.424547
+            ],
+            "velocity": [
+              -0.053036448,
+              -0.07544406,
+              0.30080536
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.8309216,
+              201.1768,
+              24.750446
+            ],
+            "velocity": [
+              -0.052289512,
+              -0.15233518,
+              0.2965674
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -7.8876357,
+              201.02448,
+              25.072107
+            ],
+            "velocity": [
+              -0.0516098,
+              -0.22768848,
+              0.2927109
+            ],
+            "on_ground": false,
+            "sprinting": true,
+            "swimming": false
+          }
+        ]
+      },
+      {
+        "name": "sprint at yaw 10, from rest",
+        "setup": [
+          "effect @a clear",
+          "gamemode s @a",
+          "scriptevent probe:food 20",
+          "scriptevent probe:sat 5",
+          "effect @a resistance 900 255 true"
+        ],
+        "start": [
+          0.5,
+          200.0,
+          -22.5
+        ],
+        "inputs": [
+          {
+            "from": 0,
+            "to": 100,
+            "move_vector": [
+              0.0,
+              1.0
+            ],
+            "yaw": 10.0,
+            "pitch": 0.0,
+            "bits": [
+              10,
+              20
+            ],
+            "first_tick_bits": []
+          }
+        ],
+        "method": "measured",
+        "verification": {
+          "replays": 2,
+          "corrected_ticks": []
+        },
+        "ticks": [
+          {
+            "feet": [
+              0.4778772,
+              200.00002,
+              -22.374535
+            ],
+            "velocity": [
+              -0.012079038,
+              -0.0784,
+              0.068503626
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.4436754,
+              200.00002,
+              -22.180567
+            ],
+            "velocity": [
+              -0.018674193,
+              -0.0784,
+              0.105906606
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.40287843,
+              200.00002,
+              -21.949196
+            ],
+            "velocity": [
+              -0.02227515,
+              -0.0784,
+              0.12632863
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.35848048,
+              200.00002,
+              -21.697403
+            ],
+            "velocity": [
+              -0.02424127,
+              -0.0784,
+              0.13747907
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.3121164,
+              200.00002,
+              -21.43446
+            ],
+            "velocity": [
+              -0.025314773,
+              -0.0784,
+              0.1435672
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.26467887,
+              200.00002,
+              -21.165428
+            ],
+            "velocity": [
+              -0.025900904,
+              -0.0784,
+              0.14689133
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.2166552,
+              200.00002,
+              -20.893072
+            ],
+            "velocity": [
+              -0.026220933,
+              -0.0784,
+              0.1487063
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.16831148,
+              200.00002,
+              -20.618902
+            ],
+            "velocity": [
+              -0.02639567,
+              -0.0784,
+              0.14969729
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.11979303,
+              200.00002,
+              -20.34374
+            ],
+            "velocity": [
+              -0.026491076,
+              -0.0784,
+              0.15023836
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.07117918,
+              200.00002,
+              -20.068037
+            ],
+            "velocity": [
+              -0.026543166,
+              -0.0784,
+              0.15053378
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              0.02251324,
+              200.00002,
+              -19.792038
+            ],
+            "velocity": [
+              -0.02657161,
+              -0.0784,
+              0.15069509
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.026181161,
+              200.00002,
+              -19.515879
+            ],
+            "velocity": [
+              -0.026587138,
+              -0.0784,
+              0.15078315
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.07489108,
+              200.00002,
+              -19.239632
+            ],
+            "velocity": [
+              -0.026595617,
+              -0.0784,
+              0.15083124
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.123609476,
+              200.00002,
+              -18.963335
+            ],
+            "velocity": [
+              -0.026600245,
+              -0.0784,
+              0.15085748
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.1723325,
+              200.00002,
+              -18.687014
+            ],
+            "velocity": [
+              -0.026602773,
+              -0.0784,
+              0.15087181
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.22105806,
+              200.00002,
+              -18.410677
+            ],
+            "velocity": [
+              -0.026604155,
+              -0.0784,
+              0.15087965
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.269785,
+              200.00002,
+              -18.134333
+            ],
+            "velocity": [
+              -0.026604908,
+              -0.0784,
+              0.15088393
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.31851268,
+              200.00002,
+              -17.857985
+            ],
+            "velocity": [
+              -0.02660532,
+              -0.0784,
+              0.15088625
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.3672408,
+              200.00002,
+              -17.581635
+            ],
+            "velocity": [
+              -0.026605545,
+              -0.0784,
+              0.15088752
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.4159691,
+              200.00002,
+              -17.305283
+            ],
+            "velocity": [
+              -0.026605668,
+              -0.0784,
+              0.15088822
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.46469757,
+              200.00002,
+              -17.02893
+            ],
+            "velocity": [
+              -0.026605733,
+              -0.0784,
+              0.15088859
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.51342607,
+              200.00002,
+              -16.752577
+            ],
+            "velocity": [
+              -0.02660577,
+              -0.0784,
+              0.1508888
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.56215465,
+              200.00002,
+              -16.476223
+            ],
+            "velocity": [
+              -0.02660579,
+              -0.0784,
+              0.15088892
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.61088324,
+              200.00002,
+              -16.19987
+            ],
+            "velocity": [
+              -0.026605802,
+              -0.0784,
+              0.15088898
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.6596118,
+              200.00002,
+              -15.923515
+            ],
+            "velocity": [
+              -0.026605807,
+              -0.0784,
+              0.15088902
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.7083404,
+              200.00002,
+              -15.6471615
+            ],
+            "velocity": [
+              -0.026605811,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.757069,
+              200.00002,
+              -15.370808
+            ],
+            "velocity": [
+              -0.026605813,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.8057976,
+              200.00002,
+              -15.094454
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.85452616,
+              200.00002,
+              -14.8181
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.90325475,
+              200.00002,
+              -14.541746
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -0.95198333,
+              200.00002,
+              -14.265392
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.0007119,
+              200.00002,
+              -13.989038
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.0494405,
+              200.00002,
+              -13.712685
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.0981691,
+              200.00002,
+              -13.436331
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.1468977,
+              200.00002,
+              -13.159977
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.1956263,
+              200.00002,
+              -12.883623
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.2443548,
+              200.00002,
+              -12.607269
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.2930834,
+              200.00002,
+              -12.330915
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.341812,
+              200.00002,
+              -12.054562
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.3905406,
+              200.00002,
+              -11.778208
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.4392692,
+              200.00002,
+              -11.501854
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.4879978,
+              200.00002,
+              -11.2255
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.5367264,
+              200.00002,
+              -10.949146
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.585455,
+              200.00002,
+              -10.672792
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.6341835,
+              200.00002,
+              -10.396439
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.6829121,
+              200.00002,
+              -10.120085
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.7316408,
+              200.00002,
+              -9.843731
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.7803694,
+              200.00002,
+              -9.567377
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.829098,
+              200.00002,
+              -9.291023
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.8778267,
+              200.00002,
+              -9.014669
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.9265554,
+              200.00002,
+              -8.738316
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -1.975284,
+              200.00002,
+              -8.461962
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.0240126,
+              200.00002,
+              -8.185608
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.0727413,
+              200.00002,
+              -7.9092546
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.12147,
+              200.00002,
+              -7.632901
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.1701984,
+              200.00002,
+              -7.356548
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.2189271,
+              200.00002,
+              -7.0801945
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.2676558,
+              200.00002,
+              -6.803841
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.3163846,
+              200.00002,
+              -6.5274878
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.3651133,
+              200.00002,
+              -6.2511344
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.413842,
+              200.00002,
+              -5.974781
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.4625707,
+              200.00002,
+              -5.6984277
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.5112994,
+              200.00002,
+              -5.4220743
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.560028,
+              200.00002,
+              -5.145721
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.6087568,
+              200.00002,
+              -4.8693676
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.6574855,
+              200.00002,
+              -4.5930142
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.7062142,
+              200.00002,
+              -4.316661
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.754943,
+              200.00002,
+              -4.0403075
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.8036716,
+              200.00002,
+              -3.763954
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.8524003,
+              200.00002,
+              -3.4876003
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.901129,
+              200.00002,
+              -3.2112467
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.9498577,
+              200.00002,
+              -2.9348931
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -2.9985864,
+              200.00002,
+              -2.6585395
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.0473151,
+              200.00002,
+              -2.382186
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.0960438,
+              200.00002,
+              -2.1058323
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.1447725,
+              200.00002,
+              -1.8294787
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.1935012,
+              200.00002,
+              -1.5531251
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.24223,
+              200.00002,
+              -1.2767715
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.2909586,
+              200.00002,
+              -1.000418
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.3396873,
+              200.00002,
+              -0.72406447
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.388416,
+              200.00002,
+              -0.4477109
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.4371448,
+              200.00002,
+              -0.17135736
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.4858735,
+              200.00002,
+              0.104996175
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.5346022,
+              200.00002,
+              0.3813497
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.5833309,
+              200.00002,
+              0.6577033
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.6320596,
+              200.00002,
+              0.9340568
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.6807883,
+              200.00002,
+              1.2104104
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.729517,
+              200.00002,
+              1.486764
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.7782454,
+              200.00002,
+              1.7631176
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.8269742,
+              200.00002,
+              2.0394711
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.8757029,
+              200.00002,
+              2.3158247
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.9244313,
+              200.00002,
+              2.5921783
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -3.9731598,
+              200.00002,
+              2.868532
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.0218887,
+              200.00002,
+              3.1448855
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.070617,
+              200.00002,
+              3.4212391
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.1193457,
+              200.00002,
+              3.6975927
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.168074,
+              200.00002,
+              3.9739463
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.2168026,
+              200.00002,
+              4.2503
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.2655315,
+              200.00002,
+              4.5266533
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          },
+          {
+            "feet": [
+              -4.31426,
+              200.00002,
+              4.8030066
+            ],
+            "velocity": [
+              -0.026605815,
+              -0.0784,
+              0.15088905
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": false
+          }
+        ]
+      },
+      {
+        "name": "sprint-swim with strafe left, from pool bottom",
+        "setup": [
+          "effect @a clear",
+          "gamemode s @a",
+          "scriptevent probe:food 20",
+          "scriptevent probe:sat 5",
+          "effect @a resistance 900 255 true",
+          "fill 26 199 -10 46 199 10 stone",
+          "fill 26 200 -10 46 240 10 air",
+          "fill 34 196 -10 46 198 10 stone",
+          "fill 35 197 -9 45 199 9 water",
+          "effect @a water_breathing 900 0 true"
+        ],
+        "start": [
+          36.5,
+          197.0,
+          -8.5
+        ],
+        "inputs": [
+          {
+            "from": 0,
+            "to": 60,
+            "move_vector": [
+              1.0,
+              1.0
+            ],
+            "yaw": 0.0,
+            "pitch": 0.0,
+            "bits": [
+              10,
+              12,
+              20
+            ],
+            "first_tick_bits": []
+          }
+        ],
+        "method": "measured",
+        "verification": {
+          "replays": 2,
+          "corrected_ticks": []
+        },
+        "ticks": [
+          {
+            "feet": [
+              36.51386,
+              197.00002,
+              -8.48614
+            ],
+            "velocity": [
+              0.012473363,
+              0.0,
+              0.012473363
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.54019,
+              197.00002,
+              -8.459807
+            ],
+            "velocity": [
+              0.023699392,
+              0.0,
+              0.023699392
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.57775,
+              197.00002,
+              -8.422249
+            ],
+            "velocity": [
+              0.033802815,
+              0.0,
+              0.033802815
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.625412,
+              197.00002,
+              -8.374587
+            ],
+            "velocity": [
+              0.0428959,
+              0.0,
+              0.0428959
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.682167,
+              197.00002,
+              -8.317832
+            ],
+            "velocity": [
+              0.05107967,
+              0.0,
+              0.05107967
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.747105,
+              197.00002,
+              -8.252893
+            ],
+            "velocity": [
+              0.058445066,
+              0.0,
+              0.058445066
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.81941,
+              197.00002,
+              -8.180589
+            ],
+            "velocity": [
+              0.06507392,
+              0.0,
+              0.06507392
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.898342,
+              197.00002,
+              -8.101656
+            ],
+            "velocity": [
+              0.07103989,
+              0.0,
+              0.07103989
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              36.983242,
+              197.00002,
+              -8.016756
+            ],
+            "velocity": [
+              0.076409265,
+              0.0,
+              0.076409265
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.07351,
+              197.00002,
+              -7.926488
+            ],
+            "velocity": [
+              0.081241705,
+              0.0,
+              0.081241705
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.16861,
+              197.00002,
+              -7.831387
+            ],
+            "velocity": [
+              0.0855909,
+              0.0,
+              0.0855909
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.26806,
+              197.00002,
+              -7.731937
+            ],
+            "velocity": [
+              0.08950517,
+              0.0,
+              0.08950517
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.37142,
+              197.00002,
+              -7.6285725
+            ],
+            "velocity": [
+              0.09302802,
+              0.0,
+              0.09302802
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.47831,
+              197.00002,
+              -7.521685
+            ],
+            "velocity": [
+              0.09619857,
+              0.0,
+              0.09619857
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.588367,
+              197.00002,
+              -7.4116273
+            ],
+            "velocity": [
+              0.09905208,
+              0.0,
+              0.09905208
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.70128,
+              197.00002,
+              -7.298716
+            ],
+            "velocity": [
+              0.101620235,
+              0.0,
+              0.101620235
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.816757,
+              197.00002,
+              -7.1832366
+            ],
+            "velocity": [
+              0.103931576,
+              0.0,
+              0.103931576
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.934547,
+              197.00002,
+              -7.065446
+            ],
+            "velocity": [
+              0.10601178,
+              0.0,
+              0.10601178
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.054417,
+              197.00002,
+              -6.9455748
+            ],
+            "velocity": [
+              0.10788396,
+              0.0,
+              0.10788396
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.17616,
+              197.00002,
+              -6.8238316
+            ],
+            "velocity": [
+              0.10956892,
+              0.0,
+              0.10956892
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.299587,
+              197.00002,
+              -6.700403
+            ],
+            "velocity": [
+              0.11108539,
+              0.0,
+              0.11108539
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.424534,
+              197.00002,
+              -6.5754585
+            ],
+            "velocity": [
+              0.11245021,
+              0.0,
+              0.11245021
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.550842,
+              197.00002,
+              -6.449149
+            ],
+            "velocity": [
+              0.113678545,
+              0.0,
+              0.113678545
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.67838,
+              197.00002,
+              -6.3216114
+            ],
+            "velocity": [
+              0.11478405,
+              0.0,
+              0.11478405
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.807022,
+              197.00002,
+              -6.192968
+            ],
+            "velocity": [
+              0.115779,
+              0.0,
+              0.115779
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.93666,
+              197.00002,
+              -6.0633297
+            ],
+            "velocity": [
+              0.11667445,
+              0.0,
+              0.11667445
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.067196,
+              197.00002,
+              -5.932796
+            ],
+            "velocity": [
+              0.11748036,
+              0.0,
+              0.11748036
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.198536,
+              197.00002,
+              -5.8014565
+            ],
+            "velocity": [
+              0.11820569,
+              0.0,
+              0.11820569
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.3306,
+              197.00002,
+              -5.6693916
+            ],
+            "velocity": [
+              0.11885848,
+              0.0,
+              0.11885848
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.463318,
+              197.00002,
+              -5.536674
+            ],
+            "velocity": [
+              0.119445994,
+              0.0,
+              0.119445994
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.596622,
+              197.00002,
+              -5.403369
+            ],
+            "velocity": [
+              0.11997475,
+              0.0,
+              0.11997475
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.730457,
+              197.00002,
+              -5.269535
+            ],
+            "velocity": [
+              0.12045063,
+              0.0,
+              0.12045063
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.86477,
+              197.00002,
+              -5.1352253
+            ],
+            "velocity": [
+              0.12087892,
+              0.0,
+              0.12087892
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.999508,
+              197.00002,
+              -5.000487
+            ],
+            "velocity": [
+              0.12126438,
+              0.0,
+              0.12126438
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.134632,
+              197.00002,
+              -4.865363
+            ],
+            "velocity": [
+              0.1216113,
+              0.0,
+              0.1216113
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.270103,
+              197.00002,
+              -4.7298927
+            ],
+            "velocity": [
+              0.12192352,
+              0.0,
+              0.12192352
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.405888,
+              197.00002,
+              -4.59411
+            ],
+            "velocity": [
+              0.12220453,
+              0.0,
+              0.12220453
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.54195,
+              197.00002,
+              -4.4580464
+            ],
+            "velocity": [
+              0.12245743,
+              0.0,
+              0.12245743
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.67827,
+              197.00002,
+              -4.3217297
+            ],
+            "velocity": [
+              0.122685045,
+              0.0,
+              0.122685045
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.81481,
+              197.00002,
+              -4.1851854
+            ],
+            "velocity": [
+              0.1228899,
+              0.0,
+              0.1228899
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.95156,
+              197.00002,
+              -4.048436
+            ],
+            "velocity": [
+              0.12307427,
+              0.0,
+              0.12307427
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.088493,
+              197.00002,
+              -3.9115024
+            ],
+            "velocity": [
+              0.1232402,
+              0.0,
+              0.1232402
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.225594,
+              197.00002,
+              -3.774403
+            ],
+            "velocity": [
+              0.123389535,
+              0.0,
+              0.123389535
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.362843,
+              197.00002,
+              -3.6371543
+            ],
+            "velocity": [
+              0.12352394,
+              0.0,
+              0.12352394
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.500225,
+              197.00002,
+              -3.499771
+            ],
+            "velocity": [
+              0.12364491,
+              0.0,
+              0.12364491
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.63773,
+              197.00002,
+              -3.362267
+            ],
+            "velocity": [
+              0.12375378,
+              0.0,
+              0.12375378
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.77534,
+              197.00002,
+              -3.224654
+            ],
+            "velocity": [
+              0.12385176,
+              0.0,
+              0.12385176
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.91305,
+              197.00002,
+              -3.086943
+            ],
+            "velocity": [
+              0.12393994,
+              0.0,
+              0.12393994
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.05085,
+              197.00002,
+              -2.9491436
+            ],
+            "velocity": [
+              0.12401931,
+              0.0,
+              0.12401931
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.18873,
+              197.00002,
+              -2.811265
+            ],
+            "velocity": [
+              0.12409073,
+              0.0,
+              0.12409073
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.32668,
+              197.00002,
+              -2.673315
+            ],
+            "velocity": [
+              0.124155015,
+              0.0,
+              0.124155015
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.464695,
+              197.00002,
+              -2.5353007
+            ],
+            "velocity": [
+              0.12421287,
+              0.0,
+              0.12421287
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.602768,
+              197.00002,
+              -2.3972285
+            ],
+            "velocity": [
+              0.12426494,
+              0.0,
+              0.12426494
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.74089,
+              197.00002,
+              -2.2591043
+            ],
+            "velocity": [
+              0.124311805,
+              0.0,
+              0.124311805
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.879063,
+              197.00002,
+              -2.120933
+            ],
+            "velocity": [
+              0.12435398,
+              0.0,
+              0.12435398
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.017277,
+              197.00002,
+              -1.9827199
+            ],
+            "velocity": [
+              0.12439194,
+              0.0,
+              0.12439194
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.15553,
+              197.00002,
+              -1.8444686
+            ],
+            "velocity": [
+              0.124426104,
+              0.0,
+              0.124426104
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.293816,
+              197.00002,
+              -1.7061832
+            ],
+            "velocity": [
+              0.12445685,
+              0.0,
+              0.12445685
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.432133,
+              197.00002,
+              -1.567867
+            ],
+            "velocity": [
+              0.124484524,
+              0.0,
+              0.124484524
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.570477,
+              197.00002,
+              -1.4295232
+            ],
+            "velocity": [
+              0.124509424,
+              0.0,
+              0.124509424
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          }
+        ]
+      },
+      {
+        "name": "sprint-swim with strafe right, from pool bottom",
+        "setup": [
+          "effect @a clear",
+          "gamemode s @a",
+          "scriptevent probe:food 20",
+          "scriptevent probe:sat 5",
+          "effect @a resistance 900 255 true",
+          "fill 26 199 -10 46 199 10 stone",
+          "fill 26 200 -10 46 240 10 air",
+          "fill 34 196 -10 46 198 10 stone",
+          "fill 35 197 -9 45 199 9 water",
+          "effect @a water_breathing 900 0 true"
+        ],
+        "start": [
+          44.5,
+          197.0,
+          -8.5
+        ],
+        "inputs": [
+          {
+            "from": 0,
+            "to": 60,
+            "move_vector": [
+              -1.0,
+              1.0
+            ],
+            "yaw": 0.0,
+            "pitch": 0.0,
+            "bits": [
+              10,
+              13,
+              20
+            ],
+            "first_tick_bits": []
+          }
+        ],
+        "method": "measured",
+        "verification": {
+          "replays": 2,
+          "corrected_ticks": []
+        },
+        "ticks": [
+          {
+            "feet": [
+              44.48614,
+              197.00002,
+              -8.48614
+            ],
+            "velocity": [
+              -0.012473363,
+              0.0,
+              0.012473363
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.45981,
+              197.00002,
+              -8.459807
+            ],
+            "velocity": [
+              -0.023699392,
+              0.0,
+              0.023699392
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.42225,
+              197.00002,
+              -8.422249
+            ],
+            "velocity": [
+              -0.033802815,
+              0.0,
+              0.033802815
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.374588,
+              197.00002,
+              -8.374587
+            ],
+            "velocity": [
+              -0.0428959,
+              0.0,
+              0.0428959
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.317833,
+              197.00002,
+              -8.317832
+            ],
+            "velocity": [
+              -0.05107967,
+              0.0,
+              0.05107967
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.252895,
+              197.00002,
+              -8.252893
+            ],
+            "velocity": [
+              -0.058445066,
+              0.0,
+              0.058445066
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.18059,
+              197.00002,
+              -8.180589
+            ],
+            "velocity": [
+              -0.06507392,
+              0.0,
+              0.06507392
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.101658,
+              197.00002,
+              -8.101656
+            ],
+            "velocity": [
+              -0.07103989,
+              0.0,
+              0.07103989
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              44.016758,
+              197.00002,
+              -8.016756
+            ],
+            "velocity": [
+              -0.076409265,
+              0.0,
+              0.076409265
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.92649,
+              197.00002,
+              -7.926488
+            ],
+            "velocity": [
+              -0.081241705,
+              0.0,
+              0.081241705
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.83139,
+              197.00002,
+              -7.831387
+            ],
+            "velocity": [
+              -0.0855909,
+              0.0,
+              0.0855909
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.73194,
+              197.00002,
+              -7.731937
+            ],
+            "velocity": [
+              -0.08950517,
+              0.0,
+              0.08950517
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.62858,
+              197.00002,
+              -7.6285725
+            ],
+            "velocity": [
+              -0.09302802,
+              0.0,
+              0.09302802
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.52169,
+              197.00002,
+              -7.521685
+            ],
+            "velocity": [
+              -0.09619857,
+              0.0,
+              0.09619857
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.411633,
+              197.00002,
+              -7.4116273
+            ],
+            "velocity": [
+              -0.09905208,
+              0.0,
+              0.09905208
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.29872,
+              197.00002,
+              -7.298716
+            ],
+            "velocity": [
+              -0.101620235,
+              0.0,
+              0.101620235
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.183243,
+              197.00002,
+              -7.1832366
+            ],
+            "velocity": [
+              -0.103931576,
+              0.0,
+              0.103931576
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.065453,
+              197.00002,
+              -7.065446
+            ],
+            "velocity": [
+              -0.10601178,
+              0.0,
+              0.10601178
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.945583,
+              197.00002,
+              -6.9455748
+            ],
+            "velocity": [
+              -0.10788396,
+              0.0,
+              0.10788396
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.82384,
+              197.00002,
+              -6.8238316
+            ],
+            "velocity": [
+              -0.10956892,
+              0.0,
+              0.10956892
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.700413,
+              197.00002,
+              -6.700403
+            ],
+            "velocity": [
+              -0.11108539,
+              0.0,
+              0.11108539
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.575466,
+              197.00002,
+              -6.5754585
+            ],
+            "velocity": [
+              -0.11245021,
+              0.0,
+              0.11245021
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.449158,
+              197.00002,
+              -6.449149
+            ],
+            "velocity": [
+              -0.113678545,
+              0.0,
+              0.113678545
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.32162,
+              197.00002,
+              -6.3216114
+            ],
+            "velocity": [
+              -0.11478405,
+              0.0,
+              0.11478405
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.192978,
+              197.00002,
+              -6.192968
+            ],
+            "velocity": [
+              -0.115779,
+              0.0,
+              0.115779
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.06334,
+              197.00002,
+              -6.0633297
+            ],
+            "velocity": [
+              -0.11667445,
+              0.0,
+              0.11667445
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.932804,
+              197.00002,
+              -5.932796
+            ],
+            "velocity": [
+              -0.11748036,
+              0.0,
+              0.11748036
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.801464,
+              197.00002,
+              -5.8014565
+            ],
+            "velocity": [
+              -0.11820569,
+              0.0,
+              0.11820569
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.6694,
+              197.00002,
+              -5.6693916
+            ],
+            "velocity": [
+              -0.11885848,
+              0.0,
+              0.11885848
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.536682,
+              197.00002,
+              -5.536674
+            ],
+            "velocity": [
+              -0.119445994,
+              0.0,
+              0.119445994
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.403378,
+              197.00002,
+              -5.403369
+            ],
+            "velocity": [
+              -0.11997475,
+              0.0,
+              0.11997475
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.269543,
+              197.00002,
+              -5.269535
+            ],
+            "velocity": [
+              -0.12045063,
+              0.0,
+              0.12045063
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.13523,
+              197.00002,
+              -5.1352253
+            ],
+            "velocity": [
+              -0.12087892,
+              0.0,
+              0.12087892
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.000492,
+              197.00002,
+              -5.000487
+            ],
+            "velocity": [
+              -0.12126438,
+              0.0,
+              0.12126438
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.865368,
+              197.00002,
+              -4.865363
+            ],
+            "velocity": [
+              -0.1216113,
+              0.0,
+              0.1216113
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.729897,
+              197.00002,
+              -4.7298927
+            ],
+            "velocity": [
+              -0.12192352,
+              0.0,
+              0.12192352
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.594112,
+              197.00002,
+              -4.59411
+            ],
+            "velocity": [
+              -0.12220453,
+              0.0,
+              0.12220453
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.45805,
+              197.00002,
+              -4.4580464
+            ],
+            "velocity": [
+              -0.12245743,
+              0.0,
+              0.12245743
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.32173,
+              197.00002,
+              -4.3217297
+            ],
+            "velocity": [
+              -0.122685045,
+              0.0,
+              0.122685045
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.18519,
+              197.00002,
+              -4.1851854
+            ],
+            "velocity": [
+              -0.1228899,
+              0.0,
+              0.1228899
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              40.04844,
+              197.00002,
+              -4.048436
+            ],
+            "velocity": [
+              -0.12307427,
+              0.0,
+              0.12307427
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.911507,
+              197.00002,
+              -3.9115024
+            ],
+            "velocity": [
+              -0.1232402,
+              0.0,
+              0.1232402
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.774406,
+              197.00002,
+              -3.774403
+            ],
+            "velocity": [
+              -0.123389535,
+              0.0,
+              0.123389535
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.637157,
+              197.00002,
+              -3.6371543
+            ],
+            "velocity": [
+              -0.12352394,
+              0.0,
+              0.12352394
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.499775,
+              197.00002,
+              -3.499771
+            ],
+            "velocity": [
+              -0.12364491,
+              0.0,
+              0.12364491
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.36227,
+              197.00002,
+              -3.362267
+            ],
+            "velocity": [
+              -0.12375378,
+              0.0,
+              0.12375378
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.22466,
+              197.00002,
+              -3.224654
+            ],
+            "velocity": [
+              -0.12385176,
+              0.0,
+              0.12385176
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              39.08695,
+              197.00002,
+              -3.086943
+            ],
+            "velocity": [
+              -0.12393994,
+              0.0,
+              0.12393994
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.94915,
+              197.00002,
+              -2.9491436
+            ],
+            "velocity": [
+              -0.12401931,
+              0.0,
+              0.12401931
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.81127,
+              197.00002,
+              -2.811265
+            ],
+            "velocity": [
+              -0.12409073,
+              0.0,
+              0.12409073
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.67332,
+              197.00002,
+              -2.673315
+            ],
+            "velocity": [
+              -0.124155015,
+              0.0,
+              0.124155015
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.535305,
+              197.00002,
+              -2.5353007
+            ],
+            "velocity": [
+              -0.12421287,
+              0.0,
+              0.12421287
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.397232,
+              197.00002,
+              -2.3972285
+            ],
+            "velocity": [
+              -0.12426494,
+              0.0,
+              0.12426494
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.25911,
+              197.00002,
+              -2.2591043
+            ],
+            "velocity": [
+              -0.124311805,
+              0.0,
+              0.124311805
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              38.120937,
+              197.00002,
+              -2.120933
+            ],
+            "velocity": [
+              -0.12435398,
+              0.0,
+              0.12435398
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.982723,
+              197.00002,
+              -1.9827199
+            ],
+            "velocity": [
+              -0.12439194,
+              0.0,
+              0.12439194
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.84447,
+              197.00002,
+              -1.8444686
+            ],
+            "velocity": [
+              -0.124426104,
+              0.0,
+              0.124426104
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.706184,
+              197.00002,
+              -1.7061832
+            ],
+            "velocity": [
+              -0.12445685,
+              0.0,
+              0.12445685
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.567867,
+              197.00002,
+              -1.567867
+            ],
+            "velocity": [
+              -0.124484524,
+              0.0,
+              0.124484524
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              37.429523,
+              197.00002,
+              -1.4295232
+            ],
+            "velocity": [
+              -0.124509424,
+              0.0,
+              0.124509424
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          }
+        ]
+      },
+      {
+        "name": "sprint-swim at yaw 10, from pool bottom",
+        "setup": [
+          "effect @a clear",
+          "gamemode s @a",
+          "scriptevent probe:food 20",
+          "scriptevent probe:sat 5",
+          "effect @a resistance 900 255 true",
+          "fill 26 199 -10 46 199 10 stone",
+          "fill 26 200 -10 46 240 10 air",
+          "fill 34 196 -10 46 198 10 stone",
+          "fill 35 197 -9 45 199 9 water",
+          "effect @a water_breathing 900 0 true"
+        ],
+        "start": [
+          43.5,
+          197.0,
+          -8.5
+        ],
+        "inputs": [
+          {
+            "from": 0,
+            "to": 60,
+            "move_vector": [
+              0.0,
+              1.0
+            ],
+            "yaw": 10.0,
+            "pitch": 0.0,
+            "bits": [
+              10,
+              20
+            ],
+            "first_tick_bits": []
+          }
+        ],
+        "method": "measured",
+        "verification": {
+          "replays": 2,
+          "corrected_ticks": []
+        },
+        "ticks": [
+          {
+            "feet": [
+              43.496597,
+              197.00002,
+              -8.480698
+            ],
+            "velocity": [
+              -0.003063154,
+              0.0,
+              0.017372008
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.49013,
+              197.00002,
+              -8.444023
+            ],
+            "velocity": [
+              -0.005819992,
+              0.0,
+              0.033006813
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.480907,
+              197.00002,
+              -8.391714
+            ],
+            "velocity": [
+              -0.008301146,
+              0.0,
+              0.047078136
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.469204,
+              197.00002,
+              -8.325334
+            ],
+            "velocity": [
+              -0.010534185,
+              0.0,
+              0.059742328
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.455265,
+              197.00002,
+              -8.246289
+            ],
+            "velocity": [
+              -0.01254392,
+              0.0,
+              0.0711401
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.439316,
+              197.00002,
+              -8.155847
+            ],
+            "velocity": [
+              -0.014352681,
+              0.0,
+              0.0813981
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.42156,
+              197.00002,
+              -8.055146
+            ],
+            "velocity": [
+              -0.015980568,
+              0.0,
+              0.0906303
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.402176,
+              197.00002,
+              -7.945214
+            ],
+            "velocity": [
+              -0.017445663,
+              0.0,
+              0.09893928
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.38133,
+              197.00002,
+              -7.8269725
+            ],
+            "velocity": [
+              -0.018764252,
+              0.0,
+              0.10641736
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.35916,
+              197.00002,
+              -7.701253
+            ],
+            "velocity": [
+              -0.01995098,
+              0.0,
+              0.11314763
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.335808,
+              197.00002,
+              -7.568803
+            ],
+            "velocity": [
+              -0.021019036,
+              0.0,
+              0.11920488
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.311386,
+              197.00002,
+              -7.430296
+            ],
+            "velocity": [
+              -0.021980286,
+              0.0,
+              0.1246564
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.286003,
+              197.00002,
+              -7.2863374
+            ],
+            "velocity": [
+              -0.02284541,
+              0.0,
+              0.12956277
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.259754,
+              197.00002,
+              -7.137472
+            ],
+            "velocity": [
+              -0.023624022,
+              0.0,
+              0.1339785
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.232727,
+              197.00002,
+              -6.9841914
+            ],
+            "velocity": [
+              -0.024324771,
+              0.0,
+              0.13795266
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.204998,
+              197.00002,
+              -6.8269367
+            ],
+            "velocity": [
+              -0.024955446,
+              0.0,
+              0.1415294
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.17664,
+              197.00002,
+              -6.6661053
+            ],
+            "velocity": [
+              -0.025523055,
+              0.0,
+              0.14474846
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.147713,
+              197.00002,
+              -6.5020547
+            ],
+            "velocity": [
+              -0.026033903,
+              0.0,
+              0.14764562
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.118275,
+              197.00002,
+              -6.335107
+            ],
+            "velocity": [
+              -0.026493667,
+              0.0,
+              0.15025307
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.08838,
+              197.00002,
+              -6.1655517
+            ],
+            "velocity": [
+              -0.026907453,
+              0.0,
+              0.15259977
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.058067,
+              197.00002,
+              -5.9936495
+            ],
+            "velocity": [
+              -0.027279861,
+              0.0,
+              0.1547118
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              43.027386,
+              197.00002,
+              -5.8196354
+            ],
+            "velocity": [
+              -0.027615028,
+              0.0,
+              0.15661262
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.99637,
+              197.00002,
+              -5.6437206
+            ],
+            "velocity": [
+              -0.02791668,
+              0.0,
+              0.15832336
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.96505,
+              197.00002,
+              -5.466095
+            ],
+            "velocity": [
+              -0.028188165,
+              0.0,
+              0.15986304
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.933456,
+              197.00002,
+              -5.2869296
+            ],
+            "velocity": [
+              -0.028432501,
+              0.0,
+              0.16124874
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.90162,
+              197.00002,
+              -5.1063786
+            ],
+            "velocity": [
+              -0.028652405,
+              0.0,
+              0.16249588
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.869564,
+              197.00002,
+              -4.9245806
+            ],
+            "velocity": [
+              -0.028850319,
+              0.0,
+              0.1636183
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.83731,
+              197.00002,
+              -4.74166
+            ],
+            "velocity": [
+              -0.029028442,
+              0.0,
+              0.16462848
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.80488,
+              197.00002,
+              -4.5577292
+            ],
+            "velocity": [
+              -0.02918875,
+              0.0,
+              0.16553764
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.772285,
+              197.00002,
+              -4.3728895
+            ],
+            "velocity": [
+              -0.029333029,
+              0.0,
+              0.16635588
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.739548,
+              197.00002,
+              -4.1872315
+            ],
+            "velocity": [
+              -0.029462878,
+              0.0,
+              0.1670923
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.70668,
+              197.00002,
+              -4.000837
+            ],
+            "velocity": [
+              -0.029579742,
+              0.0,
+              0.16775507
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.6737,
+              197.00002,
+              -3.8137794
+            ],
+            "velocity": [
+              -0.029684922,
+              0.0,
+              0.16835156
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.64061,
+              197.00002,
+              -3.6261258
+            ],
+            "velocity": [
+              -0.029779583,
+              0.0,
+              0.1688884
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.607426,
+              197.00002,
+              -3.4379349
+            ],
+            "velocity": [
+              -0.029864777,
+              0.0,
+              0.16937158
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.574158,
+              197.00002,
+              -3.2492614
+            ],
+            "velocity": [
+              -0.02994145,
+              0.0,
+              0.16980642
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.540813,
+              197.00002,
+              -3.0601525
+            ],
+            "velocity": [
+              -0.030010458,
+              0.0,
+              0.17019778
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.5074,
+              197.00002,
+              -2.8706527
+            ],
+            "velocity": [
+              -0.030072564,
+              0.0,
+              0.17055002
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.473923,
+              197.00002,
+              -2.6808004
+            ],
+            "velocity": [
+              -0.030128462,
+              0.0,
+              0.17086703
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.44039,
+              197.00002,
+              -2.490631
+            ],
+            "velocity": [
+              -0.03017877,
+              0.0,
+              0.17115232
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.40681,
+              197.00002,
+              -2.3001766
+            ],
+            "velocity": [
+              -0.030224046,
+              0.0,
+              0.1714091
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.373184,
+              197.00002,
+              -2.1094651
+            ],
+            "velocity": [
+              -0.030264795,
+              0.0,
+              0.1716402
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.339516,
+              197.00002,
+              -1.9185227
+            ],
+            "velocity": [
+              -0.030301468,
+              0.0,
+              0.1718482
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.30581,
+              197.00002,
+              -1.7273723
+            ],
+            "velocity": [
+              -0.030334476,
+              0.0,
+              0.17203538
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.27207,
+              197.00002,
+              -1.5360347
+            ],
+            "velocity": [
+              -0.030364182,
+              0.0,
+              0.17220385
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.238304,
+              197.00002,
+              -1.3445286
+            ],
+            "velocity": [
+              -0.030390916,
+              0.0,
+              0.17235547
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.20451,
+              197.00002,
+              -1.1528709
+            ],
+            "velocity": [
+              -0.030414978,
+              0.0,
+              0.17249194
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.170692,
+              197.00002,
+              -0.96107674
+            ],
+            "velocity": [
+              -0.030436635,
+              0.0,
+              0.17261475
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.136852,
+              197.00002,
+              -0.76915973
+            ],
+            "velocity": [
+              -0.030456124,
+              0.0,
+              0.17272529
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.102993,
+              197.00002,
+              -0.5771322
+            ],
+            "velocity": [
+              -0.030473666,
+              0.0,
+              0.17282477
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.069115,
+              197.00002,
+              -0.38500524
+            ],
+            "velocity": [
+              -0.030489454,
+              0.0,
+              0.1729143
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.03522,
+              197.00002,
+              -0.1927887
+            ],
+            "velocity": [
+              -0.030503662,
+              0.0,
+              0.17299487
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              42.001312,
+              197.00002,
+              -0.0004916042
+            ],
+            "velocity": [
+              -0.03051645,
+              0.0,
+              0.17306739
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.967392,
+              197.00002,
+              0.19187802
+            ],
+            "velocity": [
+              -0.030527957,
+              0.0,
+              0.17313266
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.93346,
+              197.00002,
+              0.38431293
+            ],
+            "velocity": [
+              -0.030538313,
+              0.0,
+              0.1731914
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.899517,
+              197.00002,
+              0.57680655
+            ],
+            "velocity": [
+              -0.030547634,
+              0.0,
+              0.17324427
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.865566,
+              197.00002,
+              0.76935303
+            ],
+            "velocity": [
+              -0.030556023,
+              0.0,
+              0.17329185
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.831608,
+              197.00002,
+              0.96194714
+            ],
+            "velocity": [
+              -0.030563572,
+              0.0,
+              0.17333467
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.79764,
+              197.00002,
+              1.154584
+            ],
+            "velocity": [
+              -0.03057037,
+              0.0,
+              0.1733732
+            ],
+            "on_ground": true,
+            "sprinting": true,
+            "swimming": true
+          },
+          {
+            "feet": [
+              41.763668,
+              197.00002,
+              1.3472595
+            ],
+            "velocity": [
+              -0.030576484,
+              0.0,
+              0.1734079
             ],
             "on_ground": true,
             "sprinting": true,
