@@ -14,7 +14,7 @@
       "dataset": "movement-traces",
       "file": "movement-traces.json",
       "schema_version": 1,
-      "records": 64,
+      "records": 69,
       "source": "measured on BDS 1.26.52.3",
       "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207"
     }

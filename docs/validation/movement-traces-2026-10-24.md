@@ -25,11 +25,14 @@ one run reveals only every sixth tick.
    reached the start: one run killed the player before it began, and a dead player agrees
    perfectly. `dataminer measure traces` rejects a trace whose first tick is more than 1 block
    from its start. Three such runs were redone.
+5. **Every case must build what it needs.** The world is shared between cases. One case's setup
+   paved over another's lava pool, and a later run then "measured" a player pinned under the new
+   ceiling. Those runs were discarded. The lava cases now rebuild their pool in their own setup.
 
 Food, saturation and exhaustion were set through the Script API before each case. Effects were
 applied with `/effect` before the case, so they were already active at its start.
 
-## What the 64 traces cover
+## What the 69 traces cover
 
 All of them are `measured`, and every one verified with zero corrections.
 
@@ -43,6 +46,7 @@ All of them are `measured`, and every one verified with zero corrections.
 | Water, 1 deep | walking, sprinting, a jump |
 | Lava, 3 deep (Fire Resistance) | idle on the bottom, walking on the bottom, jump held |
 | Climbing | a ladder and vines on a stone column (forward held; forward and jump held; climb then release; climb then sneak); a scaffolding column (jump held; jump then sneak; jump then release). The column's top is capped by a roof at y 209, so the climbs stop at feet y 207.2 |
+| Scaffolding top and Levitation in liquids | forward and jump held up a 9-high scaffolding column with a stone wall behind, onto its top; jump held beside a column; Levitation I in 3-deep water, and Levitation I and II in 3-deep lava, each from rest pinned under a block |
 | Slowing and special blocks | walking and sprinting inside cobweb; walking and jumping on honey; walking and sprinting on soul sand; walking on blue ice; jumping on slime |
 | Angled movement, for the clean side's small corrections | sprinting and sprint-jumping (jump held) at yaw 10 on stone; sprint-swimming from a pool's bottom with strafe left, strafe right, and at yaw 10 |
 
@@ -96,6 +100,16 @@ leaving the block.
 - The ladder's collision plate is 3/16 thick: the climber stops 0.3 + 0.1875 from the wall.
 - Scaffolding: jump held rises 0.15 per tick, and sneak descends 0.15 per tick. Released, the
   player falls onto the scaffolding block below and stands on it.
+
+**Scaffolding top.**
+- Climbing with jump held goes 0.15 per tick until the feet pass the column's top.
+- The player then settles onto the top (on ground) and, with jump still held, stands 6 ticks.
+- After that comes an ordinary jump, with the same launch as from stone: a first-tick rise of
+  0.42 and a first `Delta` of 0.3332.
+
+**Levitation in liquids.**
+- In water, Levitation I settles at 0.02778 per tick.
+- In lava it settles at 0.01667 per tick for I and 0.03333 for II.
 
 **Slowing and special blocks.**
 - Cobweb: walking moves a constant 0.0245 per tick, from the first tick; sprinting 0.03185.
