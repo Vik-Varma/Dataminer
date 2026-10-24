@@ -23,6 +23,9 @@ use crate::MeasureError;
 pub const KIND: &str = "movement-traces";
 /// The payload schema version.
 pub const SCHEMA_VERSION: u32 = 1;
+/// How far tick 0 may be from the start position, in blocks. Every trace
+/// starts from rest, so one tick moves the player far less than this.
+pub const MAX_FIRST_TICK_DISTANCE: f64 = 1.0;
 
 /// `PlayerAuthInput` input-flag bits the client set, counted from 0 at the
 /// least significant bit, as measured on the wire for protocol 2193.
@@ -267,6 +270,19 @@ pub fn derive(
                 raw.case.ticks
             )));
         }
+        if let Some(t0) = raw.trace.first().filter(|t| t.known) {
+            let d = (0..3)
+                .map(|a| (f64::from(t0.feet[a]) - raw.case.start[a]).powi(2))
+                .sum::<f64>()
+                .sqrt();
+            if d > MAX_FIRST_TICK_DISTANCE {
+                return Err(MeasureError::Evidence(format!(
+                    "trace {:?} starts {d:.3} blocks from its start position, so the player was \
+                     not where the run assumed (a failed teleport or a dead player)",
+                    raw.case.name
+                )));
+            }
+        }
         let ticks: Vec<Option<Tick>> = raw
             .trace
             .iter()
@@ -378,6 +394,12 @@ mod tests {
         let t = &doc.payload.traces[0];
         assert_eq!(t.method, Method::Unknown);
         assert!(t.ticks[1].is_none());
+    }
+
+    #[test]
+    fn rejects_a_trace_that_did_not_start_at_its_start() {
+        let elsewhere = TICK.replace("200.42", "63.0");
+        assert!(derive(&line(&[&elsewhere, TICK], 2), Some(AGREED), prov()).is_err());
     }
 
     #[test]
