@@ -8,7 +8,8 @@
       "schema_version": 1,
       "records": 12,
       "source": "measured on BDS 1.26.52.3",
-      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207"
+      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "dataminer_commit": "0778ffe"
     },
     {
       "dataset": "movement-traces",
@@ -16,9 +17,10 @@
       "schema_version": 1,
       "records": 69,
       "source": "measured on BDS 1.26.52.3",
-      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207"
+      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "dataminer_commit": "0778ffe"
     }
   ],
-  "dataminer_commit": "8fac1da",
+  "dataminer_commit": "0778ffe",
   "tool": "dataminer 0.0.1"
 }
