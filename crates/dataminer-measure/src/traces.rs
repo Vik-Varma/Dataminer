@@ -5,9 +5,13 @@
 //! single run only shows every sixth tick. The client therefore replays the
 //! same inputs from the same start several times, claiming the ticks it already
 //! knows exactly and the rest wrongly, until the server has corrected every
-//! tick. This module turns the client's log of such traces into a spec. A tick
-//! the replays never revealed is kept as `None` and the trace is marked
-//! `unknown`, never filled in.
+//! tick. Because the merged trace comes from several replays, it is checked by
+//! replaying it once more while claiming every tick: a trace counts as
+//! `measured` only when every tick is known and those verification replays drew
+//! no correction at all. Otherwise it is `unknown`; a tick the replays never
+//! revealed is kept as `None`, never filled in.
+
+use std::collections::BTreeMap;
 
 use dataminer_core::provenance::{Method, Provenance};
 use dataminer_core::spec::SpecDocument;
@@ -136,10 +140,29 @@ pub struct Trace {
     pub start: [f64; 3],
     /// The inputs.
     pub inputs: Vec<InputSpan>,
-    /// `measured` when every tick is known, else `unknown`.
+    /// `measured` when every tick is known and every verification replay drew
+    /// no correction, else `unknown`.
     pub method: Method,
+    /// The verification replays, if any were run.
+    pub verification: Option<Verification>,
     /// The server's state after input 0, 1, …; `None` where not revealed.
     pub ticks: Vec<Option<Tick>>,
+}
+
+/// Replays of a finished trace that claimed every known tick.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct Verification {
+    /// How many replays were run.
+    pub replays: usize,
+    /// Ticks any replay was corrected at, ascending; empty means the server
+    /// agreed with every tick of the trace.
+    pub corrected_ticks: Vec<usize>,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+struct RawVerification {
+    case: String,
+    corrections_at: Vec<Option<Vec<usize>>>,
 }
 
 /// The `movement-traces` payload.
@@ -185,8 +208,48 @@ fn span(raw: &RawSpan, trace_yaw: f32) -> InputSpan {
     }
 }
 
-/// Parse the client's trace log (one JSON object per line) into a spec.
-pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<Traces>, MeasureError> {
+fn parse_verification(log: &str) -> Result<BTreeMap<String, Verification>, MeasureError> {
+    let mut out = BTreeMap::new();
+    for (i, line) in log.lines().enumerate() {
+        if !line.trim_start().starts_with('{') {
+            continue;
+        }
+        let raw: RawVerification =
+            serde_json::from_str(line).map_err(|source| MeasureError::Parse {
+                line: i + 1,
+                source,
+            })?;
+        let mut ticks: Vec<usize> = raw
+            .corrections_at
+            .iter()
+            .flatten()
+            .flatten()
+            .copied()
+            .collect();
+        ticks.sort_unstable();
+        ticks.dedup();
+        out.insert(
+            raw.case,
+            Verification {
+                replays: raw.corrections_at.len(),
+                corrected_ticks: ticks,
+            },
+        );
+    }
+    Ok(out)
+}
+
+/// Parse the client's trace log (one JSON object per line), and optionally its
+/// verification log, into a spec.
+pub fn derive(
+    log: &str,
+    verification: Option<&str>,
+    provenance: Provenance,
+) -> Result<SpecDocument<Traces>, MeasureError> {
+    let verified = verification
+        .map(parse_verification)
+        .transpose()?
+        .unwrap_or_default();
     let mut traces = Vec::new();
     for (i, line) in log.lines().enumerate() {
         if !line.trim_start().starts_with('{') {
@@ -217,7 +280,11 @@ pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<Traces>,
                 })
             })
             .collect();
-        let method = if ticks.iter().all(Option::is_some) {
+        let verification = verified.get(&raw.case.name).cloned();
+        let agreed = verification
+            .as_ref()
+            .is_some_and(|v| v.replays > 0 && v.corrected_ticks.is_empty());
+        let method = if agreed && ticks.iter().all(Option::is_some) {
             Method::Measured
         } else {
             Method::Unknown
@@ -234,6 +301,7 @@ pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<Traces>,
                 .map(|s| span(s, raw.case.yaw))
                 .collect(),
             method,
+            verification,
             ticks,
         });
     }
@@ -275,20 +343,38 @@ mod tests {
         )
     }
 
+    const AGREED: &str = r#"{"case":"jump","corrections_at":[null,null]}"#;
+    const DISAGREED: &str = r#"{"case":"jump","corrections_at":[null,[1]]}"#;
+
     #[test]
-    fn complete_trace_is_measured_with_wire_bits() {
-        let doc = derive(&line(&[TICK, TICK], 2), prov()).unwrap();
+    fn complete_verified_trace_is_measured_with_wire_bits() {
+        let doc = derive(&line(&[TICK, TICK], 2), Some(AGREED), prov()).unwrap();
         let t = &doc.payload.traces[0];
         assert_eq!(t.method, Method::Measured);
         assert_eq!(t.inputs[0].bits, vec![3, 6, 10, 16, 20, 61]);
         assert_eq!(t.inputs[0].first_tick_bits, vec![31, 60]);
         assert_eq!(t.inputs[0].move_vector, [0.0, 1.0]);
         assert_eq!(t.ticks[0].as_ref().unwrap().velocity, [0.0, 0.3332, 0.0]);
+        assert_eq!(t.verification.as_ref().unwrap().replays, 2);
+    }
+
+    #[test]
+    fn a_trace_the_server_disagrees_with_is_unknown() {
+        let doc = derive(&line(&[TICK, TICK], 2), Some(DISAGREED), prov()).unwrap();
+        let t = &doc.payload.traces[0];
+        assert_eq!(t.method, Method::Unknown);
+        assert_eq!(t.verification.as_ref().unwrap().corrected_ticks, vec![1]);
+    }
+
+    #[test]
+    fn an_unverified_trace_is_unknown() {
+        let doc = derive(&line(&[TICK, TICK], 2), None, prov()).unwrap();
+        assert_eq!(doc.payload.traces[0].method, Method::Unknown);
     }
 
     #[test]
     fn an_unrevealed_tick_stays_unknown() {
-        let doc = derive(&line(&[TICK, GAP], 2), prov()).unwrap();
+        let doc = derive(&line(&[TICK, GAP], 2), Some(AGREED), prov()).unwrap();
         let t = &doc.payload.traces[0];
         assert_eq!(t.method, Method::Unknown);
         assert!(t.ticks[1].is_none());
@@ -296,6 +382,6 @@ mod tests {
 
     #[test]
     fn rejects_a_short_trace() {
-        assert!(derive(&line(&[TICK], 2), prov()).is_err());
+        assert!(derive(&line(&[TICK], 2), Some(AGREED), prov()).is_err());
     }
 }

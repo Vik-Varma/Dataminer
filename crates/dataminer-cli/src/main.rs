@@ -79,7 +79,7 @@ enum MeasureCommand {
     /// Bamboo collision boxes per state and the per-position offset.
     Bamboo(measure_cmd::MeasureArgs),
     /// Per-tick movement traces (position, velocity, sprint and swim flags).
-    Traces(measure_cmd::MeasureArgs),
+    Traces(measure_cmd::TracesArgs),
 }
 
 #[derive(Subcommand)]

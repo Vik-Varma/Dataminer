@@ -95,14 +95,35 @@ pub fn run_bamboo(args: MeasureArgs) -> Result<()> {
     Ok(())
 }
 
+/// Arguments for `dataminer measure traces`.
+#[derive(clap::Args)]
+pub struct TracesArgs {
+    #[command(flatten)]
+    common: MeasureArgs,
+    /// The client's verification log: replays of each finished trace that
+    /// claimed every tick. A trace is `measured` only if these drew no correction.
+    #[arg(long)]
+    verify: Option<PathBuf>,
+}
+
 /// Run `dataminer measure traces`.
-pub fn run_traces(args: MeasureArgs) -> Result<()> {
+pub fn run_traces(args: TracesArgs) -> Result<()> {
+    let verify = args
+        .verify
+        .as_ref()
+        .map(|p| std::fs::read_to_string(p).with_context(|| format!("reading {}", p.display())))
+        .transpose()?;
+    let args = args.common;
     let (log, log_hash, bds_hash) = inputs(&args)?;
     let provenance = provenance(
         &args,
         bds_hash,
         vec![
             format!("trace log {log_hash}"),
+            match &verify {
+                Some(v) => format!("verification log {}", Sha256Digest::of_bytes(v.as_bytes())),
+                None => "no verification log: every trace is unknown".into(),
+            },
             "tick i is the server's state after it processed input i; each trace was replayed \
              from the same start with the same inputs until every tick had been corrected"
                 .into(),
@@ -112,7 +133,7 @@ pub fn run_traces(args: MeasureArgs) -> Result<()> {
                 .into(),
         ],
     );
-    let doc = dataminer_measure::traces::derive(&log, provenance)?;
+    let doc = dataminer_measure::traces::derive(&log, verify.as_deref(), provenance)?;
     let path = write(&args, &doc, doc.payload.traces.len())?;
     let unknown = doc
         .payload
