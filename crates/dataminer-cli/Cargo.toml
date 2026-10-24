@@ -18,6 +18,7 @@ dataminer-protocol.workspace = true
 dataminer-binary.workspace = true
 dataminer-diff.workspace = true
 dataminer-fetch.workspace = true
+dataminer-measure.workspace = true
 anyhow.workspace = true
 clap.workspace = true
 serde_json.workspace = true

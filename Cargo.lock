@@ -206,6 +206,7 @@ dependencies = [
  "dataminer-core",
  "dataminer-diff",
  "dataminer-fetch",
+ "dataminer-measure",
  "dataminer-metadata",
  "dataminer-protocol",
  "serde_json",
@@ -240,6 +241,16 @@ dependencies = [
  "serde",
  "serde_json",
  "zip",
+]
+
+[[package]]
+name = "dataminer-measure"
+version = "0.0.1"
+dependencies = [
+ "dataminer-core",
+ "serde",
+ "serde_json",
+ "thiserror",
 ]
 
 [[package]]
