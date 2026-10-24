@@ -1,0 +1,3553 @@
+{
+  "meta": {
+    "kind": "bamboo",
+    "schema_version": 1,
+    "provenance": {
+      "source": "packet-capture",
+      "method": "measured",
+      "game_version": "1.26.52",
+      "artifact": "Linux Bedrock Dedicated Server 1.26.52.3 (bedrock_server, minecraft.net), run on our own machine with server-authoritative-movement-strict=true, player-position-acceptance-threshold=0.0001, online-mode=false; positions read from its CorrectPlayerMovePrediction packets to a headless client",
+      "artifact_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "tool": "dataminer-measure 0.0.1",
+      "notes": [
+        "run log sha256:1ceed6e11343f6e766a5e13283fc3e8695c0df39cda4ceb95a3ed6f8a9608190, 292 runs",
+        "collision boxes and the offset values are measured; the offset model's form (inputs, generator, per-axis range and steps) was found by static and dynamic analysis of the same BDS on the dirty side and is accepted only because it predicts every measured stop within validation.tolerance_blocks",
+        "outline use is inferred (static analysis only); rendering use is unknown"
+      ]
+    }
+  },
+  "payload": {
+    "block": "minecraft:bamboo",
+    "states": [
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "no_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 39,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "no_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "small_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "small_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "large_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thin",
+          "bamboo_leaf_size": "large_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            10.0,
+            16.0,
+            10.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "no_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "no_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "small_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "small_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "large_leaves",
+          "age_bit": false
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 2,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      },
+      {
+        "state": {
+          "bamboo_stalk_thickness": "thick",
+          "bamboo_leaf_size": "large_leaves",
+          "age_bit": true
+        },
+        "collision_box": {
+          "min": [
+            8.0,
+            0.0,
+            8.0
+          ],
+          "max": [
+            11.0,
+            16.0,
+            11.0
+          ]
+        },
+        "method": "measured",
+        "columns_measured": 3,
+        "notes": [
+          "y min 0 is not measurable by walking or dropping; read from our running BDS's base box for the thin state (single source)"
+        ]
+      }
+    ],
+    "offset": {
+      "method": "measured",
+      "inputs": [
+        "block x",
+        "block z"
+      ],
+      "axes": [
+        {
+          "axis": "x",
+          "min": -0.25,
+          "max": 0.25,
+          "steps": 16,
+          "draw": 1
+        },
+        {
+          "axis": "y",
+          "min": 0.0,
+          "max": 0.0,
+          "steps": 0,
+          "draw": 2
+        },
+        {
+          "axis": "z",
+          "min": -0.25,
+          "max": 0.25,
+          "steps": 16,
+          "draw": 3
+        }
+      ],
+      "definition": [
+        "All integer arithmetic is two's complement; 64-bit operations are modulo 2^64; >> on 64-bit values is a logical shift; rotl is a 64-bit left rotation.",
+        "Inputs: the block's integer x and z. y is not an input: the same column gives the same offset at every height.",
+        "a = x * 3129871 computed in 32 bits (wrapping), then sign-extended to 64 bits.",
+        "b = z * 116129781 computed in 64 bits, with z sign-extended.",
+        "l = a XOR b.",
+        "h = l*l*42317861 + l*11 (mod 2^64).",
+        "seed = the low 32 bits of (h >> 16), read as a signed 32-bit integer and sign-extended to 64 bits.",
+        "lo = seed XOR 0x6a09e667f3bcc909; hi = lo + 0x9e3779b97f4a7c15.",
+        "M(v): v = (v XOR (v >> 30)) * 0xbf58476d1ce4e5b9; v = (v XOR (v >> 27)) * 0x94d049bb133111eb; result v XOR (v >> 31).",
+        "s0 = M(lo), s1 = M(hi). If both are 0, s0 = 0x9e3779b97f4a7c15 and s1 = 0x6a09e667f3bcc909.",
+        "Output k (k = 1, 2, 3, in order): r_k = rotl(s0 + s1, 17) + s0; then t = s1 XOR s0, s0 = rotl(s0, 49) XOR t XOR (t << 21), s1 = rotl(t, 28).",
+        "f_k = (r_k >> 40) / 2^24, a value in [0, 1) with 24 bits.",
+        "For an axis with min < max and steps n >= 2: index = floor(f * n) (0 .. n-1), offset = min + index * ((max - min) / (n - 1)). For bamboo, x uses f_1 and z uses f_3: offset = -0.25 + index/30, index 0..15. y uses f_2 but has min = max = 0, so its offset is 0.",
+        "The server evaluates the offset and the box in IEEE-754 single precision: step = 0.5f/15f, offset = -0.25f + index*step, then box corner = (float(block coordinate) + offset) + corner/16."
+      ]
+    },
+    "shapes": [
+      {
+        "shape": "collision",
+        "offset_applied": true,
+        "method": "measured",
+        "note": "every walk and drop in validation.observations matches box + offset"
+      },
+      {
+        "shape": "outline",
+        "offset_applied": true,
+        "method": "inferred",
+        "note": "static analysis of BDS only: the selection-shape path calls the same per-position offset routine with the same base box as collision. Not measured; needs a second source before Ferrock relies on it"
+      },
+      {
+        "shape": "rendering",
+        "offset_applied": null,
+        "method": "unknown",
+        "note": "BDS has no renderer, so the client's use is not observable here. BDS does carry a shared accessor that returns the same per-position offset, which suggests but does not establish that rendering uses it"
+      }
+    ],
+    "validation": {
+      "tolerance_blocks": 0.001,
+      "max_abs_error_blocks": 0.0004883,
+      "player_half_width": 0.3,
+      "observations": [
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/large_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            -6,
+            200,
+            7
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            12,
+            200,
+            12
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            18,
+            210,
+            9
+          ],
+          "dir": "+x",
+          "measured": 18.116667,
+          "predicted": 18.116667
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            18,
+            210,
+            9
+          ],
+          "dir": "+z",
+          "measured": 9.349999,
+          "predicted": 9.349999
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            18,
+            210,
+            9
+          ],
+          "dir": "-x",
+          "measured": 18.904165,
+          "predicted": 18.904165
+        },
+        {
+          "state": "thick/large_leaves/true",
+          "pos": [
+            18,
+            210,
+            9
+          ],
+          "dir": "-z",
+          "measured": 10.1375,
+          "predicted": 10.1375
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/no_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/no_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/small_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.829166,
+          "predicted": -12.829166
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.029167,
+          "predicted": -17.029167
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.9041667,
+          "predicted": 5.9041667
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.2375,
+          "predicted": 20.2375
+        },
+        {
+          "state": "thick/small_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/large_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/large_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4095,
+            200,
+            -4097
+          ],
+          "dir": "+x",
+          "measured": -4094.75,
+          "predicted": -4094.75
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4095,
+            200,
+            -4097
+          ],
+          "dir": "+z",
+          "measured": -4096.9497,
+          "predicted": -4096.9497
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4095,
+            200,
+            -4097
+          ],
+          "dir": "-x",
+          "measured": -4094.025,
+          "predicted": -4094.025
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4095,
+            200,
+            -4097
+          ],
+          "dir": "-z",
+          "measured": -4096.2246,
+          "predicted": -4096.225
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -2001,
+            200,
+            1500
+          ],
+          "dir": "+x",
+          "measured": -2001.05,
+          "predicted": -2001.05
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -2001,
+            200,
+            1500
+          ],
+          "dir": "+z",
+          "measured": 1500.3167,
+          "predicted": 1500.3167
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -2001,
+            200,
+            1500
+          ],
+          "dir": "-x",
+          "measured": -2000.325,
+          "predicted": -2000.325
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -2001,
+            200,
+            1500
+          ],
+          "dir": "-z",
+          "measured": 1501.0417,
+          "predicted": 1501.0417
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -777,
+            200,
+            -3333
+          ],
+          "dir": "+x",
+          "measured": -776.64996,
+          "predicted": -776.64996
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -777,
+            200,
+            -3333
+          ],
+          "dir": "+z",
+          "measured": -3333.0166,
+          "predicted": -3333.0166
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -777,
+            200,
+            -3333
+          ],
+          "dir": "-x",
+          "measured": -775.925,
+          "predicted": -775.925
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -777,
+            200,
+            -3333
+          ],
+          "dir": "-z",
+          "measured": -3332.2915,
+          "predicted": -3332.2915
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -20,
+            210,
+            -2
+          ],
+          "dir": "+x",
+          "measured": -20.016666,
+          "predicted": -20.016666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -20,
+            210,
+            -2
+          ],
+          "dir": "+z",
+          "measured": -1.65,
+          "predicted": -1.6499999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -20,
+            210,
+            -2
+          ],
+          "dir": "-x",
+          "measured": -19.291668,
+          "predicted": -19.291668
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -20,
+            210,
+            -2
+          ],
+          "dir": "-z",
+          "measured": -0.9249999,
+          "predicted": -0.9249999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            -8
+          ],
+          "dir": "+x",
+          "measured": -18.016666,
+          "predicted": -18.016666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            -8
+          ],
+          "dir": "+z",
+          "measured": -8.016666,
+          "predicted": -8.016666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            -8
+          ],
+          "dir": "-x",
+          "measured": -17.291668,
+          "predicted": -17.291668
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            -8
+          ],
+          "dir": "-z",
+          "measured": -7.291666,
+          "predicted": -7.291666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            1
+          ],
+          "dir": "+x",
+          "measured": -17.983332,
+          "predicted": -17.983332
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            1
+          ],
+          "dir": "+z",
+          "measured": 1.05,
+          "predicted": 1.0500001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            1
+          ],
+          "dir": "-x",
+          "measured": -17.258333,
+          "predicted": -17.258333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -18,
+            200,
+            1
+          ],
+          "dir": "-z",
+          "measured": 1.7750001,
+          "predicted": 1.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -17,
+            200,
+            8
+          ],
+          "dir": "+x",
+          "measured": -16.849998,
+          "predicted": -16.849998
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -17,
+            200,
+            8
+          ],
+          "dir": "+z",
+          "measured": 8.383333,
+          "predicted": 8.383333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -17,
+            200,
+            8
+          ],
+          "dir": "-x",
+          "measured": -16.124998,
+          "predicted": -16.125
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -17,
+            200,
+            8
+          ],
+          "dir": "-z",
+          "measured": 9.108334,
+          "predicted": 9.108334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -15,
+            200,
+            16
+          ],
+          "dir": "+x",
+          "measured": -14.949999,
+          "predicted": -14.95
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -15,
+            200,
+            16
+          ],
+          "dir": "+z",
+          "measured": 16.316666,
+          "predicted": 16.316668
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -15,
+            200,
+            16
+          ],
+          "dir": "-x",
+          "measured": -14.224999,
+          "predicted": -14.224999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -15,
+            200,
+            16
+          ],
+          "dir": "-z",
+          "measured": 17.041666,
+          "predicted": 17.041666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            1
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            1
+          ],
+          "dir": "+z",
+          "measured": 0.9833333,
+          "predicted": 0.9833333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            1
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -14,
+            200,
+            1
+          ],
+          "dir": "-z",
+          "measured": 1.7083334,
+          "predicted": 1.7083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -13,
+            200,
+            7
+          ],
+          "dir": "+x",
+          "measured": -12.583333,
+          "predicted": -12.583333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -13,
+            200,
+            7
+          ],
+          "dir": "+z",
+          "measured": 7.1166663,
+          "predicted": 7.1166663
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -13,
+            200,
+            7
+          ],
+          "dir": "-x",
+          "measured": -11.858333,
+          "predicted": -11.858333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -13,
+            200,
+            7
+          ],
+          "dir": "-z",
+          "measured": 7.841667,
+          "predicted": 7.8416667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -12,
+            200,
+            -8
+          ],
+          "dir": "+x",
+          "measured": -11.95,
+          "predicted": -11.95
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -12,
+            200,
+            -8
+          ],
+          "dir": "+z",
+          "measured": -7.7500005,
+          "predicted": -7.75
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -12,
+            200,
+            -8
+          ],
+          "dir": "-x",
+          "measured": -11.224999,
+          "predicted": -11.224999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -12,
+            200,
+            -8
+          ],
+          "dir": "-z",
+          "measured": -7.0249996,
+          "predicted": -7.0249996
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -10,
+            200,
+            -1
+          ],
+          "dir": "+x",
+          "measured": -9.95,
+          "predicted": -9.95
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -10,
+            200,
+            -1
+          ],
+          "dir": "+z",
+          "measured": -0.8166664,
+          "predicted": -0.81666666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -10,
+            200,
+            -1
+          ],
+          "dir": "-x",
+          "measured": -9.224999,
+          "predicted": -9.224999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -10,
+            200,
+            -1
+          ],
+          "dir": "-z",
+          "measured": -0.09166662,
+          "predicted": -0.091666654
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -9,
+            200,
+            -9
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -8,
+            200,
+            -15
+          ],
+          "dir": "+x",
+          "measured": -8.016666,
+          "predicted": -8.016666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -8,
+            200,
+            -15
+          ],
+          "dir": "+z",
+          "measured": -14.683332,
+          "predicted": -14.683333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -8,
+            200,
+            -15
+          ],
+          "dir": "-x",
+          "measured": -7.291666,
+          "predicted": -7.291666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -8,
+            200,
+            -15
+          ],
+          "dir": "-z",
+          "measured": -13.958333,
+          "predicted": -13.958333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -7,
+            210,
+            -21
+          ],
+          "dir": "+x",
+          "measured": -6.8833337,
+          "predicted": -6.8833337
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -7,
+            210,
+            -21
+          ],
+          "dir": "+z",
+          "measured": -20.583332,
+          "predicted": -20.583332
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -7,
+            210,
+            -21
+          ],
+          "dir": "-x",
+          "measured": -6.1583333,
+          "predicted": -6.1583333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -7,
+            210,
+            -21
+          ],
+          "dir": "-z",
+          "measured": -19.858334,
+          "predicted": -19.858334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4,
+            200,
+            -6
+          ],
+          "dir": "+x",
+          "measured": -3.75,
+          "predicted": -3.75
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4,
+            200,
+            -6
+          ],
+          "dir": "+z",
+          "measured": -5.7833333,
+          "predicted": -5.7833333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4,
+            200,
+            -6
+          ],
+          "dir": "-x",
+          "measured": -3.0249999,
+          "predicted": -3.025
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -4,
+            200,
+            -6
+          ],
+          "dir": "-z",
+          "measured": -5.0583334,
+          "predicted": -5.058333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -3,
+            210,
+            5
+          ],
+          "dir": "+x",
+          "measured": -2.6166668,
+          "predicted": -2.6166666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -3,
+            210,
+            5
+          ],
+          "dir": "+z",
+          "measured": 5.216667,
+          "predicted": 5.2166667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -3,
+            210,
+            5
+          ],
+          "dir": "-x",
+          "measured": -1.8916667,
+          "predicted": -1.8916667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -3,
+            210,
+            5
+          ],
+          "dir": "-z",
+          "measured": 5.941667,
+          "predicted": 5.941667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            -1
+          ],
+          "dir": "+x",
+          "measured": -0.88333315,
+          "predicted": -0.8833334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            -1
+          ],
+          "dir": "+z",
+          "measured": -0.98333323,
+          "predicted": -0.9833334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            -1
+          ],
+          "dir": "-x",
+          "measured": -0.15833335,
+          "predicted": -0.15833338
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            -1
+          ],
+          "dir": "-z",
+          "measured": -0.25833338,
+          "predicted": -0.25833338
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            0
+          ],
+          "dir": "+x",
+          "measured": -0.88333315,
+          "predicted": -0.8833334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            0
+          ],
+          "dir": "+z",
+          "measured": 0.45,
+          "predicted": 0.45
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            0
+          ],
+          "dir": "-x",
+          "measured": -0.15833335,
+          "predicted": -0.15833338
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            0
+          ],
+          "dir": "-z",
+          "measured": 1.1749998,
+          "predicted": 1.175
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            1
+          ],
+          "dir": "+x",
+          "measured": -0.64999974,
+          "predicted": -0.65
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            1
+          ],
+          "dir": "+z",
+          "measured": 1.3500001,
+          "predicted": 1.3500001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            1
+          ],
+          "dir": "-x",
+          "measured": 0.07500008,
+          "predicted": 0.07500003
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            -1,
+            200,
+            1
+          ],
+          "dir": "-z",
+          "measured": 2.075,
+          "predicted": 2.075
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            -1
+          ],
+          "dir": "+x",
+          "measured": 0.38333338,
+          "predicted": 0.38333338
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            -1
+          ],
+          "dir": "+z",
+          "measured": -0.94999975,
+          "predicted": -0.95
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            -1
+          ],
+          "dir": "-x",
+          "measured": 1.1083332,
+          "predicted": 1.1083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            -1
+          ],
+          "dir": "-z",
+          "measured": -0.22499995,
+          "predicted": -0.22499998
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            0
+          ],
+          "dir": "+x",
+          "measured": 0.016666621,
+          "predicted": 0.016666662
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            0
+          ],
+          "dir": "+z",
+          "measured": 0.08333329,
+          "predicted": 0.08333333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            0
+          ],
+          "dir": "-x",
+          "measured": 0.74166644,
+          "predicted": 0.7416667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            0,
+            200,
+            0
+          ],
+          "dir": "-z",
+          "measured": 0.8083331,
+          "predicted": 0.80833334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -15
+          ],
+          "dir": "+x",
+          "measured": 0.9833333,
+          "predicted": 0.9833333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -15
+          ],
+          "dir": "+z",
+          "measured": -14.949999,
+          "predicted": -14.95
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -15
+          ],
+          "dir": "-x",
+          "measured": 1.7083334,
+          "predicted": 1.7083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -15
+          ],
+          "dir": "-z",
+          "measured": -14.224999,
+          "predicted": -14.224999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -13
+          ],
+          "dir": "+x",
+          "measured": 1.1500001,
+          "predicted": 1.1500001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -13
+          ],
+          "dir": "+z",
+          "measured": -12.683333,
+          "predicted": -12.683333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -13
+          ],
+          "dir": "-x",
+          "measured": 1.8750001,
+          "predicted": 1.875
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1,
+            200,
+            -13
+          ],
+          "dir": "-z",
+          "measured": -11.958333,
+          "predicted": -11.958333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            2,
+            200,
+            -3
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            3
+          ],
+          "dir": "+x",
+          "measured": 3.35,
+          "predicted": 3.3500001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            3
+          ],
+          "dir": "+z",
+          "measured": 3.3833332,
+          "predicted": 3.3833334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            3
+          ],
+          "dir": "-x",
+          "measured": 4.075,
+          "predicted": 4.0750003
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            3
+          ],
+          "dir": "-z",
+          "measured": 4.1083336,
+          "predicted": 4.1083336
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            9
+          ],
+          "dir": "+x",
+          "measured": 3.0166664,
+          "predicted": 3.0166667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            9
+          ],
+          "dir": "+z",
+          "measured": 9.349999,
+          "predicted": 9.349999
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            9
+          ],
+          "dir": "-x",
+          "measured": 3.7416668,
+          "predicted": 3.7416666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3,
+            200,
+            9
+          ],
+          "dir": "-z",
+          "measured": 10.075,
+          "predicted": 10.075
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "+x",
+          "measured": 4.0499997,
+          "predicted": 4.0499997
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "+x",
+          "measured": 4.0499997,
+          "predicted": 4.0499997
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "+z",
+          "measured": 16.05,
+          "predicted": 16.050001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "+z",
+          "measured": 16.05,
+          "predicted": 16.050001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "-x",
+          "measured": 4.775,
+          "predicted": 4.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "-x",
+          "measured": 4.775,
+          "predicted": 4.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "-z",
+          "measured": 16.775,
+          "predicted": 16.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            4,
+            200,
+            16
+          ],
+          "dir": "-z",
+          "measured": 16.775,
+          "predicted": 16.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            7,
+            210,
+            -11
+          ],
+          "dir": "+x",
+          "measured": 7.0499997,
+          "predicted": 7.0499997
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            7,
+            210,
+            -11
+          ],
+          "dir": "+z",
+          "measured": -10.616667,
+          "predicted": -10.616667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            7,
+            210,
+            -11
+          ],
+          "dir": "-x",
+          "measured": 7.7750006,
+          "predicted": 7.775
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            7,
+            210,
+            -11
+          ],
+          "dir": "-z",
+          "measured": -9.891666,
+          "predicted": -9.891666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            9,
+            200,
+            -8
+          ],
+          "dir": "+x",
+          "measured": 9.050001,
+          "predicted": 9.05
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            9,
+            200,
+            -8
+          ],
+          "dir": "+z",
+          "measured": -7.7500005,
+          "predicted": -7.75
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            9,
+            200,
+            -8
+          ],
+          "dir": "-x",
+          "measured": 9.775001,
+          "predicted": 9.775001
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            9,
+            200,
+            -8
+          ],
+          "dir": "-z",
+          "measured": -7.0249996,
+          "predicted": -7.0249996
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            10,
+            210,
+            22
+          ],
+          "dir": "+x",
+          "measured": 10.083333,
+          "predicted": 10.083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            10,
+            210,
+            22
+          ],
+          "dir": "+z",
+          "measured": 22.25,
+          "predicted": 22.25
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            10,
+            210,
+            22
+          ],
+          "dir": "-x",
+          "measured": 10.808333,
+          "predicted": 10.808333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            10,
+            210,
+            22
+          ],
+          "dir": "-z",
+          "measured": 22.974998,
+          "predicted": 22.974998
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            11,
+            200,
+            -1
+          ],
+          "dir": "+x",
+          "measured": 11.083333,
+          "predicted": 11.083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            11,
+            200,
+            -1
+          ],
+          "dir": "+z",
+          "measured": -0.91666645,
+          "predicted": -0.9166667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            11,
+            200,
+            -1
+          ],
+          "dir": "-x",
+          "measured": 11.808333,
+          "predicted": 11.808333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            11,
+            200,
+            -1
+          ],
+          "dir": "-z",
+          "measured": -0.19166665,
+          "predicted": -0.19166668
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            13,
+            200,
+            7
+          ],
+          "dir": "+x",
+          "measured": 13.183333,
+          "predicted": 13.183333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            13,
+            200,
+            7
+          ],
+          "dir": "+z",
+          "measured": 7.083333,
+          "predicted": 7.083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            13,
+            200,
+            7
+          ],
+          "dir": "-x",
+          "measured": 13.908334,
+          "predicted": 13.908334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            13,
+            200,
+            7
+          ],
+          "dir": "-z",
+          "measured": 7.8083334,
+          "predicted": 7.8083334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            14,
+            200,
+            -20
+          ],
+          "dir": "+x",
+          "measured": 14.083333,
+          "predicted": 14.083333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            14,
+            200,
+            -20
+          ],
+          "dir": "+z",
+          "measured": -19.983332,
+          "predicted": -19.983332
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            14,
+            200,
+            -20
+          ],
+          "dir": "-x",
+          "measured": 14.808332,
+          "predicted": 14.808333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            14,
+            200,
+            -20
+          ],
+          "dir": "-z",
+          "measured": -19.258333,
+          "predicted": -19.258333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            15,
+            200,
+            16
+          ],
+          "dir": "+x",
+          "measured": 15.25,
+          "predicted": 15.25
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            15,
+            200,
+            16
+          ],
+          "dir": "+z",
+          "measured": 16.45,
+          "predicted": 16.45
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            15,
+            200,
+            16
+          ],
+          "dir": "-x",
+          "measured": 15.974998,
+          "predicted": 15.975
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            15,
+            200,
+            16
+          ],
+          "dir": "-z",
+          "measured": 17.175,
+          "predicted": 17.175
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            19,
+            200,
+            -4
+          ],
+          "dir": "+x",
+          "measured": 19.416668,
+          "predicted": 19.416668
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            19,
+            200,
+            -4
+          ],
+          "dir": "+z",
+          "measured": -3.9833336,
+          "predicted": -3.9833333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            19,
+            200,
+            -4
+          ],
+          "dir": "-x",
+          "measured": 20.141666,
+          "predicted": 20.141666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            19,
+            200,
+            -4
+          ],
+          "dir": "-z",
+          "measured": -3.2583332,
+          "predicted": -3.2583334
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            65,
+            200,
+            -1
+          ],
+          "dir": "+x",
+          "measured": 65.216675,
+          "predicted": 65.21667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            65,
+            200,
+            -1
+          ],
+          "dir": "+z",
+          "measured": -0.5833331,
+          "predicted": -0.5833333
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            65,
+            200,
+            -1
+          ],
+          "dir": "-x",
+          "measured": 65.94167,
+          "predicted": 65.94167
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            65,
+            200,
+            -1
+          ],
+          "dir": "-z",
+          "measured": 0.14166674,
+          "predicted": 0.1416667
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1234,
+            200,
+            -987
+          ],
+          "dir": "+x",
+          "measured": 1234.35,
+          "predicted": 1234.35
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1234,
+            200,
+            -987
+          ],
+          "dir": "+z",
+          "measured": -987.01666,
+          "predicted": -987.01666
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1234,
+            200,
+            -987
+          ],
+          "dir": "-x",
+          "measured": 1235.0751,
+          "predicted": 1235.0751
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            1234,
+            200,
+            -987
+          ],
+          "dir": "-z",
+          "measured": -986.2917,
+          "predicted": -986.2917
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3000,
+            200,
+            2999
+          ],
+          "dir": "+x",
+          "measured": 3000.25,
+          "predicted": 3000.25
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3000,
+            200,
+            2999
+          ],
+          "dir": "+z",
+          "measured": 2999.25,
+          "predicted": 2999.25
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3000,
+            200,
+            2999
+          ],
+          "dir": "-x",
+          "measured": 3000.975,
+          "predicted": 3000.975
+        },
+        {
+          "state": "thin/no_leaves/false",
+          "pos": [
+            3000,
+            200,
+            2999
+          ],
+          "dir": "-z",
+          "measured": 2999.975,
+          "predicted": 2999.975
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/no_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/small_leaves/false",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+x",
+          "measured": -13.616667,
+          "predicted": -13.616667
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "+z",
+          "measured": -17.816666,
+          "predicted": -17.816666
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-x",
+          "measured": -12.891666,
+          "predicted": -12.891666
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            -14,
+            200,
+            -18
+          ],
+          "dir": "-z",
+          "measured": -17.091667,
+          "predicted": -17.091667
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            -11,
+            200,
+            13
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+x",
+          "measured": 5.116667,
+          "predicted": 5.1166663
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "+z",
+          "measured": 19.45,
+          "predicted": 19.45
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-x",
+          "measured": 5.8416667,
+          "predicted": 5.8416667
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            5,
+            200,
+            19
+          ],
+          "dir": "-z",
+          "measured": 20.175,
+          "predicted": 20.175
+        },
+        {
+          "state": "thin/small_leaves/true",
+          "pos": [
+            8,
+            200,
+            -5
+          ],
+          "dir": "drop",
+          "measured": 201.00002,
+          "predicted": 201.0
+        }
+      ]
+    }
+  }
+}
