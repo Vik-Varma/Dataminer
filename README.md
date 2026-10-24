@@ -103,6 +103,7 @@ type-name strings that survive in read-only data.
 - [docs/datamining-techniques.md](docs/datamining-techniques.md) — industry survey of Bedrock datamining
 - [docs/reverse-engineering.md](docs/reverse-engineering.md) — industry survey of RE tools and methods
 - [docs/clean-room-and-legal.md](docs/clean-room-and-legal.md) — the clean-room method and legal guardrails
+- [docs/clean-room-log.md](docs/clean-room-log.md) — who has been on which side of the wall, per subject
 - [docs/fetcher-requirements.md](docs/fetcher-requirements.md) — what `dataminer fetch` downloads, and the rules it follows
 
 ## License
