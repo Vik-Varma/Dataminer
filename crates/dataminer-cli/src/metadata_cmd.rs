@@ -217,17 +217,7 @@ fn write_manifest(
             })
         })
         .collect();
-    let manifest = json!({
-        "game_version": game_version,
-        "wire_protocol": protocol,
-        "dataminer_commit": env!("DATAMINER_COMMIT"),
-        "tool": concat!("dataminer ", env!("CARGO_PKG_VERSION")),
-        "datasets": datasets,
-    });
-    let path = out_dir.join("manifest.json");
-    let body = serde_json::to_string_pretty(&manifest)? + "\n";
-    std::fs::write(&path, body).with_context(|| format!("writing {}", path.display()))?;
-    Ok(())
+    crate::manifest::merge(out_dir, game_version, protocol, datasets)
 }
 
 fn read_latest_version(samples: &Path) -> Result<String> {

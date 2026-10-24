@@ -21,6 +21,10 @@ pub const KIND: &str = "bamboo";
 pub const SCHEMA_VERSION: u32 = 1;
 /// How far a prediction may be from a measured stop, in blocks.
 pub const TOLERANCE: f64 = 0.001;
+/// Distinct block columns that must be walked into from all four sides, across
+/// all four x/z sign quadrants. The offset model is tested by every column
+/// agreeing on one base box, so a single column would prove nothing.
+pub const MIN_COLUMNS: usize = 20;
 
 /// One axis of the offset: `steps` evenly spaced values from `min` to `max`,
 /// chosen by the `draw`-th output of the position's generator (1-based).
@@ -172,8 +176,14 @@ impl State {
             let (k, v) = kv.split_once('=')?;
             let v = v.trim().trim_matches('"');
             match k.trim().trim_matches('"') {
-                "bamboo_stalk_thickness" => s.bamboo_stalk_thickness = v.into(),
-                "bamboo_leaf_size" => s.bamboo_leaf_size = v.into(),
+                "bamboo_stalk_thickness" if ["thin", "thick"].contains(&v) => {
+                    s.bamboo_stalk_thickness = v.into()
+                }
+                "bamboo_leaf_size"
+                    if ["no_leaves", "small_leaves", "large_leaves"].contains(&v) =>
+                {
+                    s.bamboo_leaf_size = v.into()
+                }
                 "age_bit" => s.age_bit = v.parse().ok()?,
                 _ => return None,
             }
@@ -306,8 +316,12 @@ fn half_width(runs: &[&Run]) -> Result<f64, MeasureError> {
             }
         })
         .collect::<Result<_, _>>()?;
-    if est.len() < 4 {
-        return Err(evidence("need stone runs from all four directions"));
+    for d in ["+x", "-x", "+z", "-z"] {
+        if !runs.iter().any(|r| r.dir == d) {
+            return Err(evidence(format!(
+                "need stone runs from all four directions; none from {d}"
+            )));
+        }
     }
     let mean = est.iter().sum::<f64>() / est.len() as f64;
     if est.iter().any(|e| (e - mean).abs() > TOLERANCE / 10.0) {
@@ -341,6 +355,39 @@ fn face(r: &Run, hw: f64, off: [f32; 3]) -> Option<(usize, bool, f64)> {
         is_max,
         (world - f64::from(base) - f64::from(off[axis])) * 16.0,
     ))
+}
+
+/// The runs must walk into at least [`MIN_COLUMNS`] columns from all four
+/// sides, in all four x/z sign quadrants.
+fn check_coverage(bamboo: &[(State, &Run)]) -> Result<(), MeasureError> {
+    let mut sides: BTreeMap<(i32, i32), std::collections::BTreeSet<&str>> = BTreeMap::new();
+    for (_, r) in bamboo.iter().filter(|(_, r)| r.dir != "drop") {
+        sides
+            .entry((r.bx, r.bz))
+            .or_default()
+            .insert(r.dir.as_str());
+    }
+    let full: Vec<(i32, i32)> = sides
+        .iter()
+        .filter(|(_, d)| d.len() == 4)
+        .map(|(c, _)| *c)
+        .collect();
+    if full.len() < MIN_COLUMNS {
+        return Err(evidence(format!(
+            "only {} columns were walked into from all four sides; need {MIN_COLUMNS}",
+            full.len()
+        )));
+    }
+    for (qx, qz) in [(true, true), (true, false), (false, true), (false, false)] {
+        if !full.iter().any(|(x, z)| (*x >= 0) == qx && (*z >= 0) == qz) {
+            return Err(evidence(format!(
+                "no fully walked column with x {} 0 and z {} 0",
+                if qx { ">=" } else { "<" },
+                if qz { ">=" } else { "<" }
+            )));
+        }
+    }
+    Ok(())
 }
 
 fn predict(r: &Run, b: &Box16, hw: f64) -> f32 {
@@ -400,6 +447,8 @@ pub fn derive(runs: &[Run], provenance: Provenance) -> Result<SpecDocument<Bambo
             columns.entry(s.clone()).or_default().insert((r.bx, r.bz));
         }
     }
+
+    check_coverage(&bamboo)?;
 
     let mut states = Vec::new();
     for s in State::all() {
@@ -646,7 +695,21 @@ mod tests {
         }
     }
 
+    /// Columns spread over all four quadrants.
+    fn columns() -> Vec<(i32, i32)> {
+        (0..MIN_COLUMNS as i32)
+            .map(|i| {
+                let (sx, sz) = [(1, 1), (1, -1), (-1, 1), (-1, -1)][(i % 4) as usize];
+                (sx * (3 + 7 * i), sz * (5 + 11 * i))
+            })
+            .collect()
+    }
+
     fn synthetic(width16: f64) -> Vec<Run> {
+        synthetic_with(width16, &columns(), true)
+    }
+
+    fn synthetic_with(width16: f64, cols: &[(i32, i32)], true_offset: bool) -> Vec<Run> {
         let mut v = vec![
             run("stone", (3, 200, 3), "+x", [2.7, 200.0, 3.5]),
             run("stone", (3, 200, 3), "-x", [4.3, 200.0, 3.5]),
@@ -663,15 +726,17 @@ mod tests {
                 r#"bamboo ["bamboo_stalk_thickness"="{}","bamboo_leaf_size"="{}","age_bit"={}]"#,
                 s.bamboo_stalk_thickness, s.bamboo_leaf_size, s.age_bit
             );
-            let (x, y, z) = (5, 200, -7);
-            let o = offset(x, z);
-            let lo = |p: i32, a: usize| p as f32 + o[a] + 0.5;
-            let hi = |p: i32, a: usize| lo(p, a) + (w / 16.0) as f32;
-            v.push(run(&block, (x, y, z), "+x", [lo(x, 0) - 0.3, 200.0, 0.0]));
-            v.push(run(&block, (x, y, z), "-x", [hi(x, 0) + 0.3, 200.0, 0.0]));
-            v.push(run(&block, (x, y, z), "+z", [0.0, 200.0, lo(z, 2) - 0.3]));
-            v.push(run(&block, (x, y, z), "-z", [0.0, 200.0, hi(z, 2) + 0.3]));
-            v.push(run(&block, (x, y, z), "drop", [0.0, 201.0, 0.0]));
+            for &(x, z) in cols {
+                let y = 200;
+                let o = if true_offset { offset(x, z) } else { [0.0; 3] };
+                let lo = |p: i32, a: usize| p as f32 + o[a] + 0.5;
+                let hi = |p: i32, a: usize| lo(p, a) + (w / 16.0) as f32;
+                v.push(run(&block, (x, y, z), "+x", [lo(x, 0) - 0.3, 200.0, 0.0]));
+                v.push(run(&block, (x, y, z), "-x", [hi(x, 0) + 0.3, 200.0, 0.0]));
+                v.push(run(&block, (x, y, z), "+z", [0.0, 200.0, lo(z, 2) - 0.3]));
+                v.push(run(&block, (x, y, z), "-z", [0.0, 200.0, hi(z, 2) + 0.3]));
+                v.push(run(&block, (x, y, z), "drop", [0.0, 201.0, 0.0]));
+            }
         }
         v
     }
@@ -709,6 +774,43 @@ mod tests {
         let mut runs = synthetic(2.0);
         let r = runs.iter_mut().rfind(|r| r.dir == "-x").unwrap();
         r.feet[0] += 0.01;
+        assert!(derive(&runs, prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_stops_made_by_a_different_offset() {
+        // Stalks placed with no offset at all: the columns can't agree on one
+        // base box under the real offset, so the model must be rejected.
+        let runs = synthetic_with(2.0, &columns(), false);
+        assert!(derive(&runs, prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_too_few_columns() {
+        let runs = synthetic_with(2.0, &columns()[..MIN_COLUMNS - 1], true);
+        assert!(derive(&runs, prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_columns_missing_a_quadrant() {
+        let cols: Vec<(i32, i32)> = (0..MIN_COLUMNS as i32).map(|i| (3 + i, 5 + i)).collect();
+        assert!(derive(&synthetic_with(2.0, &cols, true), prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_an_unknown_state_value_instead_of_panicking() {
+        let mut runs = synthetic(2.0);
+        runs[10].block = r#"bamboo ["bamboo_stalk_thickness"="thik"]"#.into();
+        assert!(derive(&runs, prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_stone_runs_from_too_few_directions() {
+        let mut runs = synthetic(2.0);
+        for r in runs.iter_mut().filter(|r| r.block == "stone") {
+            r.dir = "+x".into();
+            r.feet = [2.7, 200.0, 3.5];
+        }
         assert!(derive(&runs, prov()).is_err());
     }
 

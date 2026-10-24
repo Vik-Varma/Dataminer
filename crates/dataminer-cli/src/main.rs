@@ -7,6 +7,7 @@
 
 mod crosscheck_cmd;
 mod fetch_cmd;
+mod manifest;
 mod measure_cmd;
 mod metadata_cmd;
 mod protocol_cmd;

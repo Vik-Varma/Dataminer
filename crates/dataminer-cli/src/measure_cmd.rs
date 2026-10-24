@@ -1,12 +1,12 @@
 //! The `dataminer measure` subcommands: turn a headless client's run log from
 //! our own strict-movement BDS into specs.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use anyhow::{Context, Result};
 use dataminer_core::digest::Sha256Digest;
 use dataminer_core::provenance::{Method, Provenance, SourceKind};
-use serde_json::{Value, json};
+use serde_json::json;
 
 /// Arguments shared by the `dataminer measure` subcommands.
 #[derive(clap::Args)]
@@ -161,50 +161,18 @@ fn write<T: serde::Serialize>(
     let path = out_dir.join(&file);
     std::fs::write(&path, doc.to_pretty_json()?)
         .with_context(|| format!("writing {}", path.display()))?;
-    add_to_manifest(
+    crate::manifest::merge(
         &out_dir,
         &args.game_version,
         args.protocol,
-        json!({
+        vec![json!({
             "dataset": doc.meta.kind,
             "file": file,
             "schema_version": doc.meta.schema_version,
             "records": records,
             "source": format!("measured on BDS {}", args.bds_version),
             "source_sha256": doc.meta.provenance.artifact_sha256.as_ref().map(ToString::to_string),
-        }),
+        })],
     )?;
     Ok(path)
-}
-
-/// Add or replace one dataset entry in `<out_dir>/manifest.json`, keeping the rest.
-fn add_to_manifest(
-    out_dir: &Path,
-    game_version: &str,
-    protocol: Option<u32>,
-    entry: Value,
-) -> Result<()> {
-    let path = out_dir.join("manifest.json");
-    let mut manifest = match std::fs::read(&path) {
-        Ok(b) => {
-            serde_json::from_slice(&b).with_context(|| format!("parsing {}", path.display()))?
-        }
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => json!({
-            "game_version": game_version,
-            "wire_protocol": protocol,
-            "datasets": [],
-        }),
-        Err(e) => return Err(e).with_context(|| format!("reading {}", path.display())),
-    };
-    manifest["dataminer_commit"] = json!(env!("DATAMINER_COMMIT"));
-    manifest["tool"] = json!(concat!("dataminer ", env!("CARGO_PKG_VERSION")));
-    let datasets = manifest["datasets"]
-        .as_array_mut()
-        .context("manifest.json has no datasets array")?;
-    datasets.retain(|d| d["dataset"] != entry["dataset"]);
-    datasets.push(entry);
-    datasets.sort_by(|a, b| a["dataset"].as_str().cmp(&b["dataset"].as_str()));
-    let body = serde_json::to_string_pretty(&manifest)? + "\n";
-    std::fs::write(&path, body).with_context(|| format!("writing {}", path.display()))?;
-    Ok(())
 }

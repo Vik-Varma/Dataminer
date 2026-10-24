@@ -98,7 +98,8 @@ struct RawTrace {
 }
 
 /// Inputs held over ticks `from..to`; outside every span the client sent no
-/// movement input at the trace's yaw.
+/// movement input at the trace's yaw. Where spans overlap, the later one in
+/// the list is what was sent.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InputSpan {
     /// First tick (inclusive).
@@ -171,7 +172,7 @@ struct RawVerification {
 /// The `movement-traces` payload.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Traces {
-    /// The traces, in run order.
+    /// The traces, sorted by name.
     pub traces: Vec<Trace>,
 }
 
@@ -222,22 +223,23 @@ fn parse_verification(log: &str) -> Result<BTreeMap<String, Verification>, Measu
                 line: i + 1,
                 source,
             })?;
-        let mut ticks: Vec<usize> = raw
+        let ticks: Vec<usize> = raw
             .corrections_at
             .iter()
             .flatten()
             .flatten()
             .copied()
             .collect();
-        ticks.sort_unstable();
-        ticks.dedup();
-        out.insert(
-            raw.case,
-            Verification {
-                replays: raw.corrections_at.len(),
-                corrected_ticks: ticks,
-            },
-        );
+        // A case verified more than once keeps every replay, so one failed
+        // replay can't be hidden by a later clean one.
+        let v = out.entry(raw.case).or_insert(Verification {
+            replays: 0,
+            corrected_ticks: Vec::new(),
+        });
+        v.replays += raw.corrections_at.len();
+        v.corrected_ticks.extend(ticks);
+        v.corrected_ticks.sort_unstable();
+        v.corrected_ticks.dedup();
     }
     Ok(out)
 }
@@ -270,7 +272,27 @@ pub fn derive(
                 raw.case.ticks
             )));
         }
-        if let Some(t0) = raw.trace.first().filter(|t| t.known) {
+        if traces.iter().any(|t: &Trace| t.name == raw.case.name) {
+            return Err(MeasureError::Evidence(format!(
+                "trace {:?} appears twice in the log",
+                raw.case.name
+            )));
+        }
+        for sp in raw.case.spans.iter().flatten() {
+            if sp.from >= sp.to || sp.to > raw.case.ticks {
+                return Err(MeasureError::Evidence(format!(
+                    "trace {:?} has an input span {}..{} outside its {} ticks",
+                    raw.case.name, sp.from, sp.to, raw.case.ticks
+                )));
+            }
+        }
+        let Some(t0) = raw.trace.first().filter(|t| t.known) else {
+            return Err(MeasureError::Evidence(format!(
+                "trace {:?} has no known tick 0, so it can't be checked against its start",
+                raw.case.name
+            )));
+        };
+        {
             let d = (0..3)
                 .map(|a| (f64::from(t0.feet[a]) - raw.case.start[a]).powi(2))
                 .sum::<f64>()
@@ -324,6 +346,7 @@ pub fn derive(
     if traces.is_empty() {
         return Err(MeasureError::Evidence("no traces in the log".into()));
     }
+    traces.sort_by(|a, b| a.name.cmp(&b.name));
     Ok(SpecDocument::new(
         KIND,
         SCHEMA_VERSION,
@@ -400,6 +423,32 @@ mod tests {
     fn rejects_a_trace_that_did_not_start_at_its_start() {
         let elsewhere = TICK.replace("200.42", "63.0");
         assert!(derive(&line(&[&elsewhere, TICK], 2), Some(AGREED), prov()).is_err());
+    }
+
+    #[test]
+    fn a_failed_replay_is_not_hidden_by_a_later_clean_one() {
+        let log = format!("{DISAGREED}\n{AGREED}\n");
+        let doc = derive(&line(&[TICK, TICK], 2), Some(&log), prov()).unwrap();
+        let t = &doc.payload.traces[0];
+        assert_eq!(t.method, Method::Unknown);
+        assert_eq!(t.verification.as_ref().unwrap().replays, 4);
+    }
+
+    #[test]
+    fn rejects_a_trace_name_given_twice() {
+        let one = line(&[TICK, TICK], 2);
+        assert!(derive(&format!("{one}\n{one}\n"), Some(AGREED), prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_an_unknown_tick_zero() {
+        assert!(derive(&line(&[GAP, TICK], 2), Some(AGREED), prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_a_span_beyond_the_trace() {
+        let long = line(&[TICK, TICK], 2).replace(r#""to":1"#, r#""to":3"#);
+        assert!(derive(&long, Some(AGREED), prov()).is_err());
     }
 
     #[test]
