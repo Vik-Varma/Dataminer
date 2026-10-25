@@ -22,7 +22,7 @@ use crate::MeasureError;
 /// The spec kind.
 pub const KIND: &str = "movement-traces";
 /// The payload schema version.
-pub const SCHEMA_VERSION: u32 = 1;
+pub const SCHEMA_VERSION: u32 = 2;
 /// How far tick 0 may be from the start position, in blocks. Every trace
 /// starts from rest, so one tick moves the player far less than this.
 pub const MAX_FIRST_TICK_DISTANCE: f64 = 1.0;
@@ -72,6 +72,8 @@ struct RawCase {
     name: String,
     #[serde(default)]
     setup: Option<Vec<String>>,
+    #[serde(default)]
+    pass_setup: Option<Vec<String>>,
     start: [f64; 3],
     #[serde(default)]
     yaw: f32,
@@ -89,6 +91,8 @@ struct RawTick {
     server_sprinting: bool,
     #[serde(default)]
     server_swimming: bool,
+    #[serde(default)]
+    server_gliding: bool,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -131,6 +135,10 @@ pub struct Tick {
     pub sprinting: bool,
     /// The SWIMMING actor flag (bit 57) the server reported for this tick.
     pub swimming: bool,
+    /// The GLIDING actor flag (bit 32) the server reported for this tick.
+    /// Written only when set (schema 2).
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub gliding: bool,
 }
 
 /// One traced run.
@@ -140,6 +148,10 @@ pub struct Trace {
     pub name: String,
     /// Server console commands run before it (effects, terrain).
     pub setup: Vec<String>,
+    /// Commands run again before every replay, for state a run uses up
+    /// (food, an elytra's durability). Written only when present (schema 2).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub pass_setup: Vec<String>,
     /// Feet position the player was teleported to before the run.
     pub start: [f64; 3],
     /// The inputs.
@@ -315,6 +327,7 @@ pub fn derive(
                     on_ground: t.on_ground,
                     sprinting: t.server_sprinting,
                     swimming: t.server_swimming,
+                    gliding: t.server_gliding,
                 })
             })
             .collect();
@@ -330,6 +343,7 @@ pub fn derive(
         traces.push(Trace {
             name: raw.case.name,
             setup: raw.case.setup.unwrap_or_default(),
+            pass_setup: raw.case.pass_setup.unwrap_or_default(),
             start: raw.case.start,
             inputs: raw
                 .case
@@ -449,6 +463,20 @@ mod tests {
     fn rejects_a_span_beyond_the_trace() {
         let long = line(&[TICK, TICK], 2).replace(r#""to":1"#, r#""to":3"#);
         assert!(derive(&long, Some(AGREED), prov()).is_err());
+    }
+
+    #[test]
+    fn gliding_is_kept_and_only_written_when_set() {
+        let glide = TICK.replace(
+            r#""server_sprinting":false"#,
+            r#""server_sprinting":false,"server_gliding":true"#,
+        );
+        let doc = derive(&line(&[TICK, &glide], 2), Some(AGREED), prov()).unwrap();
+        let t = &doc.payload.traces[0];
+        assert!(!t.ticks[0].as_ref().unwrap().gliding);
+        assert!(t.ticks[1].as_ref().unwrap().gliding);
+        let json = doc.to_pretty_json().unwrap();
+        assert_eq!(json.matches("\"gliding\"").count(), 1);
     }
 
     #[test]

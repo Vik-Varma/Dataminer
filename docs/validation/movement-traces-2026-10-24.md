@@ -29,12 +29,15 @@ one run reveals only every sixth tick.
    paved over another's lava pool, and a later run then "measured" a player pinned under the new
    ceiling. Those runs were discarded. The lava cases now rebuild their pool in their own setup.
 
-Food, saturation and exhaustion were set through the Script API before each case. Effects were
+Food, saturation and exhaustion were set through the Script API before each case. Cases that use
+something up across replays (food, an elytra's durability) repeat those commands before every
+replay; the spec records them as `pass_setup`. Effects were
 applied with `/effect` before the case, so they were already active at its start.
 
-## What the 69 traces cover
+## What the 75 traces cover
 
-All of them are `measured`, and every one verified with zero corrections.
+All of them are `measured`, and every one verified with zero corrections. The last six (elytra and
+low food) were added on 2026-10-25 for questions in Ferrock's `docs/open-questions.md`.
 
 | Group | Traces |
 | --- | --- |
@@ -48,6 +51,8 @@ All of them are `measured`, and every one verified with zero corrections.
 | Climbing | a ladder and vines on a stone column (forward held; forward and jump held; climb then release; climb then sneak); a scaffolding column (jump held; jump then sneak; jump then release). The column's top is capped by a roof at y 209, so the climbs stop at feet y 207.2 |
 | Scaffolding top and Levitation in liquids | forward and jump held up a 9-high scaffolding column with a stone wall behind, onto its top; jump held beside a column; Levitation I in 3-deep water, and Levitation I and II in 3-deep lava, each from rest pinned under a block |
 | Slowing and special blocks | walking and sprinting inside cobweb; walking and jumping on honey; walking and sprinting on soul sand; walking on blue ice; jumping on slime |
+| Elytra | a glide from a platform 4 blocks up, jump press with input bit 32 (StartGliding) on input 22, forward held, at pitch 0 and at pitch 30, through the landing and on |
+| Low food | sprinting (bit 20) from rest at food 0, 6, 6.01 and 7, with food, saturation and exhaustion reset before every replay |
 | Angled movement, for the clean side's small corrections | sprinting and sprint-jumping (jump held) at yaw 10 on stone; sprint-swimming from a pool's bottom with strafe left, strafe right, and at yaw 10 |
 
 ## Headline numbers
@@ -117,6 +122,25 @@ leaving the block.
 - Soul sand: its top is 0.875 above its base. Walking settles at 0.11743 per tick, sprinting at
   0.15265.
 - Slime: a jump peaks at the normal 1.25224, and the player then bounces.
+
+**Elytra.**
+- The glide starts only when input bit 32 comes with a jump press on the same input. Bit 32
+  alone, once or held, left the player falling normally.
+- On the landing tick L (38 at pitch 0, 33 at pitch 30), the server reports on-ground, still
+  gliding (actor flag 32), vertical velocity 0 and the full glide speed: 0.44073 at pitch 0.
+- On L + 1 gliding ends. The step is the carried glide velocity plus the ordinary walking
+  acceleration: 0.44073 + 0.098 = 0.53873. Ground friction then applies to it:
+  0.53873 × 0.546 = 0.29415.
+
+**Low food.** At food 0 and 6, holding sprint gave plain walking (steady 0.21586 per tick) with no
+sprint flag. At 6.01 and 7 it gave the sprint curve (steady 0.28062), with the flag on from
+tick 0.
+
+**Schema 2** adds two optional fields, written only when present:
+- `gliding` on a tick, for actor flag 32;
+- `pass_setup` on a trace.
+
+The 69 earlier traces are byte-identical apart from the schema number.
 
 ## Not covered
 
