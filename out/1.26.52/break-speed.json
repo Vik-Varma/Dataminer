@@ -1,0 +1,3237 @@
+{
+  "meta": {
+    "kind": "break-speed",
+    "schema_version": 1,
+    "provenance": {
+      "source": "packet-capture",
+      "method": "measured",
+      "game_version": "1.26.52",
+      "artifact": "Linux Bedrock Dedicated Server 1.26.52.3 (bedrock_server, minecraft.net), run on our own machine with server-authoritative-movement-strict=true, player-position-acceptance-threshold=0.0001, online-mode=false; block replies read from its LevelEvent and UpdateBlock packets to a headless client",
+      "artifact_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "tool": "dataminer-measure 0.0.1",
+      "notes": [
+        "break records sha256:a12cfbf228e1effa9a3feb607f451604ee35d3ff3e2534375a9475edcf319752",
+        "r is read from LevelEvent 3600 (start cracking), whose data is floor(65535 · r); the break input from LevelEvent 2001; prediction answers from the UpdateBlock the server sent for the target in reply",
+        "hardness, tool speeds and harvest rules are the model's parameters: each was chosen to fit, and is accepted only because the model reproduces every 3600 value exactly; hardness_bracket is the range all cases allow",
+        "the client stood at feet (60.5, 200, 0.5) facing +z and hit the north face of the block at (60, 200, 2); it sent the block actions listed per case in PlayerAuthInput, with input flag 35"
+      ]
+    }
+  },
+  "payload": {
+    "definition": [
+      "r = s / (H · D) · M, the share of the block broken per input",
+      "s = the held tool's speed if the block lists the tool among suited_tools (tier speed, or 15 for shears and swords), else 1; plus L² + 1 for Efficiency L",
+      "D = 30 if the held item meets the block's harvest rule, else 100",
+      "M = (1 + 0.2·h) · 1.2^h for Haste level h (amplifier + 1; Conduit Power counts as Haste 1) × 0.21^f for Mining Fatigue level f × 1/5 with the eyes in water × 1/5 when not on the ground",
+      "LevelEvent 3600 data = floor(65535 · r)",
+      "N = ceil(1 / r); counting the start-break input as 0, the server breaks the block itself on input N − 1, and accepts a destroy prediction on input N − 1 but not before; it answers a rejected prediction by re-sending the block as it was",
+      "in creative, a start-break breaks the block on the same input, unless a sword is held",
+      "a break that is not stopped goes on after the block is gone: when water flows into the cell, crack updates for it follow (updates_after_break); a continue-destroy after the break starts cracking whatever fills the cell (starts_after_break)"
+    ],
+    "tiers": [
+      {
+        "name": "wooden",
+        "speed": 2.0,
+        "harvest_level": 0
+      },
+      {
+        "name": "stone",
+        "speed": 4.0,
+        "harvest_level": 1
+      },
+      {
+        "name": "iron",
+        "speed": 6.0,
+        "harvest_level": 2
+      },
+      {
+        "name": "diamond",
+        "speed": 8.0,
+        "harvest_level": 3
+      },
+      {
+        "name": "netherite",
+        "speed": 9.0,
+        "harvest_level": 4
+      },
+      {
+        "name": "golden",
+        "speed": 12.0,
+        "harvest_level": 0
+      }
+    ],
+    "fixed_tool_speed": 15.0,
+    "blocks": [
+      {
+        "block": "bedrock",
+        "hardness": null,
+        "hardness_bracket": null,
+        "suited_tools": [],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "cobblestone",
+        "hardness": 2.0,
+        "hardness_bracket": [
+          1.9995423340961098,
+          2.0004578754578755
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 0
+        }
+      },
+      {
+        "block": "deepslate",
+        "hardness": 3.0,
+        "hardness_bracket": [
+          2.998627316403569,
+          3.0006868131868134
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 0
+        }
+      },
+      {
+        "block": "dirt",
+        "hardness": 0.5,
+        "hardness_bracket": [
+          0.4999904632932156,
+          0.5
+        ],
+        "suited_tools": [
+          "shovel"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "end_stone",
+        "hardness": 3.0,
+        "hardness_bracket": [
+          2.998627316403569,
+          3.0006868131868134
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 0
+        }
+      },
+      {
+        "block": "glass",
+        "hardness": 0.3,
+        "hardness_bracket": [
+          0.2999862675089261,
+          0.300027468754292
+        ],
+        "suited_tools": [],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "gravel",
+        "hardness": 0.6,
+        "hardness_bracket": [
+          0.5999725350178522,
+          0.6001373626373626
+        ],
+        "suited_tools": [
+          "shovel"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "iron_ore",
+        "hardness": 3.0,
+        "hardness_bracket": [
+          2.9996567112941985,
+          3.0006868131868134
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 1
+        }
+      },
+      {
+        "block": "netherrack",
+        "hardness": 0.4,
+        "hardness_bracket": [
+          0.3999816900119015,
+          0.4000183116645303
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 0
+        }
+      },
+      {
+        "block": "oak_leaves",
+        "hardness": 0.2,
+        "hardness_bracket": [
+          0.19999938964098682,
+          0.2
+        ],
+        "suited_tools": [
+          "hoe",
+          "shears"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "oak_log",
+        "hardness": 2.0,
+        "hardness_bracket": [
+          1.999771140862799,
+          2.0
+        ],
+        "suited_tools": [
+          "axe"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "oak_planks",
+        "hardness": 2.0,
+        "hardness_bracket": [
+          1.9995423340961098,
+          2.0004578754578755
+        ],
+        "suited_tools": [
+          "axe"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "obsidian",
+        "hardness": 35.0,
+        "hardness_bracket": [
+          34.952,
+          35.02204408817635
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 3
+        }
+      },
+      {
+        "block": "sand",
+        "hardness": 0.5,
+        "hardness_bracket": [
+          0.49994278521569974,
+          0.5
+        ],
+        "suited_tools": [
+          "shovel"
+        ],
+        "harvest": {
+          "needs": "anything"
+        }
+      },
+      {
+        "block": "stone",
+        "hardness": 1.5,
+        "hardness_bracket": [
+          1.4999889730535205,
+          1.5
+        ],
+        "suited_tools": [
+          "pickaxe"
+        ],
+        "harvest": {
+          "needs": "tool",
+          "kind": "pickaxe",
+          "min_level": 0
+        }
+      },
+      {
+        "block": "web",
+        "hardness": 4.0,
+        "hardness_bracket": [
+          3.99993896484375,
+          4.0004272982541815
+        ],
+        "suited_tools": [
+          "shears",
+          "sword"
+        ],
+        "harvest": {
+          "needs": "shears_or_sword"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "name": "bedrock by hand",
+        "block": "bedrock",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0,
+        "expected_crack_start": 0,
+        "crack_start": 0,
+        "inputs_to_break": null,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "cobblestone by hand",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.005,
+        "expected_crack_start": 327,
+        "crack_start": 327,
+        "inputs_to_break": 200,
+        "expected_break_input": 199,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "cobblestone by wooden_pickaxe",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 29,
+        "predictions": []
+      },
+      {
+        "name": "cobblestone by wooden_pickaxe, predict and stop at 27",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 27,
+            "action": 26
+          },
+          {
+            "k": 27,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 52,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 29,
+        "predictions": [
+          {
+            "k": 27,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "cobblestone by wooden_pickaxe, predict and stop at 28",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 28,
+            "action": 26
+          },
+          {
+            "k": 28,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 53,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 29,
+        "predictions": [
+          {
+            "k": 28,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "cobblestone by wooden_pickaxe, predict and stop at 29",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 29,
+            "action": 26
+          },
+          {
+            "k": 29,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 54,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 29,
+        "predictions": [
+          {
+            "k": 29,
+            "expected": "accepted",
+            "observed": "changed"
+          }
+        ]
+      },
+      {
+        "name": "cobblestone by wooden_pickaxe, predict and stop at 30",
+        "block": "cobblestone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 30,
+            "action": 26
+          },
+          {
+            "k": 30,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 30,
+        "predictions": [
+          {
+            "k": 30,
+            "expected": "accepted",
+            "observed": "changed"
+          }
+        ]
+      },
+      {
+        "name": "creative bedrock, start",
+        "block": "bedrock",
+        "mode": "c",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": 0,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 1,
+        "predictions": []
+      },
+      {
+        "name": "creative dirt by wooden_sword, start",
+        "block": "dirt",
+        "mode": "c",
+        "held": "wooden_sword",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "creative dirt, predict only",
+        "block": "dirt",
+        "mode": "c",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 26
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": [
+          {
+            "k": 0,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "creative dirt, start",
+        "block": "dirt",
+        "mode": "c",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": 0,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 0,
+        "predictions": []
+      },
+      {
+        "name": "creative dirt, start, predict and stop together",
+        "block": "dirt",
+        "mode": "c",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 0,
+            "action": 26
+          },
+          {
+            "k": 0,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": 0,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 0,
+        "predictions": [
+          {
+            "k": 0,
+            "expected": "accepted",
+            "observed": "none"
+          }
+        ]
+      },
+      {
+        "name": "creative obsidian, start",
+        "block": "obsidian",
+        "mode": "c",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": null,
+        "expected_crack_start": null,
+        "crack_start": null,
+        "inputs_to_break": null,
+        "expected_break_input": 0,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 0,
+        "predictions": []
+      },
+      {
+        "name": "deepslate by hand",
+        "block": "deepslate",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0033333333333333335,
+        "expected_crack_start": 218,
+        "crack_start": 218,
+        "inputs_to_break": 300,
+        "expected_break_input": 299,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "deepslate by wooden_pickaxe",
+        "block": "deepslate",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.022222222222222223,
+        "expected_crack_start": 1456,
+        "crack_start": 1456,
+        "inputs_to_break": 45,
+        "expected_break_input": 44,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 44,
+        "predictions": []
+      },
+      {
+        "name": "dirt by diamond_shovel",
+        "block": "dirt",
+        "mode": "s",
+        "held": "diamond_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.5333333333333333,
+        "expected_crack_start": 34952,
+        "crack_start": 34952,
+        "inputs_to_break": 2,
+        "expected_break_input": 1,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 1,
+        "predictions": []
+      },
+      {
+        "name": "dirt by golden_shovel",
+        "block": "dirt",
+        "mode": "s",
+        "held": "golden_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.8,
+        "expected_crack_start": 52428,
+        "crack_start": 52428,
+        "inputs_to_break": 2,
+        "expected_break_input": 1,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 2,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, abort at 1",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 1,
+            "action": 1
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, abort at 13",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 13,
+            "action": 1
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, abort at 5",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 5,
+            "action": 1
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, abort at 5, start again at 10",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 5,
+            "action": 1
+          },
+          {
+            "k": 10,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 24,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 24,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, air",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "air",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 95,
+        "rate": 0.013333333333333334,
+        "expected_crack_start": 873,
+        "crack_start": 873,
+        "inputs_to_break": 75,
+        "expected_break_input": 74,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 74,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, continue every tick",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 1,
+            "action": 27
+          },
+          {
+            "k": 2,
+            "action": 27
+          },
+          {
+            "k": 3,
+            "action": 27
+          },
+          {
+            "k": 4,
+            "action": 27
+          },
+          {
+            "k": 5,
+            "action": 27
+          },
+          {
+            "k": 6,
+            "action": 27
+          },
+          {
+            "k": 7,
+            "action": 27
+          },
+          {
+            "k": 8,
+            "action": 27
+          },
+          {
+            "k": 9,
+            "action": 27
+          },
+          {
+            "k": 10,
+            "action": 27
+          },
+          {
+            "k": 11,
+            "action": 27
+          },
+          {
+            "k": 12,
+            "action": 27
+          },
+          {
+            "k": 13,
+            "action": 27
+          },
+          {
+            "k": 14,
+            "action": 27
+          },
+          {
+            "k": 15,
+            "action": 27
+          },
+          {
+            "k": 16,
+            "action": 27
+          },
+          {
+            "k": 17,
+            "action": 27
+          },
+          {
+            "k": 18,
+            "action": 27
+          },
+          {
+            "k": 19,
+            "action": 27
+          },
+          {
+            "k": 20,
+            "action": 27
+          },
+          {
+            "k": 21,
+            "action": 27
+          },
+          {
+            "k": 22,
+            "action": 27
+          },
+          {
+            "k": 23,
+            "action": 27
+          },
+          {
+            "k": 24,
+            "action": 27
+          },
+          {
+            "k": 25,
+            "action": 27
+          },
+          {
+            "k": 26,
+            "action": 27
+          },
+          {
+            "k": 27,
+            "action": 27
+          },
+          {
+            "k": 28,
+            "action": 27
+          },
+          {
+            "k": 29,
+            "action": 27
+          },
+          {
+            "k": 30,
+            "action": 27
+          },
+          {
+            "k": 31,
+            "action": 27
+          },
+          {
+            "k": 32,
+            "action": 27
+          },
+          {
+            "k": 33,
+            "action": 27
+          },
+          {
+            "k": 34,
+            "action": 27
+          },
+          {
+            "k": 35,
+            "action": 27
+          },
+          {
+            "k": 36,
+            "action": 27
+          },
+          {
+            "k": 37,
+            "action": 27
+          },
+          {
+            "k": 38,
+            "action": 27
+          },
+          {
+            "k": 39,
+            "action": 27
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [
+          0
+        ],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, crack every tick",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 1,
+            "action": 18
+          },
+          {
+            "k": 2,
+            "action": 18
+          },
+          {
+            "k": 3,
+            "action": 18
+          },
+          {
+            "k": 4,
+            "action": 18
+          },
+          {
+            "k": 5,
+            "action": 18
+          },
+          {
+            "k": 6,
+            "action": 18
+          },
+          {
+            "k": 7,
+            "action": 18
+          },
+          {
+            "k": 8,
+            "action": 18
+          },
+          {
+            "k": 9,
+            "action": 18
+          },
+          {
+            "k": 10,
+            "action": 18
+          },
+          {
+            "k": 11,
+            "action": 18
+          },
+          {
+            "k": 12,
+            "action": 18
+          },
+          {
+            "k": 13,
+            "action": 18
+          },
+          {
+            "k": 14,
+            "action": 18
+          },
+          {
+            "k": 15,
+            "action": 18
+          },
+          {
+            "k": 16,
+            "action": 18
+          },
+          {
+            "k": 17,
+            "action": 18
+          },
+          {
+            "k": 18,
+            "action": 18
+          },
+          {
+            "k": 19,
+            "action": 18
+          },
+          {
+            "k": 20,
+            "action": 18
+          },
+          {
+            "k": 21,
+            "action": 18
+          },
+          {
+            "k": 22,
+            "action": 18
+          },
+          {
+            "k": 23,
+            "action": 18
+          },
+          {
+            "k": 24,
+            "action": 18
+          },
+          {
+            "k": 25,
+            "action": 18
+          },
+          {
+            "k": 26,
+            "action": 18
+          },
+          {
+            "k": 27,
+            "action": 18
+          },
+          {
+            "k": 28,
+            "action": 18
+          },
+          {
+            "k": 29,
+            "action": 18
+          },
+          {
+            "k": 30,
+            "action": 18
+          },
+          {
+            "k": 31,
+            "action": 18
+          },
+          {
+            "k": 32,
+            "action": 18
+          },
+          {
+            "k": 33,
+            "action": 18
+          },
+          {
+            "k": 34,
+            "action": 18
+          },
+          {
+            "k": 35,
+            "action": 18
+          },
+          {
+            "k": 36,
+            "action": 18
+          },
+          {
+            "k": 37,
+            "action": 18
+          },
+          {
+            "k": 38,
+            "action": 18
+          },
+          {
+            "k": 39,
+            "action": 18
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, predict and stop at 12",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 12,
+            "action": 26
+          },
+          {
+            "k": 12,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 37,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 15,
+        "predictions": [
+          {
+            "k": 12,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "dirt by hand, predict and stop at 13",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 13,
+            "action": 26
+          },
+          {
+            "k": 13,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 38,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": [
+          {
+            "k": 13,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "dirt by hand, predict and stop at 14",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 14,
+            "action": 26
+          },
+          {
+            "k": 14,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 39,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": [
+          {
+            "k": 14,
+            "expected": "accepted",
+            "observed": "none"
+          }
+        ]
+      },
+      {
+        "name": "dirt by hand, predict and stop at 15",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 15,
+            "action": 26
+          },
+          {
+            "k": 15,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 40,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 15,
+        "predictions": [
+          {
+            "k": 15,
+            "expected": "accepted",
+            "observed": "changed"
+          }
+        ]
+      },
+      {
+        "name": "dirt by hand, predict only",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 26
+          }
+        ],
+        "inputs_watched": 45,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": null,
+        "inputs_to_break": 15,
+        "expected_break_input": null,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": [
+          {
+            "k": 0,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "dirt by hand, stop at 5",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 5,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 55,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 15,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, water",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "water",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 95,
+        "rate": 0.013333333333333334,
+        "expected_crack_start": 873,
+        "crack_start": 873,
+        "inputs_to_break": 75,
+        "expected_break_input": 74,
+        "starts_after_break": [],
+        "updates_after_break": [
+          4
+        ],
+        "broke_reply_input": 74,
+        "predictions": []
+      },
+      {
+        "name": "dirt by hand, water+air",
+        "block": "dirt",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "water+air",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 95,
+        "rate": 0.0026666666666666666,
+        "expected_crack_start": 174,
+        "crack_start": 174,
+        "inputs_to_break": 375,
+        "expected_break_input": 374,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "dirt by stone_shovel",
+        "block": "dirt",
+        "mode": "s",
+        "held": "stone_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.26666666666666666,
+        "expected_crack_start": 17476,
+        "crack_start": 17476,
+        "inputs_to_break": 4,
+        "expected_break_input": 3,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 4,
+        "predictions": []
+      },
+      {
+        "name": "dirt by wooden_pickaxe",
+        "block": "dirt",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 14,
+        "predictions": []
+      },
+      {
+        "name": "dirt by wooden_shovel",
+        "block": "dirt",
+        "mode": "s",
+        "held": "wooden_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.13333333333333333,
+        "expected_crack_start": 8738,
+        "crack_start": 8738,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      },
+      {
+        "name": "end_stone by wooden_pickaxe",
+        "block": "end_stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.022222222222222223,
+        "expected_crack_start": 1456,
+        "crack_start": 1456,
+        "inputs_to_break": 45,
+        "expected_break_input": 44,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 44,
+        "predictions": []
+      },
+      {
+        "name": "glass by hand",
+        "block": "glass",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.11111111111111112,
+        "expected_crack_start": 7281,
+        "crack_start": 7281,
+        "inputs_to_break": 9,
+        "expected_break_input": 8,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 9,
+        "predictions": []
+      },
+      {
+        "name": "gravel by hand",
+        "block": "gravel",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.05555555555555556,
+        "expected_crack_start": 3640,
+        "crack_start": 3640,
+        "inputs_to_break": 18,
+        "expected_break_input": 17,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 17,
+        "predictions": []
+      },
+      {
+        "name": "iron_ore by hand",
+        "block": "iron_ore",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0033333333333333335,
+        "expected_crack_start": 218,
+        "crack_start": 218,
+        "inputs_to_break": 300,
+        "expected_break_input": 299,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "iron_ore by stone_pickaxe",
+        "block": "iron_ore",
+        "mode": "s",
+        "held": "stone_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 22,
+        "predictions": []
+      },
+      {
+        "name": "iron_ore by wooden_pickaxe",
+        "block": "iron_ore",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.006666666666666667,
+        "expected_crack_start": 436,
+        "crack_start": 436,
+        "inputs_to_break": 150,
+        "expected_break_input": 149,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "netherrack by hand",
+        "block": "netherrack",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.024999999999999998,
+        "expected_crack_start": 1638,
+        "crack_start": 1638,
+        "inputs_to_break": 40,
+        "expected_break_input": 39,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 39,
+        "predictions": []
+      },
+      {
+        "name": "netherrack by wooden_pickaxe",
+        "block": "netherrack",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.16666666666666666,
+        "expected_crack_start": 10922,
+        "crack_start": 10922,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 6,
+        "predictions": []
+      },
+      {
+        "name": "oak_leaves by hand",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.16666666666666666,
+        "expected_crack_start": 10922,
+        "crack_start": 10922,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 5,
+        "predictions": []
+      },
+      {
+        "name": "oak_leaves by hand, predict and stop at 3",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 3,
+            "action": 26
+          },
+          {
+            "k": 3,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 28,
+        "rate": 0.16666666666666666,
+        "expected_crack_start": 10922,
+        "crack_start": 10922,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 5,
+        "predictions": [
+          {
+            "k": 3,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "oak_leaves by hand, predict and stop at 4",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 4,
+            "action": 26
+          },
+          {
+            "k": 4,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 29,
+        "rate": 0.16666666666666666,
+        "expected_crack_start": 10922,
+        "crack_start": 10922,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 5,
+        "predictions": [
+          {
+            "k": 4,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "oak_leaves by hand, predict and stop at 5",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 5,
+            "action": 26
+          },
+          {
+            "k": 5,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 30,
+        "rate": 0.16666666666666666,
+        "expected_crack_start": 10922,
+        "crack_start": 10922,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 5,
+        "predictions": [
+          {
+            "k": 5,
+            "expected": "accepted",
+            "observed": "none"
+          }
+        ]
+      },
+      {
+        "name": "oak_leaves by shears",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "shears",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 2.5,
+        "expected_crack_start": 163837,
+        "crack_start": 163837,
+        "inputs_to_break": 1,
+        "expected_break_input": 0,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 1,
+        "predictions": []
+      },
+      {
+        "name": "oak_leaves by wooden_hoe",
+        "block": "oak_leaves",
+        "mode": "s",
+        "held": "wooden_hoe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.3333333333333333,
+        "expected_crack_start": 21845,
+        "crack_start": 21845,
+        "inputs_to_break": 3,
+        "expected_break_input": 2,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 2,
+        "predictions": []
+      },
+      {
+        "name": "oak_log by diamond_axe",
+        "block": "oak_log",
+        "mode": "s",
+        "held": "diamond_axe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.13333333333333333,
+        "expected_crack_start": 8738,
+        "crack_start": 8738,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      },
+      {
+        "name": "oak_log by hand",
+        "block": "oak_log",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.016666666666666666,
+        "expected_crack_start": 1092,
+        "crack_start": 1092,
+        "inputs_to_break": 60,
+        "expected_break_input": 59,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 59,
+        "predictions": []
+      },
+      {
+        "name": "oak_log by wooden_axe",
+        "block": "oak_log",
+        "mode": "s",
+        "held": "wooden_axe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 29,
+        "predictions": []
+      },
+      {
+        "name": "oak_planks by hand",
+        "block": "oak_planks",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.016666666666666666,
+        "expected_crack_start": 1092,
+        "crack_start": 1092,
+        "inputs_to_break": 60,
+        "expected_break_input": 59,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 59,
+        "predictions": []
+      },
+      {
+        "name": "oak_planks by wooden_axe",
+        "block": "oak_planks",
+        "mode": "s",
+        "held": "wooden_axe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.03333333333333333,
+        "expected_crack_start": 2184,
+        "crack_start": 2184,
+        "inputs_to_break": 30,
+        "expected_break_input": 29,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 30,
+        "predictions": []
+      },
+      {
+        "name": "obsidian by diamond_pickaxe",
+        "block": "obsidian",
+        "mode": "s",
+        "held": "diamond_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.007619047619047619,
+        "expected_crack_start": 499,
+        "crack_start": 499,
+        "inputs_to_break": 132,
+        "expected_break_input": 131,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "obsidian by hand",
+        "block": "obsidian",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.00028571428571428574,
+        "expected_crack_start": 18,
+        "crack_start": 18,
+        "inputs_to_break": 3500,
+        "expected_break_input": 3499,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "obsidian by iron_pickaxe",
+        "block": "obsidian",
+        "mode": "s",
+        "held": "iron_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0017142857142857142,
+        "expected_crack_start": 112,
+        "crack_start": 112,
+        "inputs_to_break": 584,
+        "expected_break_input": 583,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "sand by hand",
+        "block": "sand",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.06666666666666667,
+        "expected_crack_start": 4369,
+        "crack_start": 4369,
+        "inputs_to_break": 15,
+        "expected_break_input": 14,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 15,
+        "predictions": []
+      },
+      {
+        "name": "sand by wooden_shovel",
+        "block": "sand",
+        "mode": "s",
+        "held": "wooden_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.13333333333333333,
+        "expected_crack_start": 8738,
+        "crack_start": 8738,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      },
+      {
+        "name": "stone by diamond_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "diamond_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.17777777777777778,
+        "expected_crack_start": 11650,
+        "crack_start": 11650,
+        "inputs_to_break": 6,
+        "expected_break_input": 5,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 6,
+        "predictions": []
+      },
+      {
+        "name": "stone by golden_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "golden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.26666666666666666,
+        "expected_crack_start": 17476,
+        "crack_start": 17476,
+        "inputs_to_break": 4,
+        "expected_break_input": 3,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 4,
+        "predictions": []
+      },
+      {
+        "name": "stone by hand",
+        "block": "stone",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.006666666666666667,
+        "expected_crack_start": 436,
+        "crack_start": 436,
+        "inputs_to_break": 150,
+        "expected_break_input": 149,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by iron_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "iron_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.13333333333333333,
+        "expected_crack_start": 8738,
+        "crack_start": 8738,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      },
+      {
+        "name": "stone by netherite_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "netherite_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.19999999999999998,
+        "expected_crack_start": 13107,
+        "crack_start": 13107,
+        "inputs_to_break": 5,
+        "expected_break_input": 4,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 5,
+        "predictions": []
+      },
+      {
+        "name": "stone by stone_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "stone_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.08888888888888889,
+        "expected_crack_start": 5825,
+        "crack_start": 5825,
+        "inputs_to_break": 12,
+        "expected_break_input": 11,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 11,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 22,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, air",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "air",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.008888888888888889,
+        "expected_crack_start": 582,
+        "crack_start": 582,
+        "inputs_to_break": 113,
+        "expected_break_input": 112,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, conduit_power 30 0",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "conduit_power 30 0",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.064,
+        "expected_crack_start": 4194,
+        "crack_start": 4194,
+        "inputs_to_break": 16,
+        "expected_break_input": 15,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 15,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, conduit_power 30 0, water",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "conduit_power 30 0",
+        "where": "water",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 105,
+        "rate": 0.012799999999999999,
+        "expected_crack_start": 838,
+        "crack_start": 838,
+        "inputs_to_break": 79,
+        "expected_break_input": 78,
+        "starts_after_break": [],
+        "updates_after_break": [
+          6
+        ],
+        "broke_reply_input": 78,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, efficiency 1",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "efficiency 1",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.08888888888888889,
+        "expected_crack_start": 5825,
+        "crack_start": 5825,
+        "inputs_to_break": 12,
+        "expected_break_input": 11,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 11,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, efficiency 2",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "efficiency 2",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.15555555555555556,
+        "expected_crack_start": 10194,
+        "crack_start": 10194,
+        "inputs_to_break": 7,
+        "expected_break_input": 6,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 6,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, efficiency 3",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "efficiency 3",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.26666666666666666,
+        "expected_crack_start": 17476,
+        "crack_start": 17476,
+        "inputs_to_break": 4,
+        "expected_break_input": 3,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 3,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, efficiency 4",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "efficiency 4",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.4222222222222222,
+        "expected_crack_start": 27670,
+        "crack_start": 27670,
+        "inputs_to_break": 3,
+        "expected_break_input": 2,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 2,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, efficiency 5",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "efficiency 5",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.6222222222222222,
+        "expected_crack_start": 40777,
+        "crack_start": 40777,
+        "inputs_to_break": 2,
+        "expected_break_input": 1,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 1,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, haste 30 0",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "haste 30 0",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.064,
+        "expected_crack_start": 4194,
+        "crack_start": 4194,
+        "inputs_to_break": 16,
+        "expected_break_input": 15,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 16,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, haste 30 1",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "haste 30 1",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0896,
+        "expected_crack_start": 5871,
+        "crack_start": 5871,
+        "inputs_to_break": 12,
+        "expected_break_input": 11,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 12,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, haste 30 2",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "haste 30 2",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.12288,
+        "expected_crack_start": 8052,
+        "crack_start": 8052,
+        "inputs_to_break": 9,
+        "expected_break_input": 8,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 8,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, haste 30 3",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "haste 30 3",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.16588799999999998,
+        "expected_crack_start": 10871,
+        "crack_start": 10871,
+        "inputs_to_break": 7,
+        "expected_break_input": 6,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 6,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, haste 30 4",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "haste 30 4",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.22118399999999996,
+        "expected_crack_start": 14495,
+        "crack_start": 14495,
+        "inputs_to_break": 5,
+        "expected_break_input": 4,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 4,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, mining_fatigue 30 0",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "mining_fatigue 30 0",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.009333333333333332,
+        "expected_crack_start": 611,
+        "crack_start": 611,
+        "inputs_to_break": 108,
+        "expected_break_input": 107,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, mining_fatigue 30 1",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "mining_fatigue 30 1",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0019599999999999995,
+        "expected_crack_start": 128,
+        "crack_start": 128,
+        "inputs_to_break": 511,
+        "expected_break_input": 510,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, mining_fatigue 30 2",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "mining_fatigue 30 2",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0004116,
+        "expected_crack_start": 26,
+        "crack_start": 26,
+        "inputs_to_break": 2430,
+        "expected_break_input": 2429,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, mining_fatigue 30 3",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "mining_fatigue 30 3",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.00008643599999999997,
+        "expected_crack_start": 5,
+        "crack_start": 5,
+        "inputs_to_break": 11570,
+        "expected_break_input": 11569,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, predict and stop at 20",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 20,
+            "action": 26
+          },
+          {
+            "k": 20,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 45,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 22,
+        "predictions": [
+          {
+            "k": 20,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "stone by wooden_pickaxe, predict and stop at 21",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 21,
+            "action": 26
+          },
+          {
+            "k": 21,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 46,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 23,
+        "predictions": [
+          {
+            "k": 21,
+            "expected": "rejected",
+            "observed": "restored"
+          }
+        ]
+      },
+      {
+        "name": "stone by wooden_pickaxe, predict and stop at 22",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 22,
+            "action": 26
+          },
+          {
+            "k": 22,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 47,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 22,
+        "predictions": [
+          {
+            "k": 22,
+            "expected": "accepted",
+            "observed": "changed"
+          }
+        ]
+      },
+      {
+        "name": "stone by wooden_pickaxe, predict and stop at 23",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          },
+          {
+            "k": 23,
+            "action": 26
+          },
+          {
+            "k": 23,
+            "action": 2
+          }
+        ],
+        "inputs_watched": 48,
+        "rate": 0.044444444444444446,
+        "expected_crack_start": 2912,
+        "crack_start": 2912,
+        "inputs_to_break": 23,
+        "expected_break_input": 22,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 22,
+        "predictions": [
+          {
+            "k": 23,
+            "expected": "accepted",
+            "observed": "changed"
+          }
+        ]
+      },
+      {
+        "name": "stone by wooden_pickaxe, water",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "water",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.008888888888888889,
+        "expected_crack_start": 582,
+        "crack_start": 582,
+        "inputs_to_break": 113,
+        "expected_break_input": 112,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_pickaxe, water+air",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_pickaxe",
+        "enchant": "",
+        "effect": "",
+        "where": "water+air",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0017777777777777776,
+        "expected_crack_start": 116,
+        "crack_start": 116,
+        "inputs_to_break": 563,
+        "expected_break_input": 562,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "stone by wooden_shovel",
+        "block": "stone",
+        "mode": "s",
+        "held": "wooden_shovel",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.006666666666666667,
+        "expected_crack_start": 436,
+        "crack_start": 436,
+        "inputs_to_break": 150,
+        "expected_break_input": 149,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "web by hand",
+        "block": "web",
+        "mode": "s",
+        "held": "",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.0025,
+        "expected_crack_start": 163,
+        "crack_start": 163,
+        "inputs_to_break": 400,
+        "expected_break_input": 399,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": null,
+        "predictions": []
+      },
+      {
+        "name": "web by shears",
+        "block": "web",
+        "mode": "s",
+        "held": "shears",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.125,
+        "expected_crack_start": 8191,
+        "crack_start": 8191,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      },
+      {
+        "name": "web by wooden_sword",
+        "block": "web",
+        "mode": "s",
+        "held": "wooden_sword",
+        "enchant": "",
+        "effect": "",
+        "where": "ground",
+        "actions": [
+          {
+            "k": 0,
+            "action": 0
+          }
+        ],
+        "inputs_watched": 75,
+        "rate": 0.125,
+        "expected_crack_start": 8191,
+        "crack_start": 8191,
+        "inputs_to_break": 8,
+        "expected_break_input": 7,
+        "starts_after_break": [],
+        "updates_after_break": [],
+        "broke_reply_input": 7,
+        "predictions": []
+      }
+    ],
+    "not_covered": [
+      "Aqua Affinity",
+      "Efficiency on a tool that doesn't suit the block, and Efficiency with Haste",
+      "tool kinds on blocks other than those in observations",
+      "breaking while looking or moving away from the block",
+      "what the vanilla client sends"
+    ]
+  }
+}

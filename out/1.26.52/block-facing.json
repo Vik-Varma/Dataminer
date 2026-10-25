@@ -1,0 +1,8123 @@
+{
+  "meta": {
+    "kind": "block-facing",
+    "schema_version": 1,
+    "provenance": {
+      "source": "script-api-dump",
+      "method": "measured",
+      "game_version": "1.26.52",
+      "artifact": "Linux Bedrock Dedicated Server 1.26.52.3 (bedrock_server, minecraft.net), run on our own machine with server-authoritative-movement-strict=true, player-position-acceptance-threshold=0.0001, online-mode=false; states read through its Script API after a headless client placed each block",
+      "artifact_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "tool": "dataminer-measure 0.0.1",
+      "notes": [
+        "placement records sha256:56c79d77fb061035c732e6bbbf82538edc9c2be1932836e37122282057cf1ee2",
+        "each block was placed with an InventoryTransaction UseItem (ClickBlock) carrying the clicked block's runtime id; its stored states were read back on the same server through the Script API (Block.permutation.getAllStates)",
+        "the player's feet come from the server's own position (eye − 1.62), after it settled on what it stood on"
+      ]
+    }
+  },
+  "payload": {
+    "horizontal": [
+      {
+        "item": "carved_pumpkin",
+        "yaw": -90.0,
+        "states": {
+          "direction": 1,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 90.0,
+        "states": {
+          "direction": 3,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 180.0,
+        "states": {
+          "direction": 0,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 4,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 5,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 3,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": -90.0,
+        "states": {
+          "direction": 1
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 90.0,
+        "states": {
+          "direction": 3
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 180.0,
+        "states": {
+          "direction": 0
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": -90.0,
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 0
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 90.0,
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 1
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 180.0,
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 3
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 5,
+          "minecraft:facing_direction": "east",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 4,
+          "minecraft:facing_direction": "west",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 2,
+          "minecraft:facing_direction": "north",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 5
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 4
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 2
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": -90.0,
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 90.0,
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 180.0,
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      }
+    ],
+    "vertical": {
+      "definition": [
+        "with feet = the player's feet y, Y = the placed cell's y, and dx, dz = the feet's offsets from the cell's centre:",
+        "faces by feet_above when feet − Y > a and max(|dx|, |dz|) ≤ L",
+        "faces by cell_above when feet − Y < b and max(|dx|, |dz|) ≤ L",
+        "otherwise faces by yaw, as in horizontal; pitch does not enter"
+      ],
+      "feet_above_a": [
+        0.0,
+        0.0625
+      ],
+      "cell_above_b": [
+        -1.8175,
+        -1.8
+      ],
+      "axis_limit_l": [
+        1.5,
+        1.53
+      ],
+      "straight_line_limit_fits": false,
+      "items": [
+        {
+          "item": "dispenser",
+          "feet_above": {
+            "facing_direction": 1,
+            "triggered_bit": false
+          },
+          "cell_above": {
+            "facing_direction": 0,
+            "triggered_bit": false
+          }
+        },
+        {
+          "item": "observer",
+          "feet_above": {
+            "facing_direction": 0,
+            "minecraft:facing_direction": "down",
+            "powered_bit": false
+          },
+          "cell_above": {
+            "facing_direction": 1,
+            "minecraft:facing_direction": "up",
+            "powered_bit": false
+          }
+        },
+        {
+          "item": "piston",
+          "feet_above": {
+            "facing_direction": 1
+          },
+          "cell_above": {
+            "facing_direction": 0
+          }
+        }
+      ]
+    },
+    "observations": [
+      {
+        "item": "carved_pumpkin",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "direction": 1,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "direction": 0,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "direction": 3,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "carved_pumpkin",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "chest",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.099998474121094,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.4,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.20000076293945,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.3,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.29999923706055,
+          200.0,
+          1.2999999523162842
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.2,
+          -1.2
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.599998474121094,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -0.9,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet"
+        ],
+        "feet_minus_y": 0.0625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]"
+        ],
+        "feet_minus_y": 0.125,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor"
+        ],
+        "feet_minus_y": 0.1825,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]"
+        ],
+        "feet_minus_y": 0.25,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]"
+        ],
+        "feet_minus_y": 0.375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]"
+        ],
+        "feet_minus_y": 0.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 0.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          201,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "placed": [
+          60,
+          201,
+          2
+        ],
+        "setup": [
+          "fill 60 200 3 60 202 3 stone"
+        ],
+        "feet_minus_y": -1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.9375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.875,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.8175,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.2,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone",
+          "fill 59 202 -2 61 202 1 stone",
+          "effect @a levitation 20 0 true"
+        ],
+        "feet_minus_y": -1.8,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.75,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "dispenser",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "triggered_bit": false
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "furnace",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "direction": 1
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "direction": 0
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "direction": 3
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "loom",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 0
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 3
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 1
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": true,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": false,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "oak_stairs",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "minecraft:corner": "none",
+          "upside_down_bit": true,
+          "weirdo_direction": 2
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.099998474121094,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.4,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.20000076293945,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.3,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.29999923706055,
+          200.0,
+          1.2999999523162842
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.2,
+          -1.2
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.599998474121094,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -0.9,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5,
+          "minecraft:facing_direction": "east",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:facing_direction": "north",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet"
+        ],
+        "feet_minus_y": 0.0625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]"
+        ],
+        "feet_minus_y": 0.125,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor"
+        ],
+        "feet_minus_y": 0.1825,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]"
+        ],
+        "feet_minus_y": 0.25,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]"
+        ],
+        "feet_minus_y": 0.375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]"
+        ],
+        "feet_minus_y": 0.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0,
+          "minecraft:facing_direction": "down",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4,
+          "minecraft:facing_direction": "west",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 0.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          201,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "placed": [
+          60,
+          201,
+          2
+        ],
+        "setup": [
+          "fill 60 200 3 60 202 3 stone"
+        ],
+        "feet_minus_y": -1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.9375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.875,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.8175,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1,
+          "minecraft:facing_direction": "up",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.2,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone",
+          "fill 59 202 -2 61 202 1 stone",
+          "effect @a levitation 20 0 true"
+        ],
+        "feet_minus_y": -1.8,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.75,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "observer",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:facing_direction": "south",
+          "powered_bit": false
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.099998474121094,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.4,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.20000076293945,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.3,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.29999923706055,
+          200.0,
+          1.2999999523162842
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -1.2,
+          -1.2
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          59.599998474121094,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          -0.9,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          198,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          199,
+          2
+        ],
+        "setup": [
+          "setblock 60 199 2 air",
+          "setblock 60 198 2 stone"
+        ],
+        "feet_minus_y": 1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 2
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet"
+        ],
+        "feet_minus_y": 0.0625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]"
+        ],
+        "feet_minus_y": 0.125,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor"
+        ],
+        "feet_minus_y": 0.1825,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]"
+        ],
+        "feet_minus_y": 0.25,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]"
+        ],
+        "feet_minus_y": 0.375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]"
+        ],
+        "feet_minus_y": 0.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 1
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 0.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          201,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "placed": [
+          60,
+          201,
+          2
+        ],
+        "setup": [
+          "fill 60 200 3 60 202 3 stone"
+        ],
+        "feet_minus_y": -1.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.20000000298023224
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.44999998807907104
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -2.05
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.699999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.8
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.800000011920929
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.7
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.8999999761581421
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.6
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9300000071525574
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.57
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.949999988079071
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.55
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.9700000286102295
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.53
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.0
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.5
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.100000023841858
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.4
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.0625,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 white_carpet",
+          "fill 58 200 1 59 200 4 white_carpet",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.9375,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.125,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=1]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=1]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.875,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.1825,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 trapdoor",
+          "fill 58 200 1 59 200 4 trapdoor",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.8175,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 0
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.2,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone",
+          "fill 59 202 -2 61 202 1 stone",
+          "effect @a levitation 20 0 true"
+        ],
+        "feet_minus_y": -1.8,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.25,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=2]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=2]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.75,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.375,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=3]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=3]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.625,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "piston",
+        "yaw": 0.0,
+        "pitch": -40.0,
+        "feet": [
+          60.5,
+          200.5,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "fill 58 200 -2 62 200 1 snow_layer [\"height\"=4]",
+          "fill 58 200 1 59 200 4 snow_layer [\"height\"=4]",
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -1.5,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 3
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": -90.0,
+        "pitch": 39.0,
+        "feet": [
+          58.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          -2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 4,
+          "minecraft:cardinal_direction": "west"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": 60.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": 75.0,
+        "feet": [
+          60.5,
+          200.0,
+          1.690000057220459
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -0.81
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 180.0,
+        "pitch": 39.0,
+        "feet": [
+          60.5,
+          200.0,
+          4.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          2.0
+        ],
+        "states": {
+          "facing_direction": 3,
+          "minecraft:cardinal_direction": "south"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 90.0,
+        "pitch": 39.0,
+        "feet": [
+          62.5,
+          200.0,
+          2.5
+        ],
+        "clicked": [
+          60,
+          199,
+          2
+        ],
+        "face": 1,
+        "click_pos": [
+          0.5,
+          1.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          2.0,
+          0.0
+        ],
+        "states": {
+          "facing_direction": 5,
+          "minecraft:cardinal_direction": "east"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": 19.2,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.75,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": 28.7,
+        "feet": [
+          60.5,
+          200.0,
+          0.5
+        ],
+        "clicked": [
+          60,
+          200,
+          3
+        ],
+        "face": 2,
+        "click_pos": [
+          0.5,
+          0.25,
+          0.0
+        ],
+        "placed": [
+          60,
+          200,
+          2
+        ],
+        "setup": [
+          "setblock 60 200 3 stone"
+        ],
+        "feet_minus_y": 0.0,
+        "offset_xz": [
+          0.0,
+          -2.0
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      },
+      {
+        "item": "stonecutter_block",
+        "yaw": 0.0,
+        "pitch": -46.7,
+        "feet": [
+          60.5,
+          200.0,
+          1.2000000476837158
+        ],
+        "clicked": [
+          60,
+          203,
+          2
+        ],
+        "face": 0,
+        "click_pos": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "placed": [
+          60,
+          202,
+          2
+        ],
+        "setup": [
+          "setblock 60 203 2 stone"
+        ],
+        "feet_minus_y": -2.0,
+        "offset_xz": [
+          0.0,
+          -1.3
+        ],
+        "states": {
+          "facing_direction": 2,
+          "minecraft:cardinal_direction": "north"
+        }
+      }
+    ],
+    "not_covered": [
+      "the click height where stairs switch to upside down (only 0.25 and 0.75 tried)",
+      "the yaw boundaries between the four horizontal directions (only 0, 90, 180, −90)",
+      "the horizontal-only blocks placed with the player above the cell"
+    ]
+  }
+}

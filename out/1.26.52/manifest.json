@@ -12,6 +12,24 @@
       "dataminer_commit": "0778ffe"
     },
     {
+      "dataset": "block-facing",
+      "file": "block-facing.json",
+      "schema_version": 1,
+      "records": 204,
+      "source": "measured on BDS 1.26.52.3",
+      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "dataminer_commit": "612072a"
+    },
+    {
+      "dataset": "break-speed",
+      "file": "break-speed.json",
+      "schema_version": 1,
+      "records": 94,
+      "source": "measured on BDS 1.26.52.3",
+      "source_sha256": "sha256:0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+      "dataminer_commit": "612072a"
+    },
+    {
       "dataset": "movement-traces",
       "file": "movement-traces.json",
       "schema_version": 1,
@@ -21,6 +39,6 @@
       "dataminer_commit": "0778ffe"
     }
   ],
-  "dataminer_commit": "0778ffe",
+  "dataminer_commit": "612072a",
   "tool": "dataminer 0.0.1"
 }
