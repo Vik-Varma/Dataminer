@@ -12,6 +12,8 @@
 //! facts from it. It never runs the server itself.
 
 pub mod bamboo;
+pub mod breaking;
+pub mod facing;
 pub mod traces;
 
 use serde::Deserialize;

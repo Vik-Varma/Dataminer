@@ -81,6 +81,10 @@ enum MeasureCommand {
     Bamboo(measure_cmd::MeasureArgs),
     /// Per-tick movement traces (position, velocity, sprint and swim flags).
     Traces(measure_cmd::TracesArgs),
+    /// Breaking speed and timing, from the client's break records.
+    BreakSpeed(measure_cmd::MeasureArgs),
+    /// The states placed blocks store, by the player's yaw and position.
+    BlockFacing(measure_cmd::MeasureArgs),
 }
 
 #[derive(Subcommand)]
@@ -129,6 +133,8 @@ fn main() -> Result<ExitCode> {
         Command::Measure { what } => match what {
             MeasureCommand::Bamboo(a) => measure_cmd::run_bamboo(a).map(|()| ok),
             MeasureCommand::Traces(a) => measure_cmd::run_traces(a).map(|()| ok),
+            MeasureCommand::BreakSpeed(a) => measure_cmd::run_break_speed(a).map(|()| ok),
+            MeasureCommand::BlockFacing(a) => measure_cmd::run_block_facing(a).map(|()| ok),
         },
         Command::Report(args) => report_cmd::run(args),
         Command::Crosscheck { what } => match what {

@@ -46,7 +46,16 @@ fn inputs(args: &MeasureArgs) -> Result<(String, Sha256Digest, Sha256Digest)> {
     Ok((log, log_hash, bds_hash))
 }
 
-fn provenance(args: &MeasureArgs, bds_hash: Sha256Digest, notes: Vec<String>) -> Provenance {
+/// How positions were read for the movement measurements.
+const READ_CORRECTIONS: &str =
+    "positions read from its CorrectPlayerMovePrediction packets to a headless client";
+
+fn provenance(
+    args: &MeasureArgs,
+    bds_hash: Sha256Digest,
+    read: &str,
+    notes: Vec<String>,
+) -> Provenance {
     Provenance {
         source: SourceKind::PacketCapture,
         method: Method::Measured,
@@ -54,8 +63,7 @@ fn provenance(args: &MeasureArgs, bds_hash: Sha256Digest, notes: Vec<String>) ->
         artifact: format!(
             "Linux Bedrock Dedicated Server {} (bedrock_server, minecraft.net), run on our own \
              machine with server-authoritative-movement-strict=true, \
-             player-position-acceptance-threshold=0.0001, online-mode=false; positions read \
-             from its CorrectPlayerMovePrediction packets to a headless client",
+             player-position-acceptance-threshold=0.0001, online-mode=false; {read}",
             args.bds_version
         ),
         artifact_sha256: Some(bds_hash),
@@ -71,6 +79,7 @@ pub fn run_bamboo(args: MeasureArgs) -> Result<()> {
     let provenance = provenance(
         &args,
         bds_hash,
+        READ_CORRECTIONS,
         vec![
             format!("run log {log_hash}, {} runs", runs.len()),
             "collision boxes and the offset values are measured; the offset model's form \
@@ -118,6 +127,7 @@ pub fn run_traces(args: TracesArgs) -> Result<()> {
     let provenance = provenance(
         &args,
         bds_hash,
+        READ_CORRECTIONS,
         vec![
             format!("trace log {log_hash}"),
             match &verify {
@@ -145,6 +155,73 @@ pub fn run_traces(args: TracesArgs) -> Result<()> {
         "wrote {} ({} traces, {unknown} with unrevealed ticks)",
         path.display(),
         doc.payload.traces.len()
+    );
+    Ok(())
+}
+
+/// Run `dataminer measure break-speed`.
+pub fn run_break_speed(args: MeasureArgs) -> Result<()> {
+    let (log, log_hash, bds_hash) = inputs(&args)?;
+    let provenance = provenance(
+        &args,
+        bds_hash,
+        "block replies read from its LevelEvent and UpdateBlock packets to a headless client",
+        vec![
+            format!("break records {log_hash}"),
+            "r is read from LevelEvent 3600 (start cracking), whose data is floor(65535 · r); \
+             the break input from LevelEvent 2001; prediction answers from the UpdateBlock the \
+             server sent for the target in reply"
+                .into(),
+            "hardness, tool speeds and harvest rules are the model's parameters: each was \
+             chosen to fit, and is accepted only because the model reproduces every 3600 value \
+             exactly; hardness_bracket is the range all cases allow"
+                .into(),
+            "the client stood at feet (60.5, 200, 0.5) facing +z and hit the north face of the \
+             block at (60, 200, 2); it sent the block actions listed per case in \
+             PlayerAuthInput, with input flag 35"
+                .into(),
+        ],
+    );
+    let doc = dataminer_measure::breaking::derive(&log, provenance)?;
+    let path = write(&args, &doc, doc.payload.observations.len())?;
+    eprintln!(
+        "wrote {} ({} cases, {} blocks)",
+        path.display(),
+        doc.payload.observations.len(),
+        doc.payload.blocks.len()
+    );
+    Ok(())
+}
+
+/// Run `dataminer measure block-facing`.
+pub fn run_block_facing(args: MeasureArgs) -> Result<()> {
+    let (log, log_hash, bds_hash) = inputs(&args)?;
+    let mut provenance = provenance(
+        &args,
+        bds_hash,
+        "states read through its Script API after a headless client placed each block",
+        vec![
+            format!("placement records {log_hash}"),
+            "each block was placed with an InventoryTransaction UseItem (ClickBlock) carrying \
+             the clicked block's runtime id; its stored states were read back on the same \
+             server through the Script API (Block.permutation.getAllStates)"
+                .into(),
+            "the player's feet come from the server's own position (eye − 1.62), after it \
+             settled on what it stood on"
+                .into(),
+        ],
+    );
+    provenance.source = SourceKind::ScriptApiDump;
+    let doc = dataminer_measure::facing::derive(&log, provenance)?;
+    let path = write(&args, &doc, doc.payload.observations.len())?;
+    let v = &doc.payload.vertical;
+    eprintln!(
+        "wrote {} ({} placements; a in {:?}, b in {:?}, L in {:?})",
+        path.display(),
+        doc.payload.observations.len(),
+        v.feet_above_a,
+        v.cell_above_b,
+        v.axis_limit_l
     );
     Ok(())
 }

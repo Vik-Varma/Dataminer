@@ -81,6 +81,8 @@ cargo run -p dataminer-cli -- crosscheck blockstates \
 cargo run -p dataminer-cli -- measure bamboo --runs bamboo-runs.jsonl \
     --bds work/1.26.52/bedrock-server/bedrock_server --bds-version 1.26.52.3 \
     --game-version 1.26.52 --protocol 2193 --out out
+# The same arguments work for `measure traces` (plus `--verify <log>`),
+# `measure break-speed` and `measure block-facing`.
 
 # Diff two spec documents to see what a game update changed:
 cargo run -p dataminer-cli -- diff out/old/blocks.json out/new/blocks.json
