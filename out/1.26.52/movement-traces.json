@@ -1,7 +1,7 @@
 {
   "meta": {
     "kind": "movement-traces",
-    "schema_version": 2,
+    "schema_version": 3,
     "provenance": {
       "source": "packet-capture",
       "method": "measured",
@@ -9444,6 +9444,7 @@
           "scriptevent probe:food 20",
           "replaceitem entity @a slot.armor.chest 0 elytra"
         ],
+        "gliding_recorded": true,
         "start": [
           60.5,
           204.0,
@@ -10894,6 +10895,7 @@
           "scriptevent probe:food 20",
           "replaceitem entity @a slot.armor.chest 0 elytra"
         ],
+        "gliding_recorded": true,
         "start": [
           60.5,
           204.0,
@@ -43782,6 +43784,7 @@
           "scriptevent probe:sat 0",
           "scriptevent probe:exh 0"
         ],
+        "gliding_recorded": true,
         "start": [
           0.5,
           200.0,
@@ -44428,6 +44431,7 @@
           "scriptevent probe:sat 0",
           "scriptevent probe:exh 0"
         ],
+        "gliding_recorded": true,
         "start": [
           0.5,
           200.0,
@@ -45074,6 +45078,7 @@
           "scriptevent probe:sat 0",
           "scriptevent probe:exh 0"
         ],
+        "gliding_recorded": true,
         "start": [
           0.5,
           200.0,
@@ -45720,6 +45725,7 @@
           "scriptevent probe:sat 0",
           "scriptevent probe:exh 0"
         ],
+        "gliding_recorded": true,
         "start": [
           0.5,
           200.0,

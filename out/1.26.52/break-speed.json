@@ -13,14 +13,15 @@
         "break records sha256:a12cfbf228e1effa9a3feb607f451604ee35d3ff3e2534375a9475edcf319752",
         "r is read from LevelEvent 3600 (start cracking), whose data is floor(65535 · r); the break input from LevelEvent 2001; prediction answers from the UpdateBlock the server sent for the target in reply",
         "hardness, tool speeds and harvest rules are the model's parameters: each was chosen to fit, and is accepted only because the model reproduces every 3600 value exactly; hardness_bracket is the range all cases allow",
-        "the client stood at feet (60.5, 200, 0.5) facing +z and hit the north face of the block at (60, 200, 2); it sent the block actions listed per case in PlayerAuthInput, with input flag 35"
+        "before each case the client was teleported to feet (60.5, 200, 0.5) on a stone floor at y 199, facing +z at pitch 36.75; it hit the north face of the block at (60, 200, 2) and sent the block actions listed per case in PlayerAuthInput, with input flag 35",
+        "where = water: the area was glass from (58, 199, -2) to (62, 203, 4), filled with water from (59, 200, -1) to (61, 202, 3) before the target was set; where = air: a stone block at (60, 202, 0) over the player's head and Levitation I; water+air: both"
       ]
     }
   },
   "payload": {
     "definition": [
       "r = s / (H · D) · M, the share of the block broken per input",
-      "s = the held tool's speed if the block lists the tool among suited_tools (tier speed, or 15 for shears and swords), else 1; plus L² + 1 for Efficiency L",
+      "s = the held tool's speed if the block lists the tool among suited_tools (tier speed, or 15 for shears and swords), else 1; plus L² + 1 for Efficiency L on a suited tool",
       "D = 30 if the held item meets the block's harvest rule, else 100",
       "M = (1 + 0.2·h) · 1.2^h for Haste level h (amplifier + 1; Conduit Power counts as Haste 1) × 0.21^f for Mining Fatigue level f × 1/5 with the eyes in water × 1/5 when not on the ground",
       "LevelEvent 3600 data = floor(65535 · r)",
