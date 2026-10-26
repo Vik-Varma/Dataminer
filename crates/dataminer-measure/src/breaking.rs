@@ -15,7 +15,7 @@ use dataminer_core::provenance::Provenance;
 use dataminer_core::spec::SpecDocument;
 use serde::{Deserialize, Serialize};
 
-use crate::MeasureError;
+use crate::{MeasureError, evidence};
 
 /// The spec kind.
 pub const KIND: &str = "break-speed";
@@ -150,7 +150,7 @@ pub fn definition() -> Vec<String> {
     [
         "r = s / (H · D) · M, the share of the block broken per input",
         "s = the held tool's speed if the block lists the tool among suited_tools (tier speed, \
-         or 15 for shears and swords), else 1; plus L² + 1 for Efficiency L",
+         or 15 for shears and swords), else 1; plus L² + 1 for Efficiency L on a suited tool",
         "D = 30 if the held item meets the block's harvest rule, else 100",
         "M = (1 + 0.2·h) · 1.2^h for Haste level h (amplifier + 1; Conduit Power counts as \
          Haste 1) × 0.21^f for Mining Fatigue level f × 1/5 with the eyes in water × 1/5 when \
@@ -205,10 +205,6 @@ fn held(item: &str) -> Result<Option<Held>, MeasureError> {
     Ok(Some(Held { kind, speed, level }))
 }
 
-fn evidence(msg: impl Into<String>) -> MeasureError {
-    MeasureError::Evidence(msg.into())
-}
-
 /// `effect` and `enchant` arguments as the console took them, e.g.
 /// `haste 30 1` (amplifier 1, level 2) and `efficiency 3`.
 fn level(arg: &str, name: &str, amplifier_field: usize) -> Result<u32, MeasureError> {
@@ -245,6 +241,14 @@ fn rate(rec: &RawRecord, block: &BlockParams) -> Result<(f64, Option<f64>), Meas
     let mut s = suits.map_or(1.0, |h| h.speed);
     let efficiency = level(&rec.enchant, "efficiency", 1)?;
     if efficiency > 0 {
+        // Measured only on a tool that suits the block.
+        if suits.is_none() {
+            return Err(evidence(format!(
+                "case {:?}: Efficiency on an item that doesn't suit {}, which the model doesn't \
+                 cover",
+                rec.name, block.block
+            )));
+        }
         s += f64::from(efficiency.pow(2) + 1);
     }
     let harvests = match &block.harvest {
@@ -257,11 +261,13 @@ fn rate(rec: &RawRecord, block: &BlockParams) -> Result<(f64, Option<f64>), Meas
     let d = if harvests { 30.0 } else { 100.0 };
     let haste = level(&rec.effect, "haste", 2)?.max(level(&rec.effect, "conduit_power", 2)?);
     let mut m = haste_factor(haste) * fatigue_factor(level(&rec.effect, "mining_fatigue", 2)?);
-    let wet = rec.where_.contains("water");
-    let floating = rec.where_.contains("air");
-    if !(rec.where_ == "ground" || wet || floating) {
-        return Err(evidence(format!("unknown place {:?}", rec.where_)));
-    }
+    let (wet, floating) = match rec.where_.as_str() {
+        "ground" => (false, false),
+        "water" => (true, false),
+        "air" => (false, true),
+        "water+air" => (true, true),
+        w => return Err(evidence(format!("unknown place {w:?}"))),
+    };
     if wet {
         m /= 5.0;
     }
@@ -479,14 +485,7 @@ pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<BreakSpe
         blocks().into_iter().map(|b| (b.block.clone(), b)).collect();
     let mut brackets: BTreeMap<String, [f64; 2]> = BTreeMap::new();
     let mut observations = Vec::new();
-    for (i, line) in log.lines().enumerate() {
-        if !line.trim_start().starts_with('{') {
-            continue;
-        }
-        let rec: RawRecord = serde_json::from_str(line).map_err(|source| MeasureError::Parse {
-            line: i + 1,
-            source,
-        })?;
+    for rec in crate::parse_lines::<RawRecord>(log)? {
         if !rec.fresh_setup {
             return Err(evidence(format!(
                 "case {:?}: the server never confirmed the target block was set, so the case \
@@ -506,6 +505,9 @@ pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<BreakSpe
             .clone();
         let acts = rec.actions.clone().unwrap_or_default();
         // Crack starts after the break input are for whatever then fills the cell.
+        // The split is at the input the break reply arrived on, not the model's:
+        // a late reply delays every receipt alike, so the filler's first start
+        // still comes after it.
         let before_break = |k: i64| rec.broke_k.is_none_or(|b| k <= b);
         let starts: Vec<i64> = rec
             .crack_start
@@ -542,7 +544,14 @@ pub fn derive(log: &str, provenance: Provenance) -> Result<SpecDocument<BreakSpe
                 let (q, r) = rate(&rec, &block)?;
                 let r = r.unwrap_or(0.0);
                 let d = (CRACK_SCALE * r + SLACK).floor() as i64;
-                if acts.iter().any(|a| a.action == actions::START_BREAK) {
+                if !acts.iter().any(|a| a.action == actions::START_BREAK) {
+                    if !starts.is_empty() || !updates.is_empty() {
+                        return Err(evidence(format!(
+                            "case {:?}: crack data {starts:?} {updates:?} with no start-break",
+                            rec.name
+                        )));
+                    }
+                } else {
                     let Some(&got) = starts.first() else {
                         return Err(evidence(format!("case {:?}: no crack start", rec.name)));
                     };
@@ -925,6 +934,21 @@ mod tests {
         assert!(derive(&with(&creative("", "0")), prov()).is_ok());
         assert!(derive(&with(&creative("wooden_sword", "null")), prov()).is_ok());
         assert!(derive(&with(&creative("wooden_sword", "0")), prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_unknown_places_unmodelled_efficiency_and_unchecked_cracks() {
+        let err = |extra: String| derive(&with(&extra), prov()).unwrap_err().to_string();
+        let stairs = rec_json("stone", "wooden_pickaxe", 2912, "null", 60)
+            .replace(r#""where":"ground""#, r#""where":"stairs""#);
+        assert!(err(stairs).contains("unknown place"));
+        let unsuited = rec_json("dirt", "wooden_pickaxe", 4369, "null", 60)
+            .replace(r#""enchant":"""#, r#""enchant":"efficiency 5""#);
+        assert!(err(unsuited).contains("Efficiency"));
+        let no_start = rec_json("dirt", "", 4369, "null", 60)
+            .replace("dirt by ", "dirt, continue only")
+            .replace(r#""action":0"#, r#""action":27"#);
+        assert!(err(no_start).contains("no start-break"));
     }
 
     #[test]

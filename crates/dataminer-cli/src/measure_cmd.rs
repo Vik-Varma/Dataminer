@@ -176,9 +176,15 @@ pub fn run_break_speed(args: MeasureArgs) -> Result<()> {
              chosen to fit, and is accepted only because the model reproduces every 3600 value \
              exactly; hardness_bracket is the range all cases allow"
                 .into(),
-            "the client stood at feet (60.5, 200, 0.5) facing +z and hit the north face of the \
-             block at (60, 200, 2); it sent the block actions listed per case in \
-             PlayerAuthInput, with input flag 35"
+            "before each case the client was teleported to feet (60.5, 200, 0.5) on a stone \
+             floor at y 199, facing +z at pitch 36.75; it hit the north face of the block at \
+             (60, 200, 2) and sent the block actions listed per case in PlayerAuthInput, with \
+             input flag 35"
+                .into(),
+            "where = water: the area was glass from (58, 199, -2) to (62, 203, 4), filled with \
+             water from (59, 200, -1) to (61, 202, 3) before the target was set; where = air: a \
+             stone block at (60, 202, 0) over the player's head and Levitation I; water+air: \
+             both"
                 .into(),
         ],
     );

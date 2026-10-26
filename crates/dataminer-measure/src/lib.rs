@@ -57,9 +57,14 @@ pub struct Run {
     pub late_corrections: u32,
 }
 
-/// Parse a JSON-lines run log. Lines that don't start with `{` (the client's
-/// own status output) are skipped.
-pub fn parse_runs(log: &str) -> Result<Vec<Run>, MeasureError> {
+/// A [`MeasureError::Evidence`] with this message.
+pub(crate) fn evidence(msg: impl Into<String>) -> MeasureError {
+    MeasureError::Evidence(msg.into())
+}
+
+/// Parse a JSON-lines log into records. Lines that don't start with `{` (the
+/// client's own status output) are skipped.
+pub fn parse_lines<T: serde::de::DeserializeOwned>(log: &str) -> Result<Vec<T>, MeasureError> {
     log.lines()
         .enumerate()
         .filter(|(_, l)| l.trim_start().starts_with('{'))
@@ -70,6 +75,11 @@ pub fn parse_runs(log: &str) -> Result<Vec<Run>, MeasureError> {
             })
         })
         .collect()
+}
+
+/// Parse a JSON-lines run log.
+pub fn parse_runs(log: &str) -> Result<Vec<Run>, MeasureError> {
+    parse_lines(log)
 }
 
 /// The tool identifier stamped into every spec's provenance.

@@ -13,7 +13,7 @@ use dataminer_core::provenance::{Method, Provenance};
 use dataminer_core::spec::SpecDocument;
 use serde::{Deserialize, Serialize};
 
-use crate::{MeasureError, Run};
+use crate::{MeasureError, Run, evidence};
 
 /// The spec kind.
 pub const KIND: &str = "bamboo";
@@ -294,10 +294,6 @@ pub struct Bamboo {
     pub shapes: Vec<ShapeUse>,
     /// The evidence.
     pub validation: Validation,
-}
-
-fn evidence(msg: impl Into<String>) -> MeasureError {
-    MeasureError::Evidence(msg.into())
 }
 
 /// The player's half-width, from walks into full blocks of `stone`.

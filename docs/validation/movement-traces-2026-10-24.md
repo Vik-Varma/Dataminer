@@ -142,6 +142,12 @@ tick 0.
 
 The 69 earlier traces are byte-identical apart from the schema number.
 
+**Schema 3** adds `gliding_recorded` on a trace, written only when true. It marks the traces whose
+log carried the gliding flag on every tick: the 2 elytra traces and the 4 low-food sprint traces.
+In the other 69 the flag wasn't logged, so their missing `gliding` means "not recorded", not "not
+gliding". A log that has the flag on only some ticks of a trace is refused. Everything else is
+byte-identical to schema 2.
+
 ## Not covered
 
 - Swimming in flowing water, and bubble columns.

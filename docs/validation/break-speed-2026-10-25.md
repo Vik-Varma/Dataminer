@@ -7,13 +7,16 @@ difficulty normal. This note gives facts and method only.
 ## Method
 
 **Setup.**
-- The player stood at feet (60.5, 200, 0.5) facing +z, pitch 36.75, on stone. The target
-  block was at (60, 200, 2), hit on its north face.
+- Before each case the player was teleported to feet (60.5, 200, 0.5), facing +z at pitch
+  36.75, on a stone floor at y 199. The target block was at (60, 200, 2), hit on its north
+  face.
 - Each case rebuilt the area, set the block, gave the held item to hotbar slot 0, and applied
   the case's enchantment or effect with console commands.
-- **In water:** a glass box filled with still water around the player, so the eyes were under
-  water.
-- **Off the ground:** the player was pinned under a ceiling by Levitation.
+- **In water:** glass from (58, 199, −2) to (62, 203, 4), filled with still water from
+  (59, 200, −1) to (61, 202, 3) before the target was set, so the eyes were under water.
+- **Off the ground:** a stone block at (60, 202, 0) over the player's head, and Levitation I,
+  which held the player against it.
+- `water+air` used both.
 
 **What was sent.** The client sent the block actions of the case in `PlayerAuthInput`, with
 input flag 35. It recorded what came back:
@@ -65,7 +68,8 @@ and the same answer to whether the block broke, in every case.
 ## Not covered
 
 - Aqua Affinity.
-- Efficiency on a tool that doesn't suit the block, and Efficiency combined with Haste.
+- Efficiency on a tool that doesn't suit the block, and Efficiency combined with Haste. The
+  derivation refuses an Efficiency case on an unsuited tool rather than guess.
 - Tool kinds on blocks other than those in the observations.
 - Breaking while looking or moving away from the block.
 - What the vanilla client sends: there is no vanilla client in this setup.

@@ -13,7 +13,7 @@ use dataminer_core::spec::SpecDocument;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::MeasureError;
+use crate::{MeasureError, evidence};
 
 /// The spec kind.
 pub const KIND: &str = "block-facing";
@@ -124,10 +124,6 @@ pub struct BlockFacing {
     pub not_covered: Vec<String>,
 }
 
-fn evidence(msg: impl Into<String>) -> MeasureError {
-    MeasureError::Evidence(msg.into())
-}
-
 fn round(v: f64) -> f64 {
     (v * PER_BLOCK).round() / PER_BLOCK
 }
@@ -147,7 +143,23 @@ fn bracket(what: &str, lower: &[f64], upper: &[f64]) -> Result<[f64; 2], Measure
     Ok([lo, hi])
 }
 
-#[derive(Clone, Copy, PartialEq)]
+/// The four tabled yaws.
+const YAWS: [i32; 4] = [-90, 0, 90, 180];
+
+/// A yaw rounded and brought into (−180, 180], which must be one of [`YAWS`].
+fn yaw_key(yaw: f32) -> Result<i32, MeasureError> {
+    let y = (yaw.round() as i32).rem_euclid(360);
+    let y = if y > 180 { y - 360 } else { y };
+    if YAWS.contains(&y) {
+        Ok(y)
+    } else {
+        Err(evidence(format!(
+            "yaw {yaw}: only 0, 90, 180 and −90 are tabled"
+        )))
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
 enum Dir {
     Flat,
     FeetAbove,
@@ -160,14 +172,7 @@ pub fn derive(
     provenance: Provenance,
 ) -> Result<SpecDocument<BlockFacing>, MeasureError> {
     let mut obs = Vec::new();
-    for (i, line) in log.lines().enumerate() {
-        if !line.trim_start().starts_with('{') {
-            continue;
-        }
-        let r: RawRecord = serde_json::from_str(line).map_err(|source| MeasureError::Parse {
-            line: i + 1,
-            source,
-        })?;
+    for r in crate::parse_lines::<RawRecord>(log)? {
         if r.result != format!("minecraft:{}", r.item) {
             return Err(evidence(format!(
                 "placing {} at {:?} left {}: the placement failed",
@@ -203,7 +208,7 @@ pub fn derive(
     for o in &obs {
         let far = o.offset_xz.iter().any(|d| d.abs() >= 2.0);
         if o.face == 1 && o.feet_minus_y == 0.0 && far {
-            let key = (o.item.clone(), o.yaw.round() as i32);
+            let key = (o.item.clone(), yaw_key(o.yaw)?);
             if let Some(prev) = horizontal.insert(key.clone(), o.states.clone())
                 && prev != o.states
             {
@@ -221,7 +226,7 @@ pub fn derive(
         v
     };
     for it in &items {
-        for yaw in [-90, 0, 90, 180] {
+        for yaw in YAWS {
             if !horizontal.contains_key(&(it.clone(), yaw)) {
                 return Err(evidence(format!("{it}: no floor placement at yaw {yaw}")));
             }
@@ -232,7 +237,7 @@ pub fn derive(
     let mut dirs = Vec::new();
     let mut vertical: BTreeMap<String, (Option<States>, Option<States>)> = BTreeMap::new();
     for o in &obs {
-        let flat = horizontal.get(&(o.item.clone(), o.yaw.round() as i32));
+        let flat = horizontal.get(&(o.item.clone(), yaw_key(o.yaw)?));
         let base = |s: &States| -> States {
             s.iter()
                 .filter(|(k, _)| k.as_str() != "upside_down_bit")
@@ -329,6 +334,23 @@ pub fn derive(
         &pick(Dir::Flat, &|v| v < 0.0),
     )?;
 
+    // Every case must fit the rule for some a, b and L inside their brackets.
+    for (o, d) in &vert {
+        let (h, ax) = (o.feet_minus_y, axis(o));
+        let fits = match d {
+            Dir::FeetAbove => h > a[0] && ax < axis_limit[1],
+            Dir::CellAbove => h < b[1] && ax < axis_limit[1],
+            Dir::Flat => !(ax <= axis_limit[0] && (h >= a[1] || h <= b[0])),
+        };
+        if !fits {
+            return Err(evidence(format!(
+                "{} at feet {:?} faced {d:?}, which no rule within a {a:?}, b {b:?} and L \
+                 {axis_limit:?} allows",
+                o.item, o.feet
+            )));
+        }
+    }
+
     let mut horizontal_v: Vec<YawStates> = horizontal
         .into_iter()
         .map(|((item, yaw), states)| YawStates {
@@ -338,14 +360,17 @@ pub fn derive(
         })
         .collect();
     horizontal_v.sort_by(|x, y| (&x.item, x.yaw as i32).cmp(&(&y.item, y.yaw as i32)));
-    obs.sort_by(|x, y| {
-        let key = |o: &Observation| {
+    // Every field breaks ties, so the order never depends on the log's.
+    obs.sort_by_cached_key(|o| {
+        (
             format!(
                 "{} {:?} {:?} {:+09.4} {:+09.4} {:+09.4} {:+08.3} {:+08.3}",
                 o.item, o.placed, o.face, o.feet[0], o.feet[1], o.feet[2], o.yaw, o.pitch
-            )
-        };
-        key(x).cmp(&key(y)).then_with(|| x.setup.cmp(&y.setup))
+            ),
+            o.setup.clone(),
+            format!("{:?} {:?}", o.clicked, o.click_pos),
+            serde_json::to_string(&o.states).unwrap_or_default(),
+        )
     });
     Ok(SpecDocument::new(
         KIND,
@@ -463,6 +488,27 @@ mod tests {
         let mut v = cases();
         v.push(rec(0.0, [60.5, 200.5, 1.2], [60, 200, 2], 3));
         assert!(derive(&v.join("\n"), prov()).is_err());
+    }
+
+    #[test]
+    fn rejects_a_case_only_the_final_check_sees() {
+        // Feet half a block above the cell, 1.6 out: in neither the bracket
+        // subsets, but past the distance limit, so it must face by yaw.
+        let mut v = cases();
+        v.push(rec(0.0, [60.5, 200.5, 4.1], [60, 200, 2], 1));
+        let err = derive(&v.join("\n"), prov()).unwrap_err();
+        assert!(err.to_string().contains("no rule"), "{err}");
+    }
+
+    #[test]
+    fn normalises_yaws_and_refuses_untabled_ones() {
+        let mut v = cases();
+        v[0] = rec(-180.0, [60.5, 200.0, 4.5], [60, 200, 2], 2);
+        assert!(derive(&v.join("\n"), prov()).is_ok());
+        let mut v = cases();
+        v.push(rec(45.0, [60.5, 200.0, 1.2], [60, 200, 2], 3));
+        let err = derive(&v.join("\n"), prov()).unwrap_err();
+        assert!(err.to_string().contains("tabled"), "{err}");
     }
 
     #[test]

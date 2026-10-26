@@ -22,7 +22,7 @@ use crate::MeasureError;
 /// The spec kind.
 pub const KIND: &str = "movement-traces";
 /// The payload schema version.
-pub const SCHEMA_VERSION: u32 = 2;
+pub const SCHEMA_VERSION: u32 = 3;
 /// How far tick 0 may be from the start position, in blocks. Every trace
 /// starts from rest, so one tick moves the player far less than this.
 pub const MAX_FIRST_TICK_DISTANCE: f64 = 1.0;
@@ -92,7 +92,7 @@ struct RawTick {
     #[serde(default)]
     server_swimming: bool,
     #[serde(default)]
-    server_gliding: bool,
+    server_gliding: Option<bool>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -136,7 +136,8 @@ pub struct Tick {
     /// The SWIMMING actor flag (bit 57) the server reported for this tick.
     pub swimming: bool,
     /// The GLIDING actor flag (bit 32) the server reported for this tick.
-    /// Written only when set (schema 2).
+    /// Written only when set (schema 2). It means something only in a trace
+    /// whose `gliding_recorded` is true; elsewhere the flag wasn't logged.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub gliding: bool,
 }
@@ -152,6 +153,11 @@ pub struct Trace {
     /// (food, an elytra's durability). Written only when present (schema 2).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub pass_setup: Vec<String>,
+    /// Whether the client logged the GLIDING flag on every tick of this run.
+    /// When false, a tick's `gliding` is false only because nothing was
+    /// recorded. Written only when true (schema 3).
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub gliding_recorded: bool,
     /// Feet position the player was teleported to before the run.
     pub start: [f64; 3],
     /// The inputs.
@@ -226,15 +232,7 @@ fn span(raw: &RawSpan, trace_yaw: f32) -> InputSpan {
 
 fn parse_verification(log: &str) -> Result<BTreeMap<String, Verification>, MeasureError> {
     let mut out = BTreeMap::new();
-    for (i, line) in log.lines().enumerate() {
-        if !line.trim_start().starts_with('{') {
-            continue;
-        }
-        let raw: RawVerification =
-            serde_json::from_str(line).map_err(|source| MeasureError::Parse {
-                line: i + 1,
-                source,
-            })?;
+    for raw in crate::parse_lines::<RawVerification>(log)? {
         let ticks: Vec<usize> = raw
             .corrections_at
             .iter()
@@ -268,14 +266,7 @@ pub fn derive(
         .transpose()?
         .unwrap_or_default();
     let mut traces = Vec::new();
-    for (i, line) in log.lines().enumerate() {
-        if !line.trim_start().starts_with('{') {
-            continue;
-        }
-        let raw: RawTrace = serde_json::from_str(line).map_err(|source| MeasureError::Parse {
-            line: i + 1,
-            source,
-        })?;
+    for raw in crate::parse_lines::<RawTrace>(log)? {
         if raw.trace.len() != raw.case.ticks {
             return Err(MeasureError::Evidence(format!(
                 "trace {:?} has {} ticks, expected {}",
@@ -317,6 +308,18 @@ pub fn derive(
                 )));
             }
         }
+        let logged = raw
+            .trace
+            .iter()
+            .filter(|t| t.server_gliding.is_some())
+            .count();
+        if logged != 0 && logged != raw.trace.len() {
+            return Err(MeasureError::Evidence(format!(
+                "trace {:?} logs the gliding flag on {logged} of its {} ticks",
+                raw.case.name,
+                raw.trace.len()
+            )));
+        }
         let ticks: Vec<Option<Tick>> = raw
             .trace
             .iter()
@@ -327,7 +330,7 @@ pub fn derive(
                     on_ground: t.on_ground,
                     sprinting: t.server_sprinting,
                     swimming: t.server_swimming,
-                    gliding: t.server_gliding,
+                    gliding: t.server_gliding.unwrap_or(false),
                 })
             })
             .collect();
@@ -344,6 +347,7 @@ pub fn derive(
             name: raw.case.name,
             setup: raw.case.setup.unwrap_or_default(),
             pass_setup: raw.case.pass_setup.unwrap_or_default(),
+            gliding_recorded: logged != 0,
             start: raw.case.start,
             inputs: raw
                 .case
@@ -467,16 +471,38 @@ mod tests {
 
     #[test]
     fn gliding_is_kept_and_only_written_when_set() {
-        let glide = TICK.replace(
-            r#""server_sprinting":false"#,
-            r#""server_sprinting":false,"server_gliding":true"#,
-        );
-        let doc = derive(&line(&[TICK, &glide], 2), Some(AGREED), prov()).unwrap();
+        let with = |v: &str| {
+            TICK.replace(
+                r#""server_sprinting":false"#,
+                &format!(r#""server_sprinting":false,"server_gliding":{v}"#),
+            )
+        };
+        let doc = derive(
+            &line(&[&with("false"), &with("true")], 2),
+            Some(AGREED),
+            prov(),
+        )
+        .unwrap();
         let t = &doc.payload.traces[0];
         assert!(!t.ticks[0].as_ref().unwrap().gliding);
         assert!(t.ticks[1].as_ref().unwrap().gliding);
         let json = doc.to_pretty_json().unwrap();
         assert_eq!(json.matches("\"gliding\"").count(), 1);
+    }
+
+    #[test]
+    fn records_whether_the_gliding_flag_was_logged() {
+        let off = TICK.replace(
+            r#""server_sprinting":false"#,
+            r#""server_sprinting":false,"server_gliding":false"#,
+        );
+        let doc = derive(&line(&[TICK, TICK], 2), Some(AGREED), prov()).unwrap();
+        assert!(!doc.payload.traces[0].gliding_recorded);
+        assert!(!doc.to_pretty_json().unwrap().contains("gliding_recorded"));
+        let doc = derive(&line(&[&off, &off], 2), Some(AGREED), prov()).unwrap();
+        assert!(doc.payload.traces[0].gliding_recorded);
+        let err = derive(&line(&[TICK, &off], 2), Some(AGREED), prov()).unwrap_err();
+        assert!(err.to_string().contains("gliding flag on 1 of its 2 ticks"));
     }
 
     #[test]
