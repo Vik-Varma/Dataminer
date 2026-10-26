@@ -7,6 +7,7 @@ members = [
     "crates/dataminer-binary",
     "crates/dataminer-diff",
     "crates/dataminer-fetch",
+    "crates/dataminer-measure",
     "crates/dataminer-cli",
 ]
 
@@ -25,6 +26,7 @@ dataminer-protocol = { path = "crates/dataminer-protocol" }
 dataminer-binary = { path = "crates/dataminer-binary" }
 dataminer-diff = { path = "crates/dataminer-diff" }
 dataminer-fetch = { path = "crates/dataminer-fetch" }
+dataminer-measure = { path = "crates/dataminer-measure" }
 
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }

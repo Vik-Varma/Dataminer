@@ -76,6 +76,14 @@ cargo run -p dataminer-cli -- report out/1.26.51/packets.json --strict
 cargo run -p dataminer-cli -- crosscheck blockstates \
     --spec out/1.26.50.4/blockstates.json --against block_states.nbt --out crosscheck.json
 
+# Turn a run log from a headless client on our own strict-movement BDS into a
+# measured spec (here bamboo's collision boxes and per-position offset):
+cargo run -p dataminer-cli -- measure bamboo --runs bamboo-runs.jsonl \
+    --bds work/1.26.52/bedrock-server/bedrock_server --bds-version 1.26.52.3 \
+    --game-version 1.26.52 --protocol 2193 --out out
+# The same arguments work for `measure traces` (plus `--verify <log>`),
+# `measure break-speed` and `measure block-facing`.
+
 # Diff two spec documents to see what a game update changed:
 cargo run -p dataminer-cli -- diff out/old/blocks.json out/new/blocks.json
 ```
@@ -94,6 +102,7 @@ type-name strings that survive in read-only data.
 | `crates/dataminer-binary` | Static ELF/PE analysis: symbols, RTTI, strings (demangling via `cpp_demangle`/`msvc-demangler`) |
 | `crates/dataminer-diff` | Structural diffs between specs across game versions |
 | `crates/dataminer-fetch` | Download and pin the inputs (`bedrock-samples`, `bedrock-protocol-docs`, BDS) for a version |
+| `crates/dataminer-measure` | Turn a headless client's run log from our own strict-movement BDS into measured specs |
 | `crates/dataminer-cli` | The `dataminer` command-line tool |
 | `docs/` | Strategy, and the datamining and reverse-engineering technique surveys |
 

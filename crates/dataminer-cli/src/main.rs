@@ -7,6 +7,8 @@
 
 mod crosscheck_cmd;
 mod fetch_cmd;
+mod manifest;
+mod measure_cmd;
 mod metadata_cmd;
 mod protocol_cmd;
 mod report_cmd;
@@ -33,6 +35,11 @@ enum Command {
     Metadata(metadata_cmd::MetadataArgs),
     /// Ingest Mojang's public `bedrock-protocol-docs` into packet-layout specs.
     Protocol(protocol_cmd::ProtocolArgs),
+    /// Derive specs from measurements taken on our own strict-movement BDS.
+    Measure {
+        #[command(subcommand)]
+        what: MeasureCommand,
+    },
     /// Summarize a binary (format, architecture, whether it is stripped).
     Inspect {
         /// The binary file to inspect.
@@ -66,6 +73,18 @@ enum Command {
 enum CrosscheckCommand {
     /// Check blockstates hashes against an authoritative block_states.nbt.
     Blockstates(crosscheck_cmd::BlockStatesArgs),
+}
+
+#[derive(Subcommand)]
+enum MeasureCommand {
+    /// Bamboo collision boxes per state and the per-position offset.
+    Bamboo(measure_cmd::MeasureArgs),
+    /// Per-tick movement traces (position, velocity, sprint and swim flags).
+    Traces(measure_cmd::TracesArgs),
+    /// Breaking speed and timing, from the client's break records.
+    BreakSpeed(measure_cmd::MeasureArgs),
+    /// The states placed blocks store, by the player's yaw and position.
+    BlockFacing(measure_cmd::MeasureArgs),
 }
 
 #[derive(Subcommand)]
@@ -111,6 +130,12 @@ fn main() -> Result<ExitCode> {
         Command::Fetch(args) => fetch_cmd::run(args).map(|()| ok),
         Command::Metadata(args) => metadata_cmd::run(args).map(|()| ok),
         Command::Protocol(args) => protocol_cmd::run(args).map(|()| ok),
+        Command::Measure { what } => match what {
+            MeasureCommand::Bamboo(a) => measure_cmd::run_bamboo(a).map(|()| ok),
+            MeasureCommand::Traces(a) => measure_cmd::run_traces(a).map(|()| ok),
+            MeasureCommand::BreakSpeed(a) => measure_cmd::run_break_speed(a).map(|()| ok),
+            MeasureCommand::BlockFacing(a) => measure_cmd::run_block_facing(a).map(|()| ok),
+        },
         Command::Report(args) => report_cmd::run(args),
         Command::Crosscheck { what } => match what {
             CrosscheckCommand::Blockstates(a) => crosscheck_cmd::run_blockstates(a).map(|()| ok),
