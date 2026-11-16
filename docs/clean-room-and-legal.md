@@ -61,6 +61,13 @@ vanilla client, and some of that can't be learned from BDS or from captures alon
 - Captures of the running client and measurements on BDS stay the preferred sources. The
   executable is for what they can't explain.
 
+**Who saw what (2026-11-16).** The owner allowed the dirty-side session that studied the Windows
+client to open the Ferrock repository, to look for the measuring client. It read only
+`crates/ferrock-headless/src/main.rs` (the command line) and `docs/bds-testing.md` at commit
+`c2c02a0`, and built and ran `ferrock-headless` unmodified against its own strict BDS 1.26.52.3. It
+wrote nothing to Ferrock. That session has read the client's disassembly and decompiler output for
+player movement, so it stays barred from writing Ferrock's movement code.
+
 ## What is and isn't OK to commit
 
 | Thing | Read it? | Commit it to this GPL repo? |
