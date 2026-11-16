@@ -41,9 +41,25 @@ Courts have blessed intermediate copying done for this purpose:
   and sharing that information solely to enable interoperability
   ([17 U.S.C. 1201](https://www.law.cornell.edu/uscode/text/17/1201)).
 
-Dataminer never circumvents a technical protection measure: it reads Mojang's *freely distributed*
-Bedrock Dedicated Server and Mojang's *published* data. It does not touch the DRM-protected Windows
-client. That keeps it well inside "study of a lawfully obtained program", not circumvention.
+Dataminer itself never circumvents a technical protection measure: it reads Mojang's *freely
+distributed* Bedrock Dedicated Server, Mojang's *published* data, and files the owner supplies.
+
+**The Windows client (changed 2026-11-16).** Until this date Dataminer did "not touch the
+DRM-protected Windows client", which kept it well inside "study of a lawfully obtained program".
+The owner lifted that line: Ferrock's goal is now physics and packets bit-for-bit those of the
+vanilla client, and some of that can't be learned from BDS or from captures alone. From this date:
+
+- A dirty-side session may statically study a copy of `Minecraft.Windows.exe` that the owner
+  supplies, for interoperability facts only, limited to the parts those facts need.
+- Dataminer still performs no decryption, unpacking or other circumvention itself, and no tool
+  that does is added to it. The copy arrives readable.
+- The owner is responsible for holding a licence to the game and for how the copy was made
+  readable. **Not yet recorded:** how this copy was obtained. The owner should state it here; it
+  bears on whether §1201(f) or Art. 6 is being relied on, which the BDS-only scope never needed.
+- Every spec from it records the executable's SHA-256 and game version, and counts as binary
+  analysis under AGENTS.md §4: a second source before Ferrock relies on it.
+- Captures of the running client and measurements on BDS stay the preferred sources. The
+  executable is for what they can't explain.
 
 ## What is and isn't OK to commit
 
@@ -54,6 +70,7 @@ client. That keeps it well inside "study of a lawfully obtained program", not ci
 | Derived specs (ids/names/field order as facts) | — | Yes — in Ferrock or a data repo (facts, with provenance) |
 | `@minecraft/vanilla-data` (MIT) | Yes | The data is MIT; still prefer emitting facts over bundling files |
 | BDS binary, PDBs, `bedrock_server.debug`, Android `libminecraftpe.so`, generated headers | BDS: static study only | **No** — never commit the binary or symbol/header artifacts |
+| `Minecraft.Windows.exe`, supplied by the owner (from 2026-11-16) | Static study only, on the dirty side | **No** — never commit it, or a database, listing or export derived from it |
 | NDA-protected symbols/headers (private PDBs, `dwarf2cpp` headers) | **No** | **No** |
 | Other projects' RE'd headers/tables (Endstone, LeviLamina) | As hints to verify, cited | **No** — do not copy |
 | Mojang assets (textures, sounds, models) | — | **No** |
