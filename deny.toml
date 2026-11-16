@@ -27,3 +27,5 @@ allow-wildcard-paths = true
 [sources]
 unknown-registry = "deny"
 unknown-git = "deny"
+# The measuring client (dataminer-probe) joins the server through Acacia (MIT), pinned by commit.
+allow-git = ["https://github.com/Vik-Varma/acacia"]

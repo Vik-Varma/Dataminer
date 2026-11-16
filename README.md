@@ -84,6 +84,12 @@ cargo run -p dataminer-cli -- measure bamboo --runs bamboo-runs.jsonl \
 # The same arguments work for `measure traces` (plus `--verify <log>`),
 # `measure break-speed` and `measure block-facing`.
 
+# Record a trace log yourself. The server must be our own, strict, and reading
+# its console from a FIFO (docs/measuring.md has the settings):
+cargo run --release -p dataminer-probe -- --server 127.0.0.1:19132 \
+    --console /path/to/server-stdin.fifo --cases cases.json \
+    --out traces.jsonl --verify-out verify.jsonl
+
 # Diff two spec documents to see what a game update changed:
 cargo run -p dataminer-cli -- diff out/old/blocks.json out/new/blocks.json
 ```
@@ -103,6 +109,7 @@ type-name strings that survive in read-only data.
 | `crates/dataminer-diff` | Structural diffs between specs across game versions |
 | `crates/dataminer-fetch` | Download and pin the inputs (`bedrock-samples`, `bedrock-protocol-docs`, BDS) for a version |
 | `crates/dataminer-measure` | Turn a headless client's run log from our own strict-movement BDS into measured specs |
+| `crates/dataminer-probe` | The headless client itself: replays scripted cases against our own strict BDS and writes that run log |
 | `crates/dataminer-cli` | The `dataminer` command-line tool |
 | `docs/` | Strategy, and the datamining and reverse-engineering technique surveys |
 

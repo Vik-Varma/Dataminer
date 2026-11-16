@@ -8,6 +8,7 @@ members = [
     "crates/dataminer-diff",
     "crates/dataminer-fetch",
     "crates/dataminer-measure",
+    "crates/dataminer-probe",
     "crates/dataminer-cli",
 ]
 
