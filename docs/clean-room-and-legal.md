@@ -68,6 +68,12 @@ client to open the Ferrock repository, to look for the measuring client. It read
 wrote nothing to Ferrock. That session has read the client's disassembly and decompiler output for
 player movement, so it stays barred from writing Ferrock's movement code.
 
+The same day, at the owner's request, that session also read the sine-table lines of
+`net/minecraft/util/Mth.java` in the owner's private `minecraft-src` repository (decompiled Java
+Edition 26.2, commit `2f38a937`), to compare Java's table with Bedrock's. Java Edition is Mojang's
+code too: it was read for facts, nothing from it is copied here, and it is not evidence for
+Bedrock.
+
 ## What is and isn't OK to commit
 
 | Thing | Read it? | Commit it to this GPL repo? |
