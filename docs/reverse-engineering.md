@@ -148,6 +148,15 @@ it refers to: an import (`sinf`), a float constant from the constant pool (the c
 copy of each value, so every user points at the same place), or a combination of them. A physics
 routine is recognisable by its set of constants. Read only the few functions this finds.
 
+**Kuna as the engine (added the same day).** [Kuna](https://github.com/Noelo-Lab/kuna) is an
+Apache-2.0 Rust port of Ghidra's decompiler and builds with cargo alone
+(`make binaries specs`, then `cargo build --release -p kuna-cli --features embed-specs` in
+`decompiler/`; 5.5 min). REA's Kuna provider refuses Windows PE files, so REA plus Kuna does not
+work on the client. Kuna run directly does: `kuna decompile <exe> <address> --addr` takes about
+24 s and 2 GB per function on this binary, and three run side by side comfortably in 16 GB. Find
+the function with the reference scan above, then decompile only that. Kuna's output is dirty-side
+material: it stays out of every repository.
+
 Limits: a linear sweep gives no call graph, no types and no names, so it answers "how is this value
 computed here" and not "what runs in a tick, in order". Identifying a function by its constants is
 an inference and is reported as one. Cross-check against the measured traces in `out/`: the yaw-10
