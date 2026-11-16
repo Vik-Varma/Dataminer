@@ -157,6 +157,15 @@ work on the client. Kuna run directly does: `kuna decompile <exe> <address> --ad
 the function with the reference scan above, then decompile only that. Kuna's output is dirty-side
 material: it stays out of every repository.
 
+**System names give the tick order.** The client keeps the names of its tick systems as plain
+strings (521 of them, such as `MobGroundGravity`). The functions that register systems refer to
+those names in sequence, and call one another, so listing the name references by position, nested
+through the calls, yields an ordered list for a whole phase of the tick. Beside each name the
+registering function also points at a small table of functions, which leads from a name to the
+function that does the work. Treat "registration order is run order" as an inference and check it
+against a measured trace; the gravity-then-drag recurrence, for one, reproduces the traces' y
+velocities bit for bit.
+
 Limits: a linear sweep gives no call graph, no types and no names, so it answers "how is this value
 computed here" and not "what runs in a tick, in order". Identifying a function by its constants is
 an inference and is reported as one. Cross-check against the measured traces in `out/`: the yaw-10
