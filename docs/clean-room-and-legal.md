@@ -53,9 +53,11 @@ vanilla client, and some of that can't be learned from BDS or from captures alon
   supplies, for interoperability facts only, limited to the parts those facts need.
 - Dataminer still performs no decryption, unpacking or other circumvention itself, and no tool
   that does is added to it. The copy arrives readable.
-- The owner is responsible for holding a licence to the game and for how the copy was made
-  readable. **Not yet recorded:** how this copy was obtained. The owner should state it here; it
-  bears on whether §1201(f) or Art. 6 is being relied on, which the BDS-only scope never needed.
+- The owner holds a licence to the game and supplied the copy. In the owner's words (2026-11-16):
+  "its from my pc, a bought copy". Not recorded: whether the file was readable as installed or
+  was made readable by a tool, which is what bears on §1201(f) and Art. 6; the BDS-only scope
+  never needed that. The dirty side found it an ordinary readable executable and decrypted
+  nothing (clean-room-tool `to-clean/2026-11-16-1047-windows-client-identity-and-maths.md`).
 - Every spec from it records the executable's SHA-256 and game version, and counts as binary
   analysis under AGENTS.md §4: a second source before Ferrock relies on it.
 - Captures of the running client and measurements on BDS stay the preferred sources. The
