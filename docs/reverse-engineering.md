@@ -110,6 +110,49 @@ or a dynamic trace); label it in provenance; and keep any decompiled-code input 
   method) is far more accurate than inferring from captures; use captures (Netzob, NEMESYS,
   BinaryInferno) only to validate.
 
+## 8. The Windows client: a first pass (2026-11-16)
+
+A dirty-side session studied the owner's copy of `Minecraft.Windows.exe` (game 1.26.63.1, 324 MB,
+250 MB of code, about 990,000 functions in the exception table). Method notes only; the facts went
+to the clean side through the message channel, and nothing derived from the executable is here.
+See [clean-room-and-legal.md](clean-room-and-legal.md) for what may be done with that file.
+
+**What the session was asked to use, and what happened.** The plan was
+[REA](https://github.com/morluto/rea) (MIT) driving Ghidra.
+
+- REA 6.9.0 installs from npm in seconds (`npm install --ignore-scripts rea-agents`) and ran on
+  Node 22.23.4. It bundles no analysis engine. For Ghidra it wants 12.1 or newer (verified with
+  12.1.4) and a full JDK 21, found through `GHIDRA_INSTALL_DIR` and `JAVA_HOME`.
+- Its Ghidra start-up limit is 330 s by default (`REA_GHIDRA_STARTUP_TIMEOUT_MS`), the heap is 2 GB
+  unless `GHIDRA_HEADLESS_MAXMEM` says otherwise, and `REA_GHIDRA_CHECKPOINT_DIR` keeps a finished
+  analysis for later runs. All three need setting for a binary this size.
+- In that cloud session neither tool ran on the executable: Ghidra's release archive could not be
+  downloaded (only git reads of GitHub were allowed) and running REA on the file was refused by the
+  session's permission layer. **Full auto-analysis was therefore not attempted and its time and
+  memory on this binary are unknown.** Section 1's estimate (hours, 16–32 GB for a 100 MB binary)
+  suggests 16 GB will not do for 250 MB of code.
+
+**What worked without an engine**, on 4 cores and 16 GB:
+
+| Step | Tool | Time |
+| --- | --- | --- |
+| Hash, headers, imports, exports, debug directory | `sha256sum`, `llvm-readobj` | seconds |
+| Version and build stamp | version resource via `strings -el`; exported data symbols | seconds |
+| Packed or not | byte entropy per section and per 32 MB window; sample disassembly | seconds |
+| Strings, RTTI type-name census | `strings` | 6 s |
+| Linear disassembly of all of `.text`, filtered while streaming | `llvm-objdump -d` | 5.5 min |
+| References to a chosen import slot or constant, grouped by function | a byte scan for RIP-relative displacements, mapped through `.pdata` | 7–30 s per pass |
+
+The last step is the useful one for narrow questions. With no symbols, a function is found by what
+it refers to: an import (`sinf`), a float constant from the constant pool (the compiler keeps one
+copy of each value, so every user points at the same place), or a combination of them. A physics
+routine is recognisable by its set of constants. Read only the few functions this finds.
+
+Limits: a linear sweep gives no call graph, no types and no names, so it answers "how is this value
+computed here" and not "what runs in a tick, in order". Identifying a function by its constants is
+an inference and is reported as one. Cross-check against the measured traces in `out/`: the yaw-10
+movement traces, for example, tell a table sine from a library sine by themselves.
+
 ## Recommended pipeline (and where Dataminer sits)
 
 1. **Native Rust ingest** — `object`+`gimli`: sections, function starts from `.eh_frame`/`.pdata`,
